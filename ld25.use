@@ -1,0 +1,5 @@
+Name: LD25
+Description: Our LD25 entry
+Requires: doll
+SourcePath: source
+Main: ld25.ooc

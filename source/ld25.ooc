@@ -1,6 +1,7 @@
 
 use doll
 import doll/[core, dye]
+import dye/[input]
 
 use deadlogger
 import deadlogger/[Log, Logger, Handler]
@@ -28,7 +29,23 @@ App: class {
         engine def("game", |game|
             log info("Game starting up")
 
-            engine emit("quit")
+            screen := engine make("screen")
+            engine add(screen)
+        )
+
+        engine def("screen", |game|
+            dw := engine make("dye-window", |dw|
+                dw set("width", 1024)
+                dw set("height", 768)
+                //dw set("full-screen", true)
+                dw set("title", "LD25")
+            )
+
+            setupEvents(dw)
+
+            engine listen("update", |m|
+                dw update()
+            )
         )
 
         engine listen("start", |m|
@@ -49,6 +66,16 @@ App: class {
 
     loadLibraries: func {
         engine initDye()
+    }
+
+    setupEvents: func (dw: Entity) {
+        dw listen("key-released", |m|
+            key := m get("keycode", Int)
+            match key {
+                case Keys ESC =>
+                    dw engine emit("quit")
+            }
+        ) 
     }
 
 }

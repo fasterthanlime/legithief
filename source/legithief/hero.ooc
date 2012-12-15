@@ -7,9 +7,7 @@ use chipmunk
 import chipmunk
 
 import math
-
-HeroCollisionHandler: class extends CpCollisionHandler {
-}
+import structs/[ArrayList]
 
 Hero: class {
 
@@ -27,7 +25,7 @@ Hero: class {
     batShape: CpShape
 
     moveVel := 120
-    jumpVel := 300
+    jumpVel := 240
 
     direction := 1
 
@@ -35,6 +33,11 @@ Hero: class {
     batConstraint: CpConstraint
 
     batCounter := 0
+    jumpCounter := 0
+
+    touchesGround := false
+
+    collisionHandlers := ArrayList<CpCollisionHandler> new()
 
     init: func (=level) {
         gfx = GlGroup new()
@@ -63,6 +66,7 @@ Hero: class {
         level space addConstraint(CpConstraint newRotaryLimit(body, level space getStaticBody(), 0, 0))
         shape setLayers(ShapeGroup HERO)
         shape setGroup(1)
+        shape setCollisionType(7)
 
         // initialize bat
         batGfx = GlGroup new()
@@ -87,6 +91,10 @@ Hero: class {
         batConstraint = level space addConstraint(CpConstraint newPivot(bat, body, cpv(pos)))
         level space addConstraint(CpConstraint newRotaryLimit(bat, level space getStaticBody(),
             PI / 2, 3 * PI / 2))
+
+        heroGround := HeroGroundCollision new(this)
+        level space addCollisionHandler(1, 7, heroGround)
+        collisionHandlers add(heroGround)
     }
 
     update: func {
@@ -106,10 +114,17 @@ Hero: class {
             direction = -1
         }
 
-        if (input isPressed(Keys SPACE)) {
+        if (jumpCounter > 0) {
+            jumpCounter -= 1
+        }
+        if (input isPressed(Keys SPACE) && (touchesGround || jumpCounter > 0)) {
             vel := body getVel()
             vel y = -jumpVel
             body setVel(vel)
+
+            if (touchesGround) {
+                jumpCounter = 14
+            }
         }
     
         if (batCounter > 0) {
@@ -131,3 +146,21 @@ Hero: class {
     }
 
 }
+
+HeroGroundCollision: class extends CpCollisionHandler {
+
+    hero: Hero
+
+    init: func (=hero) {
+    }
+
+    begin: func (arbiter: CpArbiter, space: CpSpace) {
+        hero touchesGround = true
+    }
+
+    separate: func (arbiter: CpArbiter, space: CpSpace) {
+        hero touchesGround = false
+    }
+
+}
+

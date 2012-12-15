@@ -94,6 +94,7 @@ Level: class {
         (groundBody, ground) := space createStaticBox(groundRect)
         ground setFriction(1)
         ground setLayers(ShapeGroup FURNITURE | ShapeGroup HERO)
+        ground setCollisionType(1)
         space addShape(ground)
     }
 

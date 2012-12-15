@@ -1,10 +1,10 @@
 
 use doll
 import doll/[core, dye]
-import dye/[input]
+import dye/[core, input, sprite, font]
 
 use deadlogger
-import deadlogger/[Log, Logger, Handler]
+import deadlogger/[Log, Logger, Handler, Formatter]
 
 main: func (argc: Int, argv: CString*) {
 
@@ -17,6 +17,7 @@ App: class {
 
     log: Logger
     engine: Engine
+    dye: Entity
     
     init: func {
         initLogging()
@@ -34,17 +35,19 @@ App: class {
         )
 
         engine def("screen", |game|
-            dw := engine make("dye-window", |dw|
-                dw set("width", 1024)
-                dw set("height", 768)
-                //dw set("full-screen", true)
-                dw set("title", "LD25")
+            dye = engine make("dye", |dye|
+                dye set("width", 1024)
+                dye set("height", 768)
+                //dye set("full-screen", true)
+                dye set("title", "LD25")
             )
+            engine set("dye", dye)
 
-            setupEvents(dw)
+            setupEvents(dye)
+            buildHud(dye)
 
-            engine listen("update", |m|
-                dw update()
+            game listen("update", |m|
+                dye update()
             )
         )
 
@@ -60,7 +63,14 @@ App: class {
     }
 
     initLogging: func {
-        Log root attachHandler(StdoutHandler new())
+        console := StdoutHandler new()
+        formatter := NiceFormatter new()
+        version (!windows) {
+            formatter = ColoredFormatter new(formatter)
+        }
+        console setFormatter(formatter)
+
+        Log root attachHandler(console)
         log = Log getLogger("ld25")
     }
 
@@ -76,6 +86,24 @@ App: class {
                     dw engine emit("quit")
             }
         ) 
+    }
+
+    buildHud: func (dw: Entity) {
+        hudGroup := GlGroup new()
+        context := dw get("context", DyeContext)
+        context add(hudGroup)
+        context setClearColor(Color white())
+
+        bg := GlSprite new("assets/png/hud_xcf-bg.png")
+        hudGroup add(bg)
+
+        mana := GlCroppedSprite new("assets/png/hud_xcf-blue.png")
+        mana pos set!(800, 800)
+        hudGroup add(mana)
+
+        dw listen("update", |m|
+            mana right = mana right + 1
+        )
     }
 
 }

@@ -8,6 +8,9 @@ import chipmunk
 
 import math
 
+HeroCollisionHandler: class extends CpCollisionHandler {
+}
+
 Hero: class {
 
     level: Level

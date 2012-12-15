@@ -47,6 +47,9 @@ Level: class {
         spawnItem("double-sofa", vec2(500, 100))
         spawnItem("single-sofa", vec2(600, 100))
         spawnItem("bedside-table", vec2(650, 100))
+        spawnItem("kitchen", vec2(400,200))
+        spawnItem("tv-support", vec2(700,200))
+        spawnItem("television", vec2(700,100))
         for (i in 0..6) {
             spawnItem("trash", vec2(400 - i * 40, 100))
         }

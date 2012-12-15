@@ -259,21 +259,13 @@ Hero: class {
     /* Bat operations */
 
     throwBat: func {
-        if (lookDir > 0) {
-            batRotaryLimit setMin(0 - PI / 2)
-            batRotaryLimit setMax(PI / 4)
-        } else {
-            batRotaryLimit setMin(0 - PI / 4)
-            batRotaryLimit setMax(PI / 2)
-        }
-
-        bat setAngVel(lookDir * 12 * PI)
+        base := 0 - lookDir * (3 * PI / 4)
+        batRotaryLimit setMin(base - 0.1)
+        batRotaryLimit setMax(base + 0.1)
     }
 
     holdBat: func {
-        bat setAngVel(0.0)
-
-        base := lookDir * PI / 4
+        base := 0 + lookDir * (PI / 4)
         batRotaryLimit setMin(base - 0.1)
         batRotaryLimit setMax(base + 0.1)
     }

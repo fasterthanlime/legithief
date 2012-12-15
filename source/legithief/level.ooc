@@ -50,8 +50,9 @@ Level: class {
         spawnItem("kitchen", vec2(400,200))
         spawnItem("tv-support", vec2(700,200))
         spawnItem("television", vec2(700,100))
+        spawnItem("trash", vec2(400, 100))
         for (i in 0..6) {
-            spawnItem("trash", vec2(400 - i * 40, 100))
+            spawnItem("duck", vec2(400 - i * 40, 100))
         }
     }
 

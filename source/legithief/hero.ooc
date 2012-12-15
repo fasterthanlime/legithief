@@ -81,8 +81,8 @@ Hero: class {
         // initialize bat
         batGfx = GlGroup new()
         batSprite := GlRectangle new()
-        batSprite size set!(8, 38)
-        batSprite color set!(120, 10, 10)
+        batSprite size set!(4, 38)
+        batSprite color set!(220, 80, 80)
 
         batGfx add(batSprite)
         level heroLayer add(batGfx)
@@ -107,8 +107,8 @@ Hero: class {
         // initialize leg
         legGfx = GlGroup new()
         legSprite := GlRectangle new()
-        legSprite size set!(8, 40)
-        legSprite color set!(10, 120, 10)
+        legSprite size set!(4, 40)
+        legSprite color set!(80, 220, 80)
 
         legGfx add(legSprite)
         level heroLayer add(legGfx)

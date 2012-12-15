@@ -2,4 +2,4 @@ Name: Legithief
 Description: Our LD25 entry
 Requires: dye
 SourcePath: source
-Main: legithief.ooc
+Main: game.ooc

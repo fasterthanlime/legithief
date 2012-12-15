@@ -34,11 +34,12 @@ App: class {
 
         // SDL suxxorz, no function but an env var? Wtf?
         Env set("SDL_VIDEO_CENTERED", "1")
-        SDL enableUnicode(true)
 
         dye = DyeContext new(1600, 900, "legithief level editor")
         dye setClearColor(Color white())
         dye setShowCursor(true)
+        SDL enableUnicode(true)
+        SDL enableKeyRepeat(SDL_DEFAULT_REPEAT_DELAY, SDL_DEFAULT_REPEAT_INTERVAL)
 
         setupEvents()
         ui = UI new(dye, input)

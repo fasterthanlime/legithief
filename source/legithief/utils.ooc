@@ -107,3 +107,9 @@ extend DocumentNode {
 
 }
 
+isPrintable: func (u: UInt16) -> Bool {
+    /* ASCII 32 = ' ', ASCII 126 = '~' */
+    (u >= 32 && u <= 126)
+}
+
+

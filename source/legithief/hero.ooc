@@ -95,6 +95,27 @@ Hero: class {
         heroGround := HeroGroundCollision new(this)
         level space addCollisionHandler(1, 7, heroGround)
         collisionHandlers add(heroGround)
+
+        initEvents()
+    }
+
+    initEvents: func {
+        // short jump
+        input onKeyPress(Keys SPACE, ||
+            if (touchesGround) {
+                vel := body getVel()
+                vel y = -jumpVel
+                body setVel(vel)
+                jumpCounter = 14
+            }
+        )
+
+        input onKeyPress(Keys SHIFT, ||
+            if (batCounter <= 0) {
+                batCounter = 20
+                bat setAngVel(direction * -12 * PI)
+            }
+        )
     }
 
     update: func {
@@ -117,14 +138,12 @@ Hero: class {
         if (jumpCounter > 0) {
             jumpCounter -= 1
         }
-        if (input isPressed(Keys SPACE) && (touchesGround || jumpCounter > 0)) {
+
+        // long jump = short jump + continued key press (up to 14 frames)
+        if (input isPressed(Keys SPACE) && jumpCounter > 0) {
             vel := body getVel()
             vel y = -jumpVel
             body setVel(vel)
-
-            if (touchesGround) {
-                jumpCounter = 14
-            }
         }
     
         if (batCounter > 0) {
@@ -132,13 +151,6 @@ Hero: class {
             batShape setLayers(ShapeGroup HERO | ShapeGroup FURNITURE)
         } else {
             batShape setLayers(ShapeGroup HERO)
-        }
-
-        if (input isPressed(Keys SHIFT)) {
-            if (batCounter <= 0) {
-                batCounter = 20
-                bat setAngVel(direction * -12 * PI)
-            }
         }
 
         spriteRight visible = (direction > 0)

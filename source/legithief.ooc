@@ -28,7 +28,7 @@ App: class {
     init: func {
         initLogging()
 
-        log info("Creating doll engine")
+        log info("Creating game engine")
 
         dye = DyeContext new(1024, 768, "legithief")
         dye setClearColor(Color white())

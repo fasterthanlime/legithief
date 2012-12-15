@@ -15,14 +15,10 @@ Hero: class {
     input: Input 
 
     gfx: GlGroup
-
     spriteLeft, spriteRight: GlSprite
 
     body: CpBody
     shape: CpShape
-
-    bat: CpBody
-    batShape: CpShape
 
     walkSpeed := 100
     runSpeed := 200
@@ -31,11 +27,22 @@ Hero: class {
     lookDir := 1
     direction := 1
 
+    /* bat */
+    bat: CpBody
+    batShape: CpShape
     batGfx: GlGroup
     batConstraint: CpConstraint
     batRotaryLimit: CpRotaryLimitJoint
-
     batCounter := 0
+
+    /* leg */
+    leg: CpBody
+    legShape: CpShape
+    legGfx: GlGroup
+    legConstraint: CpConstraint
+    legRotaryLimit: CpRotaryLimitJoint
+    legCounter := 0
+
     jumpCounter := 0
 
     touchesGround := false
@@ -73,7 +80,9 @@ Hero: class {
 
         // initialize bat
         batGfx = GlGroup new()
-        batSprite := GlSprite new("assets/png/bat.png")
+        batSprite := GlRectangle new()
+        batSprite size set!(8, 38)
+        batSprite color set!(120, 10, 10)
 
         batGfx add(batSprite)
         level heroLayer add(batGfx)
@@ -81,7 +90,7 @@ Hero: class {
         batWidth := batSprite width
         batHeight := batSprite height
 
-        batMass := 50.0
+        batMass := 30.0
         batMoment := cpMomentForBox(batMass, batWidth, batHeight)
 
         bat = level space addBody(CpBody new(batMass, batMoment))
@@ -95,6 +104,33 @@ Hero: class {
         batRotaryLimit = CpRotaryLimitJoint new(bat, level space getStaticBody(), -0.1, 0.1)
         level space addConstraint(batRotaryLimit)
 
+        // initialize leg
+        legGfx = GlGroup new()
+        legSprite := GlRectangle new()
+        legSprite size set!(8, 32)
+        legSprite color set!(10, 120, 10)
+
+        legGfx add(legSprite)
+        level heroLayer add(legGfx)
+
+        legWidth := legSprite width
+        legHeight := legSprite height
+
+        legMass := 20.0
+        legMoment := cpMomentForBox(legMass, legWidth, legHeight)
+
+        leg = level space addBody(CpBody new(legMass, legMoment))
+        leg setPos(cpv(pos add(0, -10)))
+
+        legShape = level space addShape(CpBoxShape new(leg, legWidth, legHeight))
+        legShape setGroup(1)
+        legShape setFriction(0.99)
+
+        legConstraint = level space addConstraint(CpConstraint newPivot(leg, body, cpv(pos)))
+        legRotaryLimit = CpRotaryLimitJoint new(leg, level space getStaticBody(), PI - 0.1, PI + 0.1)
+        level space addConstraint(legRotaryLimit)
+
+        // hero <-> ground collision detection for jump
         heroGround := HeroGroundCollision new(this)
         level space addCollisionHandler(1, 7, heroGround)
         collisionHandlers add(heroGround)
@@ -119,11 +155,19 @@ Hero: class {
                 throwBat()
             }
         )
+
+        input onMousePress(Buttons RIGHT, ||
+            if (legCounter <= 0) {
+                legCounter = 15
+                throwLeg()
+            }
+        )
     }
 
     update: func {
         gfx sync(body)
         batGfx sync(bat)
+        legGfx sync(leg)
 
         moving := false
         if (input isPressed(Keys D)) {
@@ -167,6 +211,15 @@ Hero: class {
             batShape setLayers(ShapeGroup HERO)
         }
 
+        if (legCounter > 0) {
+            legCounter -= 1
+            legShape setLayers(ShapeGroup HERO | ShapeGroup FURNITURE)
+            throwLeg()
+        } else {
+            holdLeg()
+            legShape setLayers(ShapeGroup HERO)
+        }
+
         updateLookDir()
         updateSprites()
     }
@@ -184,6 +237,26 @@ Hero: class {
         spriteRight visible = (lookDir > 0)
         spriteLeft visible = (lookDir <= 0)
     }
+
+    /* Leg operations */
+
+    throwLeg: func {
+        base := lookDir * 3 * PI / 4
+        legRotaryLimit setMin(base - PI / 2)
+        legRotaryLimit setMax(base + PI / 2)
+
+        leg setAngVel(lookDir * -14 * PI)
+    }
+
+    holdLeg: func {
+        leg setAngVel(0.0)
+
+        base := lookDir * 3 * PI / 4
+        legRotaryLimit setMin(base - 0.1)
+        legRotaryLimit setMax(base + 0.1)
+    }
+
+    /* Bat operations */
 
     throwBat: func {
         if (lookDir > 0) {

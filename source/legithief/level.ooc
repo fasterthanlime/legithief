@@ -136,7 +136,7 @@ Level: class {
 
     buildHud: func {
         text := GlText new("assets/ttf/font.ttf", "Legithief - move = wasd, jump = space, run = shift, left click = attack, right click = kick")
-        text color = Color white()
+        text color = Color black()
         hudLayer add(text)
     }
 }

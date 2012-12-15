@@ -51,7 +51,7 @@ Level: class {
     initPhysx: func {
         space = CpSpace new()
 
-        gravity := cpv(0, 100)
+        gravity := cpv(0, 500)
         space setGravity(gravity)
 
         p1 := vec2(0, 200)
@@ -81,10 +81,8 @@ Level: class {
     }
 
     buildHud: func {
-        //bg := GlSprite new("assets/png/hud_xcf-bg.png")
-        //hudLayer add(bg)
-
         text := GlText new("assets/ttf/font.ttf", "Legithief")
+        hudLayer add(text)
     }
 }
 

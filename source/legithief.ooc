@@ -31,7 +31,7 @@ App: class {
         log info("Creating doll engine")
 
         dye = DyeContext new(1024, 768, "legithief")
-        //dye setClearColor(Color white())
+        dye setClearColor(Color white())
         dye setShowCursor(false)
 
         setupEvents()

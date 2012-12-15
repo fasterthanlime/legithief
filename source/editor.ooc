@@ -9,6 +9,9 @@ import legithief/[editor-ui]
 
 import os/[Time, Env]
 
+use sdl
+import sdl/Core
+
 main: func (argc: Int, argv: CString*) {
 
     app := App new()
@@ -31,6 +34,7 @@ App: class {
 
         // SDL suxxorz, no function but an env var? Wtf?
         Env set("SDL_VIDEO_CENTERED", "1")
+        SDL enableUnicode(true)
 
         dye = DyeContext new(1600, 900, "legithief level editor")
         dye setClearColor(Color white())

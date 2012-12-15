@@ -6,6 +6,8 @@ import dye/[core, input, sprite, font, math, primitives]
 use chipmunk
 import chipmunk
 
+import math
+
 Hero: class {
 
     level: Level
@@ -13,22 +15,33 @@ Hero: class {
 
     gfx: GlGroup
 
+    spriteLeft, spriteRight: GlSprite
+
     body: CpBody
     shape: CpShape
 
     bat: CpBody
     batShape: CpShape
 
-    moveVel := 150
+    moveVel := 120
     jumpVel := 300
+
+    direction := 1
 
     batGfx: GlGroup
     batConstraint: CpConstraint
 
+    batCounter := 0
+
     init: func (=level) {
         gfx = GlGroup new()
-        sprite := GlSprite new("assets/png/hero.png") 
-        gfx add(sprite)
+        spriteRight = GlSprite new("assets/png/hero-right.png") 
+        spriteLeft = GlSprite new("assets/png/hero-left.png") 
+        spriteLeft visible = false
+        gfx add(spriteRight)
+        gfx add(spriteLeft)
+
+        sprite := spriteRight
 
         level heroLayer add(gfx)
 
@@ -36,7 +49,7 @@ Hero: class {
 
         pos := vec2(100, 50)
 
-        mass := 10.0
+        mass := 120.0
         moment := cpMomentForBox(mass, sprite width, sprite height)
         body = level space addBody(CpBody new(mass, moment))
         body setPos(cpv(pos))
@@ -49,10 +62,16 @@ Hero: class {
         shape setGroup(1)
 
         // initialize bat
-        batWidth := 8.0
-        batHeight := 28.0
+        batGfx = GlGroup new()
+        batSprite := GlSprite new("assets/png/bat.png")
 
-        batMass := 15.0
+        batGfx add(batSprite)
+        level heroLayer add(batGfx)
+
+        batWidth := batSprite width
+        batHeight := batSprite height
+
+        batMass := 50.0
         batMoment := cpMomentForBox(batMass, batWidth, batHeight)
 
         bat = level space addBody(CpBody new(batMass, batMoment))
@@ -60,15 +79,11 @@ Hero: class {
 
         batShape = level space addShape(CpBoxShape new(bat, batWidth, batHeight))
         batShape setGroup(1)
+        batShape setFriction(0.99)
 
-        batConstraint = level space addConstraint(CpConstraint newPin(bat, body, cpv(0, 0 - batHeight / 2), cpv(0, -10)))
-
-        batGfx = GlGroup new()
-        batSprite := GlRectangle new()
-        batSprite size set!(batWidth, batHeight)
-        batGfx add(batSprite)
-
-        level heroLayer add(batGfx)
+        batConstraint = level space addConstraint(CpConstraint newPivot(bat, body, cpv(pos)))
+        level space addConstraint(CpConstraint newRotaryLimit(bat, level space getStaticBody(),
+            PI / 2, 3 * PI / 2))
     }
 
     update: func {
@@ -85,10 +100,12 @@ Hero: class {
             vel := body getVel()
             vel x = vel x * alpha + (moveVel * (1 - alpha))
             body setVel(vel)
+            direction = 1
         } else if (input isPressed(Keys LEFT)) {
             vel := body getVel()
             vel x = vel x * alpha + (-moveVel * (1 - alpha))
             body setVel(vel)
+            direction = -1
         }
 
         if (input isPressed(Keys SPACE)) {
@@ -96,6 +113,23 @@ Hero: class {
             vel y = -jumpVel
             body setVel(vel)
         }
+    
+        if (batCounter > 0) {
+            batCounter -= 1
+            batShape setLayers(ShapeGroup HERO | ShapeGroup FURNITURE)
+        } else {
+            batShape setLayers(ShapeGroup HERO)
+        }
+
+        if (input isPressed(Keys SHIFT)) {
+            if (batCounter <= 0) {
+                batCounter = 20
+                bat setAngVel(direction * -12 * PI)
+            }
+        }
+
+        spriteRight visible = (direction > 0)
+        spriteLeft visible = (direction <= 0)
     }
 
 }

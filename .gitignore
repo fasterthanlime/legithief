@@ -1,4 +1,8 @@
 legithief
+legithief.exe
 .libs
 rock_tmp
 *~
+*.dll
+stdout.txt
+stderr.txt

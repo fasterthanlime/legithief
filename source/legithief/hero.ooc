@@ -24,13 +24,16 @@ Hero: class {
     bat: CpBody
     batShape: CpShape
 
-    moveVel := 120
+    walkSpeed := 100
+    runSpeed := 200
     jumpVel := 240
 
+    lookDir := 1
     direction := 1
 
     batGfx: GlGroup
     batConstraint: CpConstraint
+    batRotaryLimit: CpRotaryLimitJoint
 
     batCounter := 0
     jumpCounter := 0
@@ -63,7 +66,7 @@ Hero: class {
         shape = level space addShape(CpBoxShape new(body, sprite width, sprite height))
         shape setFriction(0.8)
 
-        level space addConstraint(CpConstraint newRotaryLimit(body, level space getStaticBody(), 0, 0))
+        level space addConstraint(CpRotaryLimitJoint new(body, level space getStaticBody(), 0, 0))
         shape setLayers(ShapeGroup HERO)
         shape setGroup(1)
         shape setCollisionType(7)
@@ -89,8 +92,8 @@ Hero: class {
         batShape setFriction(0.99)
 
         batConstraint = level space addConstraint(CpConstraint newPivot(bat, body, cpv(pos)))
-        level space addConstraint(CpConstraint newRotaryLimit(bat, level space getStaticBody(),
-            PI / 2, 3 * PI / 2))
+        batRotaryLimit = CpRotaryLimitJoint new(bat, level space getStaticBody(), -0.1, 0.1)
+        level space addConstraint(batRotaryLimit)
 
         heroGround := HeroGroundCollision new(this)
         level space addCollisionHandler(1, 7, heroGround)
@@ -110,10 +113,10 @@ Hero: class {
             }
         )
 
-        input onKeyPress(Keys SHIFT, ||
+        input onMousePress(Buttons LEFT, ||
             if (batCounter <= 0) {
-                batCounter = 20
-                bat setAngVel(direction * -12 * PI)
+                batCounter = 15
+                throwBat()
             }
         )
     }
@@ -122,17 +125,21 @@ Hero: class {
         gfx sync(body)
         batGfx sync(bat)
 
-        alpha := 0.3
-        if (input isPressed(Keys RIGHT)) {
-            vel := body getVel()
-            vel x = vel x * alpha + (moveVel * (1 - alpha))
-            body setVel(vel)
+        moving := false
+        if (input isPressed(Keys D)) {
             direction = 1
-        } else if (input isPressed(Keys LEFT)) {
-            vel := body getVel()
-            vel x = vel x * alpha + (-moveVel * (1 - alpha))
-            body setVel(vel)
+            moving = true
+        } else if (input isPressed(Keys A)) {
             direction = -1
+            moving = true
+        }
+
+        if (moving) {
+            alpha := 0.3
+            speed := running? ? runSpeed : walkSpeed
+            vel := body getVel()
+            vel x = vel x * alpha + (direction * speed * (1 - alpha))
+            body setVel(vel)
         }
 
         if (jumpCounter > 0) {
@@ -149,13 +156,53 @@ Hero: class {
         if (batCounter > 0) {
             batCounter -= 1
             batShape setLayers(ShapeGroup HERO | ShapeGroup FURNITURE)
+            throwBat()
         } else {
+            holdBat()
             batShape setLayers(ShapeGroup HERO)
         }
 
-        spriteRight visible = (direction > 0)
-        spriteLeft visible = (direction <= 0)
+        updateLookDir()
+        updateSprites()
     }
+
+    updateLookDir: func {
+        mouse := input getMousePos()
+        if (mouse x > level dye width / 2) {
+            lookDir = 1
+        } else {
+            lookDir = -1
+        }
+    }
+
+    updateSprites: func {
+        spriteRight visible = (lookDir > 0)
+        spriteLeft visible = (lookDir <= 0)
+    }
+
+    throwBat: func {
+        if (lookDir > 0) {
+            batRotaryLimit setMin(0 - PI / 2)
+            batRotaryLimit setMax(PI / 4)
+        } else {
+            batRotaryLimit setMin(0 - PI / 4)
+            batRotaryLimit setMax(PI / 2)
+        }
+
+        bat setAngVel(lookDir * 12 * PI)
+    }
+
+    holdBat: func {
+        bat setAngVel(0.0)
+
+        base := lookDir * PI / 4
+        batRotaryLimit setMin(base - 0.1)
+        batRotaryLimit setMax(base + 0.1)
+    }
+
+    running?: Bool { get {
+        input isPressed(Keys SHIFT)
+    } }
 
 }
 

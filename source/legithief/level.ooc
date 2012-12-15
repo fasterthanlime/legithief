@@ -88,7 +88,7 @@ Level: class {
         groundRect := GlRectangle new()
         groundRect size set!(16 * 50, 16)
         groundRect pos set!(16 * 25, 200)
-        groundRect color = Color black()
+        groundRect color = Color white()
         bgLayer add(groundRect)
 
         (groundBody, ground) := space createStaticBox(groundRect)
@@ -135,8 +135,8 @@ Level: class {
     }
 
     buildHud: func {
-        text := GlText new("assets/ttf/font.ttf", "Legithief - space = jump, shift = swing bat")
-        text color = Color black()
+        text := GlText new("assets/ttf/font.ttf", "Legithief - move = wasd, jump = space, run = shift, left click = attack, right click = kick")
+        text color = Color white()
         hudLayer add(text)
     }
 }

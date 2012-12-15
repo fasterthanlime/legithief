@@ -7,7 +7,7 @@ import deadlogger/[Log, Logger, Handler, Formatter]
 
 import legithief/[level, hero]
 
-import os/Time
+import os/[Time, Env]
 
 main: func (argc: Int, argv: CString*) {
 
@@ -28,11 +28,13 @@ App: class {
     init: func {
         initLogging()
 
+        // SDL suxxorz, no function but an env var? Wtf?
+        Env set("SDL_VIDEO_CENTERED", "1")
+
         log info("Creating game engine")
 
         dye = DyeContext new(1024, 768, "legithief")
-        dye setClearColor(Color white())
-        dye setShowCursor(false)
+        dye setClearColor(Color new(20, 16, 16))
 
         setupEvents()
         level = Level new(dye, input)

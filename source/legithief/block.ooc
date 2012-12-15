@@ -11,28 +11,34 @@ Block: class {
     level: Level
 
     gfx: GlGroup
-    rect: GlRectangle
+    rect: GlSprite
 
     body: CpBody
     shape: CpShape
 
-    init: func (=level) {
+    blockType: String
+
+    init: func (=level, =blockType, pos: Vec2) {
         gfx = GlGroup new()
 
-        rect = GlRectangle new()
-        rect size set!(128, 128)
+        rect = GlSprite new(spriteFor(blockType))
         gfx add(rect)
 
         level heroLayer add(gfx)
 
-        mass := 50.0
-        moment := cpMomentForBox(mass, rect size x, rect size y)
+        mass := 50.0 / (78 * 44) * rect width * rect height
+        moment := cpMomentForBox(mass, rect width, rect height)
         body = level space addBody(CpBody new(mass, moment))
-        body setPos(cpv(300, 100))
-        body setAngle(45)
+        body setPos(cpv(pos))
 
-        shape = level space addShape(CpBoxShape new(body, rect size x, rect size y))
-        shape setFriction(0.3)
+        shape = level space addShape(CpBoxShape new(body, rect width, rect height))
+        shape setFriction(0.5)
+
+        shape setLayers(ShapeGroup FURNITURE)
+    }
+
+    spriteFor: func (blockType: String) -> String {
+        "assets/png/%s.png" format(blockType)
     }
 
     update: func {

@@ -87,13 +87,8 @@ Hero: class {
     }
 
     update: func {
-        pos := body getPos()
-        gfx pos set!(pos x, pos y)
-        gfx angle = toDegrees(body getAngle())
-
-        batPos := bat getPos()
-        batGfx pos set!(batPos x, batPos y)
-        batGfx angle = toDegrees(bat getAngle())
+        gfx sync(body)
+        batGfx sync(bat)
 
         alpha := 0.3
         if (input isPressed(Keys RIGHT)) {

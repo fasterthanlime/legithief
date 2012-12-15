@@ -21,3 +21,24 @@ toDegrees: func (radians: Float) -> Float {
     radians * 180.0 / PI
 }
 
+extend CpSpace {
+
+    createStaticBox: func ~fromGlRectangle (rect: GlRectangle) -> (CpBody, CpShape) {
+        body := CpBody newStatic()
+        body setPos(cpv(rect pos))
+        shape := CpBoxShape new(body, rect size x, rect size y)
+        return (body, shape)
+    }
+
+}
+
+extend GlDrawable {
+
+    sync: func (body: CpBody) {
+        bodyPos := body getPos()
+        pos set!(bodyPos x, bodyPos y)
+        angle = toDegrees(body getAngle())
+    }
+
+}
+

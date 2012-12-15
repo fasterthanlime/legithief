@@ -42,9 +42,7 @@ Block: class {
     }
 
     update: func {
-        pos := body getPos()
-        gfx pos set!(pos x, pos y)
-        gfx angle = toDegrees(body getAngle())
+        gfx sync(body)
     }
 
 }

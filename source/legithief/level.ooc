@@ -77,17 +77,16 @@ Level: class {
         space setGravity(gravity)
         space setDamping(0.9)
 
-        p1 := vec2(0, 200)
-        p2 := vec2(800, 200)
+        groundRect := GlRectangle new()
+        groundRect size set!(16 * 50, 16)
+        groundRect pos set!(16 * 25, 200)
+        groundRect color = Color black()
+        bgLayer add(groundRect)
 
-        ground := CpSegmentShape new(space getStaticBody(), cpv(p1), cpv(p2), 0)
+        (groundBody, ground) := space createStaticBox(groundRect)
         ground setFriction(1)
         ground setLayers(ShapeGroup FURNITURE | ShapeGroup HERO)
         space addShape(ground)
-        
-        segment := GlSegment new(p1, p2)
-        segment color = Color black()
-        bgLayer add(segment)
     }
 
     initGfx: func {

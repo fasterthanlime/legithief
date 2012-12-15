@@ -1,0 +1,11 @@
+image: assets/png/trash.png
+collision:
+    type: convex
+    points:
+        - [-8, -17]
+        - [-12, 4]
+        - [0, 17]
+        - [12, 4]
+        - [ 8, -17]
+fire: 0.8
+mass: 20

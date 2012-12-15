@@ -1,0 +1,9 @@
+OOCFLAGS?=-v -I/usr/local/opt/freetype/include/freetype2 -I/usr/local/opt/freetype/include/ -L/usr/local/opt/freetype/lib/
+
+all:
+	rock $(OOCFLAGS)
+
+clean:
+	rock -x
+
+.PHONY: all clean

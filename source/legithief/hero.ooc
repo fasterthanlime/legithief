@@ -107,7 +107,7 @@ Hero: class {
         // initialize leg
         legGfx = GlGroup new()
         legSprite := GlRectangle new()
-        legSprite size set!(8, 32)
+        legSprite size set!(8, 40)
         legSprite color set!(10, 120, 10)
 
         legGfx add(legSprite)
@@ -150,6 +150,8 @@ Hero: class {
         )
 
         input onMousePress(Buttons LEFT, ||
+            if (legCounter > 0) return
+
             if (batCounter <= 0) {
                 batCounter = 15
                 throwBat()
@@ -157,6 +159,8 @@ Hero: class {
         )
 
         input onMousePress(Buttons RIGHT, ||
+            if (batCounter > 0) return
+
             if (legCounter <= 0) {
                 legCounter = 15
                 throwLeg()
@@ -241,17 +245,13 @@ Hero: class {
     /* Leg operations */
 
     throwLeg: func {
-        base := lookDir * 3 * PI / 4
-        legRotaryLimit setMin(base - PI / 2)
-        legRotaryLimit setMax(base + PI / 2)
-
-        leg setAngVel(lookDir * -14 * PI)
+        base := PI + lookDir * (PI / 2)
+        legRotaryLimit setMin(base - 0.1)
+        legRotaryLimit setMax(base + 0.1)
     }
 
     holdLeg: func {
-        leg setAngVel(0.0)
-
-        base := lookDir * 3 * PI / 4
+        base := PI - lookDir * (PI / 4)
         legRotaryLimit setMin(base - 0.1)
         legRotaryLimit setMax(base + 0.1)
     }

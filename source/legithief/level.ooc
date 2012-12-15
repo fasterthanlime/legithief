@@ -1,5 +1,5 @@
 
-import legithief/[utils, hero, block]
+import legithief/[utils, hero, item]
 
 import structs/ArrayList
 
@@ -7,6 +7,9 @@ import dye/[core, input, sprite, font, primitives, math]
 
 use chipmunk
 import chipmunk
+
+use yaml
+import yaml/[Parser, Document]
 
 ShapeGroup: class {
     HERO := static 1
@@ -20,7 +23,7 @@ Level: class {
     input: Input
 
     hero: Hero
-    blocks := ArrayList<Block> new()
+    items := ArrayList<Item> new()
 
     group: GlGroup
 
@@ -37,18 +40,19 @@ Level: class {
         
         initGfx()
         initPhysx()
+        initItems()
 
         hero = Hero new(this)
 
-        spawnBlock("red-sofa", vec2(500, 100))
-        spawnBlock("red-single-sofa", vec2(600, 100))
+        spawnItem("double-sofa", vec2(500, 100))
+        spawnItem("single-sofa", vec2(600, 100))
         for (i in 0..6) {
-            spawnBlock("trash", vec2(400 - i * 40, 100))
+            spawnItem("trash", vec2(400 - i * 40, 100))
         }
     }
 
-    spawnBlock: func (blockType: String, pos: Vec2) {
-        blocks add(Block new(this, blockType, pos))
+    spawnItem: func (itemType: String, pos: Vec2) {
+        items add(Item new(this, itemType, pos))
     }
 
     update: func {
@@ -59,8 +63,8 @@ Level: class {
         space step(timeStep * 0.5)
 
         hero update()
-        for (block in blocks) {
-            block update()
+        for (item in items) {
+            item update()
         }
 
         target := vec2(
@@ -106,6 +110,23 @@ Level: class {
         dye add(hudLayer)
 
         buildHud()
+    }
+
+    initItems: func {
+        parser := YAMLParser new()
+        parser setInputFile("assets/items/index.yml")
+
+        doc := Document new()
+        parser parseAll(doc)
+
+        dict := doc getRootNode() toMap()
+        items := dict get("items") toList()
+
+        for (item in items) {
+            name := item toString()
+            "Loading item %s" printfln(name)
+            Item define(name)
+        }
     }
 
     buildHud: func {

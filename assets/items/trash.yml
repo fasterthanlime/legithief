@@ -1,5 +1,5 @@
 image: assets/png/trash.png
-collision:
+shape:
     type: convex
     points:
         - [-8, -17]

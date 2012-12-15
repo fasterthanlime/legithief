@@ -110,7 +110,7 @@ Level: class {
     }
 
     buildHud: func {
-        text := GlText new("assets/ttf/font.ttf", "Legithief")
+        text := GlText new("assets/ttf/font.ttf", "Legithief - space = jump, shift = swing bat")
         text color = Color black()
         hudLayer add(text)
     }

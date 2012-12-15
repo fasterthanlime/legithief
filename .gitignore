@@ -1,3 +1,6 @@
 legithief
 .libs
 rock_tmp
+
+# ugliness
+.DS_Store

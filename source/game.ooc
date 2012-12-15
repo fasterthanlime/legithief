@@ -34,7 +34,7 @@ App: class {
         log info("Creating game engine")
 
         dye = DyeContext new(1024, 768, "legithief")
-        dye setClearColor(Color new(20, 16, 16))
+        dye setClearColor(Color white())
 
         setupEvents()
         level = Level new(dye, input)

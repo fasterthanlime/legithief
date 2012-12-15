@@ -137,6 +137,11 @@ Hero: class {
         if (moving) {
             alpha := 0.3
             speed := running? ? runSpeed : walkSpeed
+            if (lookDir * direction < 0.0) {
+                // move noticeably slower if backtracking
+                speed *= 0.5
+            }
+
             vel := body getVel()
             vel x = vel x * alpha + (direction * speed * (1 - alpha))
             body setVel(vel)

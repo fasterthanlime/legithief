@@ -88,7 +88,7 @@ Level: class {
         groundRect := GlRectangle new()
         groundRect size set!(16 * 50, 16)
         groundRect pos set!(16 * 25, 200)
-        groundRect color = Color white()
+        groundRect color = Color black()
         bgLayer add(groundRect)
 
         (groundBody, ground) := space createStaticBox(groundRect)

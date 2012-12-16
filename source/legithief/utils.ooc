@@ -117,9 +117,7 @@ extend GlAnimSet {
     load: func (characterName: String, part: String, animationName: String, numFrames: Int) {
         numString: String
 
-        if (numFrames < 10) {
-            numString = "%d"
-        } else if (numFrames < 100) {
+        if (numFrames < 100) {
             numString = "%02d"
         } else if (numFrames < 1000) {
             numString = "%03d"

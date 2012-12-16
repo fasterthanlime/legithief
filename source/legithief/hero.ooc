@@ -173,12 +173,15 @@ Hero: class {
     initAnims: func {
         bottom = GlAnimSet new()
         bottom load("hero", "bottom", "walking", 10)
+    
         bottom play("walking")
         gfx add(bottom)
 
         top = GlAnimSet new()
         top load("hero", "top", "walking", 10)
-        top play("walking")
+        top load("hero", "top", "walking-bat", 3)
+        top load("hero", "top", "punching-bat", 8)
+        top play("walking-bat")
         gfx add(top)
     }
 

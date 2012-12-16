@@ -166,10 +166,10 @@ EditorLayer: class {
     dragEnd: func {
         moving = false
 
-        // CTRL = snap-dragging
-        if (ui input isPressed(Keys CTRL)) {
+        // CTRL = precise dragging
+        if (!ui input isPressed(Keys CTRL)) {
             for (o in selectedObjects) {
-                o pos snap!(ui gridSize)
+                o snap!(ui gridSize)
             }
         }
     }
@@ -231,6 +231,15 @@ EditorObject: class {
         group pos set!(pos)
     }
 
+    snap!: func (gridSize: Int) {
+        pos snap!(gridSize)
+    }
+    
+    snap!: func ~rect (size: Vec2, gridSize: Int) {
+        halfSize := vec2(size x * 0.5, - size y * 0.5)
+        pos set!(pos sub(halfSize) snap(gridSize) add(halfSize))
+    }
+
 }
 
 HeroObject: class extends EditorObject {
@@ -261,6 +270,10 @@ HeroObject: class extends EditorObject {
         contains?(sprite size, hand)
     }
 
+    snap!: func (gridSize: Int) {
+        snap!(sprite size, gridSize)
+    }
+
 }
 
 ItemObject: class extends EditorObject {
@@ -286,6 +299,10 @@ ItemObject: class extends EditorObject {
 
     contains?: func (hand: Vec2) -> Bool {
         contains?(sprite size, hand)
+    }
+
+    snap!: func (gridSize: Int) {
+        snap!(sprite size, gridSize)
     }
 
     clone: func -> This {

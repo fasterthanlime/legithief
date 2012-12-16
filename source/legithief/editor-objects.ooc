@@ -1,5 +1,5 @@
 
-import legithief/[level, utils]
+import legithief/[level, utils, item]
 
 import dye/[core, input, sprite, font, math, primitives]
 
@@ -45,6 +45,14 @@ EditorLayer: class {
         }
     }
 
+    deleteSelected: func {
+        while (!selectedObjects empty?()) {
+            o := selectedObjects get(0)
+            deselect(o)
+            o destroy()
+        }
+    }
+
     click: func {
         // Shift = multi-selection
         if (!ui input isPressed(Keys SHIFT)) {
@@ -55,18 +63,26 @@ EditorLayer: class {
     }
 
     singleSelect: func {
+        o := singlePick()
+        if (o) {
+            if (ui input isPressed(Keys SHIFT)) {
+                toggleSelect(o)
+            } else {
+                select(o)
+            }
+        }
+    }
+
+    singlePick: func -> EditorObject {
         handPos := ui handPos()
 
         for (o in objects) {
             if (o contains?(handPos)) {
-                if (ui input isPressed(Keys SHIFT)) {
-                    toggleSelect(o)
-                } else {
-                    select(o)
-                }
-                break
+                return o
             }
         }
+
+        null
     }
 
     toggleSelect: func (o: EditorObject) {
@@ -119,9 +135,23 @@ EditorLayer: class {
         if (inSelection) {
             moving = true // all good
         } else {
-            singleSelect()
-            if (!selectedObjects empty?()) {
+            o := singlePick()
+            if (o) {
+                clearSelection()
+                select(o)
                 moving = true
+            }
+        }
+
+        if (moving && ui input isPressed(Keys D)) {
+            old := ArrayList<EditorObject> new()
+            old addAll(selectedObjects)
+            clearSelection()
+
+            for (o in old) {
+                c := o clone()
+                add(c)
+                select(c)
             }
         }
     }
@@ -129,11 +159,11 @@ EditorLayer: class {
     dragEnd: func {
         moving = false
 
-        // CTRL = precise dragging
-        if (ui input isPressed(Keys CTRL)) return
-
-        for (o in selectedObjects) {
-            o pos snap!(ui gridSize)
+        // CTRL = snap-dragging
+        if (ui input isPressed(Keys CTRL)) {
+            for (o in selectedObjects) {
+                o pos snap!(ui gridSize)
+            }
         }
     }
 
@@ -172,14 +202,15 @@ EditorObject: class {
     }
 
     clone: func -> This {
-        null
+        // By default objects aren't clonable - they'll just return themselves
+        this
     }
 
     contains?: func ~rect (size, hand: Vec2) -> Bool {
-        left := pos x - size x
-        right :=  pos x + size x
-        top := pos y - size y
-        bottom := pos y + size y
+        left  :=  pos x - size x * 0.5
+        right :=  pos x + size x * 0.5
+        top    := pos y - size y * 0.5
+        bottom := pos y + size y * 0.5
 
         if (hand x < left) return false
         if (hand x > right) return false
@@ -197,6 +228,8 @@ EditorObject: class {
 
 HeroObject: class extends EditorObject {
 
+    CHARACTER_COLOR := static Color new(180, 0, 0)
+
     sprite: GlSprite
 
     init: func {
@@ -207,8 +240,40 @@ HeroObject: class extends EditorObject {
 
         rect := GlRectangle new()
         rect size set!(sprite size)
-        rect color = Color red()
+        rect color = CHARACTER_COLOR
         rect filled = false
+        rect lineWidth = 2.0
+        outlineGroup add(rect)
+    }
+
+    destroy: func {
+        // the hero can't be destroyed!
+    }
+
+    contains?: func (hand: Vec2) -> Bool {
+        contains?(sprite size, hand)
+    }
+
+}
+
+ItemObject: class extends EditorObject {
+
+    ITEM_COLOR := static Color new(0, 160, 0)
+
+    sprite: GlSprite
+    def: ItemDef
+
+    init: func (=def) {
+        super()
+
+        sprite = GlSprite new(def image)
+        group add(sprite)
+
+        rect := GlRectangle new()
+        rect size set!(sprite size)
+        rect color = ITEM_COLOR
+        rect filled = false
+        rect lineWidth = 2.0
         outlineGroup add(rect)
     }
 
@@ -216,8 +281,10 @@ HeroObject: class extends EditorObject {
         contains?(sprite size, hand)
     }
 
-    update: func {
-        super()
+    clone: func -> This {
+        c := new(def)
+        c pos set!(pos)
+        c
     }
 
 }

@@ -125,5 +125,9 @@ Item: class {
         defs put(itemName, ItemDef new(itemName))
     }
 
+    getDefinition: static func (itemName: String) -> ItemDef {
+        defs get(itemName)
+    }
+
 }
 

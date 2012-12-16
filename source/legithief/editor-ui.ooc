@@ -10,6 +10,9 @@ import sdl/[Core]
 import math
 import structs/[ArrayList, Stack]
 
+use deadlogger
+import deadlogger/[Log, Logger]
+
 Dialog: class {
 
     ui: UI
@@ -41,6 +44,8 @@ InputDialog: class extends Dialog {
 
     cb: Func (String)
 
+    initialized := false
+
     init: func (=ui, =prompt, =cb) {
         super(ui)
 
@@ -66,7 +71,12 @@ InputDialog: class extends Dialog {
         group add(text)
 
         group center!(ui dye)
+    }
 
+    update: func {
+        if (initialized) return
+
+        cb := this cb // silly workaround..
         input onKeyPress(|kev|
             if (kev code == Keys ESC) {
                 destroy()
@@ -81,9 +91,7 @@ InputDialog: class extends Dialog {
                 text value = "%s%c" format(text value, kev unicode as Char)
             }
         )
-    }
-
-    update: func {
+        initialized = true
     }
 
 }
@@ -93,6 +101,7 @@ UI: class {
     prevMousePos := vec2(0, 0)
 
     fontPath := static "assets/ttf/font.ttf"
+    logger := static Log getLogger("editor-ui")
 
     dye: DyeContext
     input: Input
@@ -102,7 +111,7 @@ UI: class {
     /* dragging */
     dragging := false
     dragStart := false
-    dragThreshold := 4.0
+    dragThreshold := 2.0
     dragPath := vec(0, 0)
 
     gridSize := 16.0
@@ -296,6 +305,20 @@ UI: class {
                     camPos add!(0, camNudge)
                 case Keys KP8 => 
                     camPos sub!(0, camNudge)
+                case Keys I =>
+                    push(InputDialog new(this, "Enter item name", |itemName|
+                        def := Item getDefinition(itemName)
+                        if (def) {
+                            logger debug("Spawning item %s" format(itemName))
+                            obj := ItemObject new(def)
+                            obj pos set!(handPos())
+                            activeLayer add(obj)
+                        } else {
+                            logger warn("Unknown item type %s" format(itemName))
+                        }
+                    ))
+                case Keys BACKSPACE || Keys DELETE =>
+                    if (activeLayer) activeLayer deleteSelected()
             }
         )
 

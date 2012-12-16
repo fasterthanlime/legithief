@@ -114,12 +114,12 @@ UI: class {
     dragThreshold := 2.0
     dragPath := vec(0, 0)
 
-    gridSize := 16.0
+    gridSize := 32.0
 
     /* Camera */
     camPos := vec2(0, 0)
     draggingCam := false
-    camNudge := 64.0
+    camNudge := 128.0
     
     /* Dye groups */
     group: GlGroup
@@ -153,6 +153,7 @@ UI: class {
 
         {
             grid := GlGrid new()
+            grid width = gridSize
             grid color set!(200, 200, 200)
             worldGroup add(grid)
 

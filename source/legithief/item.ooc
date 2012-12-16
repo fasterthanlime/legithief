@@ -73,14 +73,10 @@ Item: class {
     body: CpBody
     shape: CpShape
 
-    blockType: String
-
     def: ItemDef
 
-    init: func (=level, =blockType, pos: Vec2) {
+    init: func (=level, =def, pos: Vec2) {
         gfx = GlGroup new()
-
-        def = defs get(blockType)
 
         rect = GlSprite new(def image)
         gfx add(rect)

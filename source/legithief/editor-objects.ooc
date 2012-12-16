@@ -251,7 +251,7 @@ HeroObject: class extends EditorObject {
     init: func {
         super()
 
-        sprite = GlSprite new("assets/png/hero.png")
+        sprite = GlSprite new("assets/png/hero/hero-01.png")
         group add(sprite)
 
         rect := GlRectangle new()

@@ -1,16 +1,16 @@
 items:
-    - single-sofa
-    - double-sofa
+    - sofa
+    - sofa-double
     - trash
-    - bedside-table
+    - nightstand
     - bed
     - chair-left
     - chair-right
     - kitchen
-    - red-table
-    - television
+    - table
     - toilet
+    - tv
     - tv-support
+    - bathtub
     - duck
-    - bath
     - muskox

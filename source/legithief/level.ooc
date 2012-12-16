@@ -11,6 +11,9 @@ import chipmunk
 use yaml
 import yaml/[Parser, Document]
 
+use deadlogger
+import deadlogger/[Log, Logger]
+
 ShapeGroup: class {
     HERO := static 1
     FURNITURE := static 2
@@ -18,6 +21,8 @@ ShapeGroup: class {
 }
 
 Level: class {
+
+    logger := static Log getLogger("Level")
 
     dye: DyeContext
     input: Input
@@ -43,20 +48,22 @@ Level: class {
 
         hero = Hero new(this)
 
-        spawnItem("double-sofa", vec2(500, 100))
-        spawnItem("single-sofa", vec2(600, 100))
-        spawnItem("bedside-table", vec2(650, 100))
+        spawnItem("sofa-double", vec2(500, 100))
+        spawnItem("sofa", vec2(600, 100))
+        spawnItem("nightstand", vec2(650, 100))
         spawnItem("kitchen", vec2(400,200))
         spawnItem("tv-support", vec2(700,200))
-        spawnItem("television", vec2(700,100))
+        spawnItem("tv", vec2(700,100))
         spawnItem("trash", vec2(400, 100))
-        for (i in 0..6) {
-            spawnItem("duck", vec2(400 - i * 40, 100))
-        }
     }
 
-    spawnItem: func (itemType: String, pos: Vec2) {
-        items add(Item new(this, itemType, pos))
+    spawnItem: func (itemName: String, pos: Vec2) {
+        def := Item getDefinition(itemName)
+        if (def) {
+            items add(Item new(this, def, pos))
+        } else {
+            logger warn("Unknown item type: %s" format(itemName))
+        }
     }
 
     update: func {

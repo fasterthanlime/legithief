@@ -83,7 +83,7 @@ Hero: class {
         batSprite := GlRectangle new()
         batSprite size set!(8, 76)
         batSprite color set!(220, 80, 80)
-        //batSprite visible = false
+        batSprite visible = false
 
         batGfx add(batSprite)
         level heroLayer add(batGfx)
@@ -110,7 +110,7 @@ Hero: class {
         legSprite := GlRectangle new()
         legSprite size set!(8, 80)
         legSprite color set!(80, 220, 80)
-        //legSprite visible = false
+        legSprite visible = false
 
         legGfx add(legSprite)
         level heroLayer add(legGfx)
@@ -179,8 +179,13 @@ Hero: class {
 
         top = GlAnimSet new()
         top load("hero", "top", "walking", 10)
-        top load("hero", "top", "walking-bat", 3)
-        top load("hero", "top", "punching-bat", 8)
+        wbat := top load("hero", "top", "walking-bat", 3)
+        wbat offset x = 20
+        pbat := top load("hero", "top", "punching-bat", 8)
+        pbat offset x = 38
+        pbat offset y = -30
+        pbat frameDuration = 2
+
         top play("walking-bat")
         gfx add(top)
     }
@@ -259,6 +264,8 @@ Hero: class {
 
     updateSprites: func {
         sprite xSwap = (lookDir < 0)
+        top xSwap = (lookDir < 0)
+        bottom xSwap = (lookDir < 0)
     }
 
     /* Leg operations */
@@ -278,12 +285,14 @@ Hero: class {
     /* Bat operations */
 
     throwBat: func {
+        top play("punching-bat")
         base := 0 - lookDir * (3 * PI / 4)
         batRotaryLimit setMin(base - 0.1)
         batRotaryLimit setMax(base + 0.1)
     }
 
     holdBat: func {
+        top play("walking-bat")
         base := 0 + lookDir * (PI / 4)
         batRotaryLimit setMin(base - 0.1)
         batRotaryLimit setMax(base + 0.1)

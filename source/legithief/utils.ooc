@@ -114,7 +114,7 @@ isPrintable: func (u: UInt16) -> Bool {
 
 extend GlAnimSet {
 
-    load: func (characterName: String, part: String, animationName: String, numFrames: Int) {
+    load: func (characterName: String, part: String, animationName: String, numFrames: Int) -> GlAnim {
         numString: String
 
         if (numFrames < 100) {
@@ -127,7 +127,9 @@ extend GlAnimSet {
 
         formatString := "assets/png/%s/%s/%s/%s-%s.png" format(characterName, part, animationName, characterName, numString)
 
-        put(animationName, GlAnim sequence(formatString, 1, numFrames))
+        anim := GlAnim sequence(formatString, 1, numFrames)
+        put(animationName, anim)
+        anim
     }
 
 }

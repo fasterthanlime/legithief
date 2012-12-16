@@ -78,6 +78,7 @@ Hero: class {
         batSprite := GlRectangle new()
         batSprite size set!(4, 38)
         batSprite color set!(220, 80, 80)
+        batSprite visible = false
 
         batGfx add(batSprite)
         level heroLayer add(batGfx)
@@ -104,6 +105,7 @@ Hero: class {
         legSprite := GlRectangle new()
         legSprite size set!(4, 40)
         legSprite color set!(80, 220, 80)
+        legSprite visible = false
 
         legGfx add(legSprite)
         level heroLayer add(legGfx)

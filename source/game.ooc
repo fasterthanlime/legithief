@@ -33,7 +33,7 @@ App: class {
 
         log info("Creating game engine")
 
-        dye = DyeContext new(1024, 768, "legithief")
+        dye = DyeContext new(1280, 720, "legithief", true)
         dye setClearColor(Color white())
 
         setupEvents()
@@ -51,6 +51,8 @@ App: class {
         }
 
         log info("Engine exited")
+
+        dye quit()
     }
 
     update: func {

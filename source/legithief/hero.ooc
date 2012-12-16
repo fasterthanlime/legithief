@@ -1,7 +1,7 @@
 
 import legithief/[level, utils]
 
-import dye/[core, input, sprite, font, math, primitives]
+import dye/[core, input, sprite, font, math, primitives, anim]
 
 use chipmunk
 import chipmunk
@@ -43,16 +43,21 @@ Hero: class {
     legRotaryLimit: CpRotaryLimitJoint
     legCounter := 0
 
+    /* animations */
+    bottom, top: GlAnimSet
+
+    /* physics */
     jumpCounter := 0
-
     touchesGround := false
-
     collisionHandlers := ArrayList<CpCollisionHandler> new()
 
     init: func (=level) {
         gfx = GlGroup new()
         sprite = GlSprite new("assets/png/hero/hero-01.png") 
         gfx add(sprite)
+        sprite visible = false
+
+        initAnims()
 
         level heroLayer add(gfx)
 
@@ -165,10 +170,25 @@ Hero: class {
         )
     }
 
+    initAnims: func {
+        bottom = GlAnimSet new()
+        bottom put("walking", GlAnim sequence("assets/png/hero/bottom/walking/hero-%02d.png", 1, 10))
+        bottom play("walking")
+        gfx add(bottom)
+
+        top = GlAnimSet new()
+        top put("walking", GlAnim sequence("assets/png/hero/top/walking/hero-%02d.png", 1, 10))
+        top play("walking")
+        gfx add(top)
+    }
+
     update: func {
         gfx sync(body)
         batGfx sync(bat)
         legGfx sync(leg)
+
+        bottom update()
+        top update()
 
         moving := false
         if (input isPressed(Keys D)) {

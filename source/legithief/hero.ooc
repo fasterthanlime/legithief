@@ -15,7 +15,7 @@ Hero: class {
     input: Input 
 
     gfx: GlGroup
-    spriteLeft, spriteRight: GlSprite
+    sprite: GlSprite
 
     body: CpBody
     shape: CpShape
@@ -51,13 +51,8 @@ Hero: class {
 
     init: func (=level) {
         gfx = GlGroup new()
-        spriteRight = GlSprite new("assets/png/hero-right.png") 
-        spriteLeft = GlSprite new("assets/png/hero-left.png") 
-        spriteLeft visible = false
-        gfx add(spriteRight)
-        gfx add(spriteLeft)
-
-        sprite := spriteRight
+        sprite = GlSprite new("assets/png/hero-right.png") 
+        gfx add(sprite)
 
         level heroLayer add(gfx)
 
@@ -238,8 +233,7 @@ Hero: class {
     }
 
     updateSprites: func {
-        spriteRight visible = (lookDir > 0)
-        spriteLeft visible = (lookDir <= 0)
+        sprite xSwap = (lookDir < 0)
     }
 
     /* Leg operations */

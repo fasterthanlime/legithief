@@ -117,6 +117,13 @@ EditorLayer: class {
         if (!moving) return
 
         for (o in selectedObjects) {
+            ourDelta := delta
+            if(ui input isPressed(Keys X)) {
+                ourDelta y = 0
+            } else if (ui input isPressed(Keys Y)) {
+                ourDelta x = 0
+            }
+
             o pos add!(delta)
         }
     }

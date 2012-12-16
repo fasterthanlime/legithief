@@ -53,7 +53,7 @@ App: class {
         log info("Starting engine")
 
         while (running) {
-            timeStep := 1000.0 / 30.0
+            timeStep := 1000.0 / 60.0
             Time sleepMilli(timeStep)
             update()
         }

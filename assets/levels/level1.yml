@@ -1,0 +1,8 @@
+hero:
+    pos: [200, 200]
+background:
+    pos: [0, 0]
+    image: "assets/img/leather.png"
+items:
+    - type: "duck"
+      pos: [100, 100]

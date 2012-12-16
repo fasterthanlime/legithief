@@ -33,7 +33,7 @@ App: class {
 
         log info("Creating game engine")
 
-        dye = DyeContext new(1280, 720, "legithief", true)
+        dye = DyeContext new(1280, 720, "legithief", false)
         dye setClearColor(Color white())
 
         setupEvents()

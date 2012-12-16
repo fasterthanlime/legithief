@@ -71,10 +71,8 @@ Level: class {
             item update()
         }
 
-        target := vec2(
-            dye width / 2 - hero gfx pos x,
-            dye height / 2 - hero gfx pos y
-        )
+        mouseOffset := dye center sub(input getMousePos()) mul(0.5)
+        target := dye center sub(hero gfx pos) add(mouseOffset)
         group pos interpolate!(target, 0.12)
     }
 

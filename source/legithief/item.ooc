@@ -53,7 +53,7 @@ ItemDef: class {
                 case "fire" =>
                     fire = v toFloat()
                 case =>
-                    "Unhandled item key %s" printfln(k)
+                    Item logger warn("Unhandled item key %s" format(k))
             }
         )
     }

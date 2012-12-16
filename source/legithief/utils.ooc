@@ -31,6 +31,13 @@ extend CpSpace {
         return (body, shape)
     }
 
+    createStaticBox: func ~fromGlSprite (rect: GlSprite) -> (CpBody, CpShape) {
+        body := CpBody newStatic()
+        body setPos(cpv(rect pos))
+        shape := CpBoxShape new(body, rect size x, rect size y)
+        return (body, shape)
+    }
+
 }
 
 /* Dye <-> Chipmunk Vector conversion */

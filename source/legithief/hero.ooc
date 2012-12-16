@@ -50,6 +50,7 @@ Hero: class {
     jumpCounter := 0
     touchesGround := false
     collisionHandlers := ArrayList<CpCollisionHandler> new()
+    moving := false
 
     init: func (=level) {
         gfx = GlGroup new()
@@ -172,22 +173,41 @@ Hero: class {
 
     initAnims: func {
         bottom = GlAnimSet new()
-        bottom load("hero", "bottom", "walking", 10)
-    
+        bwalk := bottom load("hero", "bottom", "walking", 10)
+        bwalk frameDuration = 3
+
+        pfoot := bottom load("hero", "bottom", "punching-foot", 8)
+        pfoot offset x = 8
+        pfoot frameDuration = 3
         bottom play("walking")
         gfx add(bottom)
 
         top = GlAnimSet new()
-        top load("hero", "top", "walking", 10)
+        hwalk := top load("hero", "top", "walking", 10)
+        hwalk frameDuration = 4
+
         wbat := top load("hero", "top", "walking-bat", 3)
         wbat offset x = 20
+        wbat frameDuration = 6
+
         pbat := top load("hero", "top", "punching-bat", 8)
         pbat offset x = 38
-        pbat offset y = -30
+        pbat offset y = -24
         pbat frameDuration = 2
 
         top play("walking-bat")
         gfx add(top)
+    }
+
+    updateAnimations: func {
+        ticks := (direction * lookDir) * (running? ? 2 : 1)
+        if (moving) {
+            bottom update(ticks)
+        }
+
+        if (moving || !top currentName startsWith?("walking-")) {
+            top update()
+        }
     }
 
     update: func {
@@ -195,10 +215,7 @@ Hero: class {
         batGfx sync(bat)
         legGfx sync(leg)
 
-        bottom update()
-        top update()
-
-        moving := false
+        moving = false
         if (input isPressed(Keys D)) {
             direction = 1
             moving = true
@@ -219,6 +236,8 @@ Hero: class {
             vel x = vel x * alpha + (direction * speed * (1 - alpha))
             body setVel(vel)
         }
+
+        updateAnimations()
 
         if (jumpCounter > 0) {
             jumpCounter -= 1
@@ -271,12 +290,14 @@ Hero: class {
     /* Leg operations */
 
     throwLeg: func {
+        bottom play("punching-foot")
         base := PI + lookDir * (PI / 2)
         legRotaryLimit setMin(base - 0.1)
         legRotaryLimit setMax(base + 0.1)
     }
 
     holdLeg: func {
+        bottom play("walking")
         base := PI - lookDir * (PI / 4)
         legRotaryLimit setMin(base - 0.1)
         legRotaryLimit setMax(base + 0.1)

@@ -90,17 +90,17 @@ Level: class {
         space setGravity(gravity)
         space setDamping(0.9)
 
-        groundRect := GlRectangle new()
-        groundRect size set!(16 * 50, 16)
-        groundRect pos set!(16 * 25, 200)
-        groundRect color = Color black()
-        bgLayer add(groundRect)
+        for (i in -2..2) {
+            groundRect := GlSprite new("assets/png/checker.png")
+            groundRect pos set!(i * 640, 200)
+            bgLayer add(groundRect)
 
-        (groundBody, ground) := space createStaticBox(groundRect)
-        ground setFriction(1)
-        ground setLayers(ShapeGroup FURNITURE | ShapeGroup HERO)
-        ground setCollisionType(1)
-        space addShape(ground)
+            (groundBody, ground) := space createStaticBox(groundRect)
+            ground setFriction(1)
+            ground setLayers(ShapeGroup FURNITURE | ShapeGroup HERO)
+            ground setCollisionType(1)
+            space addShape(ground)
+        }
     }
 
     initGfx: func {

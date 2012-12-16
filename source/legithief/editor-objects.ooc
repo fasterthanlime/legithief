@@ -11,10 +11,20 @@ import structs/[ArrayList, Stack, HashMap]
 
 import legithief/[editor-ui]
 
+use deadlogger
+import deadlogger/[Log, Logger]
+
+InvalidInputException: class extends Exception {
+    
+    init: super func
+
+}
+
 EditorLayer: class {
 
     moving := false
 
+    logger: Logger
     objects := ArrayList<EditorObject> new()
     ui: UI
 
@@ -22,9 +32,12 @@ EditorLayer: class {
 
     group: GlGroup
 
-    init: func (=ui) {
+    name: String
+
+    init: func (=ui, =name) {
         group = GlGroup new()
         ui layerGroup add(group)
+        logger = Log getLogger("layer: %s" format(name))
     }
 
     add: func (object: EditorObject) {
@@ -38,6 +51,8 @@ EditorLayer: class {
         objects remove(object)
         group remove(object group)
     }
+
+    insert: func
 
     update: func {
         for (o in objects) {
@@ -184,6 +199,52 @@ EditorLayer: class {
 
 }
 
+ItemLayer: class extends EditorLayer {
+
+    init: super func
+
+    insert: func {
+        ui push(InputDialog new(ui, "Enter item name", |itemName|
+            def := Item getDefinition(itemName)
+            if (def) {
+                logger debug("Spawning item %s" format(itemName))
+                obj := ItemObject new(def)
+                obj pos set!(ui handPos())
+                add(obj)
+            } else {
+                logger warn("Unknown item type %s" format(itemName))
+            }
+        ))
+    }
+    
+}
+
+ImageLayer: class extends EditorLayer {
+
+    init: super func
+
+    insert: func {
+        ui push(InputDialog new(ui, "Enter item name", |imageName|
+            def := ImageDef get(imageName)
+            if (def) {
+                logger debug("Spawning image %s" format(imageName))
+                obj := ImageObject new(def)
+                obj pos set!(ui handPos())
+                add(obj)
+            } else {
+                logger warn("Unknown image item %s" format(imageName))
+            }
+        ))
+    }
+
+}
+
+TileLayer: class extends EditorLayer {
+
+    init: super func
+
+}
+
 EditorObject: class {
 
     pos := vec2(0, 0)
@@ -287,6 +348,62 @@ ItemObject: class extends EditorObject {
         super()
 
         sprite = GlSprite new(def image)
+        group add(sprite)
+
+        rect := GlRectangle new()
+        rect size set!(sprite size)
+        rect color = ITEM_COLOR
+        rect filled = false
+        rect lineWidth = 2.0
+        outlineGroup add(rect)
+    }
+
+    contains?: func (hand: Vec2) -> Bool {
+        contains?(sprite size, hand)
+    }
+
+    snap!: func (gridSize: Int) {
+        snap!(sprite size, gridSize)
+    }
+
+    clone: func -> This {
+        c := new(def)
+        c pos set!(pos)
+        c
+    }
+
+}
+
+ImageDef: class {
+
+    name: String
+    path: String
+
+    init: func (=name, =path)
+
+    get: static func (name: String) -> This {
+        path := "assets/png/%s.png" format(name)
+        sprite := GlSprite new(path)
+        if (sprite width == 0 || sprite height == 0) {
+            return null
+        }
+
+        new(name, path)
+    }
+
+}
+
+ImageObject: class extends EditorObject {
+
+    ITEM_COLOR := static Color new(0, 0, 160)
+
+    sprite: GlSprite
+    def: ImageDef
+
+    init: func (=def) {
+        super()
+
+        sprite = GlSprite new(def path)
         group add(sprite)
 
         rect := GlRectangle new()

@@ -2,8 +2,11 @@ OOCFLAGS?=-v -I/usr/local/opt/freetype/include/freetype2 -I/usr/local/opt/freety
 
 all:
 	rock $(OOCFLAGS)
+	
+editor:
+	rock $(OOCFLAGS) --sourcepath=source editor
 
 clean:
 	rock -x
 
-.PHONY: all clean
+.PHONY: all editor clean

@@ -1,5 +1,5 @@
 
-import legithief/[level, utils]
+import legithief/[level, utils, item]
 import legithief/[editor-objects]
 
 import dye/[core, input, sprite, font, math, primitives]
@@ -99,7 +99,12 @@ UI: class {
 
     running := true
 
+    /* dragging */
     dragging := false
+    dragStart := false
+    dragThreshold := 4.0
+    dragPath := vec(0, 0)
+
     gridSize := 16.0
 
     /* Camera */
@@ -129,6 +134,8 @@ UI: class {
 
     /* Constructor */
     init: func (=dye, globalInput: Input) {
+        Item loadDefinitions()
+
         group = GlGroup new()
         dye add(group)
 
@@ -246,6 +253,21 @@ UI: class {
             activeLayer drag(delta)
         }
 
+        if (dragStart) {
+            dragPath add!(delta)
+
+            if (dragPath norm() >= dragThreshold) {
+                // Yup, it's a drag
+                dragStart = false
+                dragging = true
+
+                if (activeLayer) {
+                    activeLayer dragStart(handPos() sub(dragPath))
+                    activeLayer drag(dragPath)
+                }
+            }
+        }
+
         prevMousePos set!(mousePos)
     }
 
@@ -278,13 +300,22 @@ UI: class {
         )
 
         input onMousePress(Buttons LEFT, ||
-            dragging = true
+            dragStart = true
+            dragPath = vec2(0, 0)
+            dragging = false
         )
 
         input onMouseRelease(Buttons LEFT, ||
-            dragging = false
-            if (activeLayer) {
-                activeLayer dragEnd()
+            dragStart = false
+            if (dragging) {
+                dragging = false
+                if (activeLayer) {
+                    activeLayer dragEnd()
+                }
+            } else {
+                if (activeLayer) {
+                    activeLayer click()
+                }
             }
         )
 

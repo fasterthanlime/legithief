@@ -35,7 +35,7 @@ App: class {
         // SDL suxxorz, no function but an env var? Wtf?
         Env set("SDL_VIDEO_CENTERED", "1")
 
-        dye = DyeContext new(1440, 900, "legithief level editor")
+        dye = DyeContext new(1360, 800, "legithief level editor")
         dye setClearColor(Color white())
         dye setShowCursor(true)
         SDL enableUnicode(true)

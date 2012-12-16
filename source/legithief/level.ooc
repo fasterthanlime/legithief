@@ -40,7 +40,6 @@ Level: class {
         
         initGfx()
         initPhysx()
-        initItems()
 
         hero = Hero new(this)
 
@@ -116,23 +115,6 @@ Level: class {
         dye add(hudLayer)
 
         buildHud()
-    }
-
-    initItems: func {
-        parser := YAMLParser new()
-        parser setInputFile("assets/items/index.yml")
-
-        doc := Document new()
-        parser parseAll(doc)
-
-        dict := doc getRootNode() toMap()
-        items := dict get("items") toList()
-
-        for (item in items) {
-            name := item toString()
-            "Loading item %s" printfln(name)
-            Item define(name)
-        }
     }
 
     buildHud: func {

@@ -5,6 +5,9 @@ import legithief/[level, utils]
 
 import dye/[core, input, sprite, font, math, primitives]
 
+use deadlogger
+import deadlogger/[Log, Logger]
+
 use chipmunk
 import chipmunk
 
@@ -60,6 +63,7 @@ ItemDef: class {
 Item: class {
 
     defs := static HashMap<String, ItemDef> new()
+    logger := static Log getLogger("item")
 
     level: Level
 
@@ -96,6 +100,25 @@ Item: class {
 
     update: func {
         gfx sync(body)
+    }
+
+    /* loading */
+
+    loadDefinitions: static func {
+        parser := YAMLParser new()
+        parser setInputFile("assets/items/index.yml")
+
+        doc := Document new()
+        parser parseAll(doc)
+
+        dict := doc getRootNode() toMap()
+        items := dict get("items") toList()
+
+        for (item in items) {
+            name := item toString()
+            logger info("Loading item %s" format(name))
+            Item define(name)
+        }
     }
 
     define: static func (itemName: String) {

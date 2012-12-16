@@ -5,7 +5,7 @@ import dye/[core, input, sprite, font]
 use deadlogger
 import deadlogger/[Log, Logger, Handler, Formatter]
 
-import legithief/[level, hero]
+import legithief/[level, hero, item]
 
 import os/[Time, Env]
 
@@ -37,6 +37,7 @@ App: class {
         dye setClearColor(Color white())
 
         setupEvents()
+        Item loadDefinitions()
         level = Level new(dye, input)
     }
 

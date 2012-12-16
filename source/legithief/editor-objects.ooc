@@ -13,10 +13,12 @@ import legithief/[editor-ui]
 
 EditorLayer: class {
 
+    moving := false
+
     objects := ArrayList<EditorObject> new()
     ui: UI
 
-    activeObject: EditorObject
+    selectedObjects := ArrayList<EditorObject> new()
 
     group: GlGroup
 
@@ -38,33 +40,100 @@ EditorLayer: class {
     }
 
     update: func {
-        activeObject = null
+        for (o in objects) {
+            o update()
+        }
+    }
+
+    click: func {
+        // Shift = multi-selection
+        if (!ui input isPressed(Keys SHIFT)) {
+            clearSelection()
+        }
+
+        singleSelect()
+    }
+
+    singleSelect: func {
         handPos := ui handPos()
 
         for (o in objects) {
-            o update()
-
             if (o contains?(handPos)) {
-                o outlineGroup visible = true
-                activeObject = o
-            } else {
-                o outlineGroup visible = false
+                if (ui input isPressed(Keys SHIFT)) {
+                    toggleSelect(o)
+                } else {
+                    select(o)
+                }
+                break
             }
         }
     }
 
+    toggleSelect: func (o: EditorObject) {
+        if (selectedObjects contains?(o)) {
+            deselect(o)
+        } else {
+            select(o)
+        }
+    }
+
+    select: func (o: EditorObject) {
+        if (!selectedObjects contains?(o)) {
+            o outlineGroup visible = true
+            selectedObjects add(o)
+        }
+    }
+
+    deselect: func (o: EditorObject) {
+        if (selectedObjects contains?(o)) {
+            o outlineGroup visible = false
+            selectedObjects remove(o)
+        }
+    }
+
+    clearSelection: func {
+        while (!selectedObjects empty?()) {
+            deselect(selectedObjects get(0))
+        }
+    }
+
     drag: func (delta: Vec2) {
-        if (activeObject) {
-            activeObject pos add!(delta)
+        if (!moving) return
+
+        for (o in selectedObjects) {
+            o pos add!(delta)
+        }
+    }
+
+    dragStart: func (handStart: Vec2) {
+        inSelection := false
+        moving = false
+
+        for (o in selectedObjects) {
+            if (o contains?(handStart)) {
+                inSelection = true
+                break
+            }
+        }
+
+        if (inSelection) {
+            moving = true // all good
+        } else {
+            singleSelect()
+            if (!selectedObjects empty?()) {
+                moving = true
+            }
         }
     }
 
     dragEnd: func {
+        moving = false
+
         // CTRL = precise dragging
         if (ui input isPressed(Keys CTRL)) return
 
-        if (activeObject) {
-            activeObject pos snap!(ui gridSize)
+        for (o in selectedObjects) {
+            o pos snap!(ui gridSize)
         }
     }
 
@@ -100,6 +169,10 @@ EditorObject: class {
     
     contains?: func (hand: Vec2) -> Bool {
         false
+    }
+
+    clone: func -> This {
+        null
     }
 
     contains?: func ~rect (size, hand: Vec2) -> Bool {

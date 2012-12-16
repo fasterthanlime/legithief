@@ -9,6 +9,9 @@ import legithief/[level, hero, item]
 
 import os/[Time, Env]
 
+use bleep
+import bleep
+
 main: func (argc: Int, argv: CString*) {
 
     app := App new()
@@ -24,6 +27,7 @@ App: class {
     running := true
 
     level: Level
+    bleep: Bleep
     
     init: func {
         initLogging()
@@ -36,9 +40,13 @@ App: class {
         dye = DyeContext new(1280, 720, "legithief", false)
         dye setClearColor(Color white())
 
+        bleep = Bleep new()
+
         setupEvents()
         Item loadDefinitions()
         level = Level new(dye, input)
+
+        bleep play("assets/ogg/story.ogg")
     }
 
     run: func {

@@ -318,7 +318,7 @@ UI: class {
                             logger warn("Unknown item type %s" format(itemName))
                         }
                     ))
-                case Keys BACKSPACE || Keys DELETE =>
+                case Keys BACKSPACE || Keys DEL =>
                     if (activeLayer) activeLayer deleteSelected()
             }
         )

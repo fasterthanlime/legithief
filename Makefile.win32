@@ -1,9 +1,9 @@
-OOCFLAGS?=-v -I/usr/local/include -L/usr/local/lib -I/usr/local/opt/freetype/include -I/usr/local/opt/freetype/include/freetype2 -L/usr/local/opt/freetype/lib -lopengl32 -lglu32
+OOCFLAGS?=-v -I/g/Dev/sdl_mixer/include -L/g/Dev/sdl_mixer/lib/x86 -I/usr/local/include -L/usr/local/lib -I/usr/local/opt/freetype/include -I/usr/local/opt/freetype/include/freetype2 -L/usr/local/opt/freetype/lib -lopengl32 -lglu32
 
 all:
 	rock $(OOCFLAGS)
 
 clean:
-	rock -x
+	rm -rf .libs rock_tmp
 
 .PHONY: all clean

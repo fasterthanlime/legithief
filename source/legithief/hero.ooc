@@ -51,7 +51,7 @@ Hero: class {
 
     init: func (=level) {
         gfx = GlGroup new()
-        sprite = GlSprite new("assets/png/hero-right.png") 
+        sprite = GlSprite new("assets/png/hero/hero-01.png") 
         gfx add(sprite)
 
         level heroLayer add(gfx)
@@ -76,9 +76,9 @@ Hero: class {
         // initialize bat
         batGfx = GlGroup new()
         batSprite := GlRectangle new()
-        batSprite size set!(4, 38)
+        batSprite size set!(8, 76)
         batSprite color set!(220, 80, 80)
-        batSprite visible = false
+        //batSprite visible = false
 
         batGfx add(batSprite)
         level heroLayer add(batGfx)
@@ -90,7 +90,7 @@ Hero: class {
         batMoment := cpMomentForBox(batMass, batWidth, batHeight)
 
         bat = level space addBody(CpBody new(batMass, batMoment))
-        bat setPos(cpv(pos add(0, -10)))
+        bat setPos(cpv(pos add(0, -20)))
 
         batShape = level space addShape(CpBoxShape new(bat, batWidth, batHeight))
         batShape setGroup(1)
@@ -103,9 +103,9 @@ Hero: class {
         // initialize leg
         legGfx = GlGroup new()
         legSprite := GlRectangle new()
-        legSprite size set!(4, 40)
+        legSprite size set!(8, 80)
         legSprite color set!(80, 220, 80)
-        legSprite visible = false
+        //legSprite visible = false
 
         legGfx add(legSprite)
         level heroLayer add(legGfx)
@@ -117,7 +117,7 @@ Hero: class {
         legMoment := cpMomentForBox(legMass, legWidth, legHeight)
 
         leg = level space addBody(CpBody new(legMass, legMoment))
-        leg setPos(cpv(pos add(0, -10)))
+        leg setPos(cpv(pos add(0, -20)))
 
         legShape = level space addShape(CpBoxShape new(leg, legWidth, legHeight))
         legShape setGroup(1)

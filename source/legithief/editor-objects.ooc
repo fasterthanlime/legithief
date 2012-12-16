@@ -16,6 +16,8 @@ EditorLayer: class {
     objects := ArrayList<EditorObject> new()
     ui: UI
 
+    activeObject: EditorObject
+
     group: GlGroup
 
     init: func (=ui) {
@@ -36,14 +38,33 @@ EditorLayer: class {
     }
 
     update: func {
+        activeObject = null
+        handPos := ui handPos()
+
         for (o in objects) {
             o update()
 
-            if (o contains?(ui handPos())) {
+            if (o contains?(handPos)) {
                 o outlineGroup visible = true
+                activeObject = o
             } else {
                 o outlineGroup visible = false
             }
+        }
+    }
+
+    drag: func (delta: Vec2) {
+        if (activeObject) {
+            activeObject pos add!(delta)
+        }
+    }
+
+    dragEnd: func {
+        // CTRL = precise dragging
+        if (ui input isPressed(Keys CTRL)) return
+
+        if (activeObject) {
+            activeObject pos snap!(ui gridSize)
         }
     }
 
@@ -97,7 +118,6 @@ EditorObject: class {
 
     update: func {
         group pos set!(pos)
-        outlineGroup pos set!(pos)
     }
 
 }

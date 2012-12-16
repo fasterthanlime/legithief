@@ -99,9 +99,12 @@ UI: class {
 
     running := true
 
+    dragging := false
+    gridSize := 16.0
+
     /* Camera */
     camPos := vec2(0, 0)
-    dragging := false
+    draggingCam := false
     camNudge := 64.0
     
     /* Dye groups */
@@ -118,6 +121,7 @@ UI: class {
     heroLayer: EditorLayer
 
     layers := ArrayList<EditorLayer> new()
+    activeLayer: EditorLayer
 
     /* HUD */
     camPosText: GlText
@@ -132,6 +136,10 @@ UI: class {
         group add(worldGroup)
 
         {
+            grid := GlGrid new()
+            grid color set!(200, 200, 200)
+            worldGroup add(grid)
+
             cross := GlCross new()
             worldGroup add(cross)
 
@@ -165,6 +173,8 @@ UI: class {
 
         heroLayer = EditorLayer new(this)
         layers add(heroLayer)
+
+        activeLayer = heroLayer
 
         hero := HeroObject new()
         hero pos set!(0, 0)
@@ -228,8 +238,12 @@ UI: class {
         mousePos := input getMousePos()
         delta := mousePos sub(prevMousePos)
         
-        if (dragging) {
+        if (draggingCam) {
             camPos sub!(delta)
+        }
+
+        if (dragging && activeLayer) {
+            activeLayer drag(delta)
         }
 
         prevMousePos set!(mousePos)
@@ -263,12 +277,23 @@ UI: class {
             }
         )
 
-        input onMousePress(Buttons MIDDLE, ||
+        input onMousePress(Buttons LEFT, ||
             dragging = true
         )
 
-        input onMouseRelease(Buttons MIDDLE, ||
+        input onMouseRelease(Buttons LEFT, ||
             dragging = false
+            if (activeLayer) {
+                activeLayer dragEnd()
+            }
+        )
+
+        input onMousePress(Buttons MIDDLE, ||
+            draggingCam = true
+        )
+
+        input onMouseRelease(Buttons MIDDLE, ||
+            draggingCam = false
         )
     }
 

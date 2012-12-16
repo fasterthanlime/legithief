@@ -184,7 +184,11 @@ UI: class {
 
     updateHud: func {
         camPosText value = "camera pos: %s" format(camPos _)
-        mousePosText value = "mouse pos: %s" format(toWorld(input getMousePos()) _)
+        mousePosText value = "mouse pos: %s" format(handPos() _)
+    }
+
+    handPos: func -> Vec2 {
+        toWorld(input getMousePos())
     }
 
     openDialog: func {

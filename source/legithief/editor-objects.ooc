@@ -38,6 +38,12 @@ EditorLayer: class {
     update: func {
         for (o in objects) {
             o update()
+
+            if (o contains?(ui handPos())) {
+                o outlineGroup visible = true
+            } else {
+                o outlineGroup visible = false
+            }
         }
     }
 
@@ -63,18 +69,35 @@ EditorObject: class {
     init: func {
         group = GlGroup new()
         outlineGroup = GlGroup new()
-        // outlineGroup visible = false
+        outlineGroup visible = false
+        group add(outlineGroup)
     }
 
     destroy: func {
         layer remove(this)
     }
     
-    contains?: func (pos: Vec2) {
+    contains?: func (hand: Vec2) -> Bool {
         false
     }
 
+    contains?: func ~rect (size, hand: Vec2) -> Bool {
+        left := pos x - size x
+        right :=  pos x + size x
+        top := pos y - size y
+        bottom := pos y + size y
+
+        if (hand x < left) return false
+        if (hand x > right) return false
+        if (hand y < top) return false
+        if (hand y > bottom) return false
+
+        true
+    }
+
     update: func {
+        group pos set!(pos)
+        outlineGroup pos set!(pos)
     }
 
 }
@@ -88,14 +111,20 @@ HeroObject: class extends EditorObject {
 
         sprite = GlSprite new("assets/png/hero.png")
         group add(sprite)
+
+        rect := GlRectangle new()
+        rect size set!(sprite size)
+        rect color = Color red()
+        rect filled = false
+        outlineGroup add(rect)
     }
 
-    contains?: func (pos: Vec2) {
-        true
+    contains?: func (hand: Vec2) -> Bool {
+        contains?(sprite size, hand)
     }
 
     update: func {
-        sprite pos set!(pos)
+        super()
     }
 
 }

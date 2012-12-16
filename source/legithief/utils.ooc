@@ -3,7 +3,7 @@ use chipmunk
 import chipmunk
 
 use dye
-import dye/[core, input, sprite, font, primitives, math]
+import dye/[core, input, sprite, font, primitives, math, anim]
 
 import math
 
@@ -110,6 +110,28 @@ extend DocumentNode {
 isPrintable: func (u: UInt16) -> Bool {
     /* ASCII 32 = ' ', ASCII 126 = '~' */
     (u >= 32 && u <= 126)
+}
+
+extend GlAnimSet {
+
+    load: func (characterName: String, part: String, animationName: String, numFrames: Int) {
+        numString: String
+
+        if (numFrames < 10) {
+            numString = "%d"
+        } else if (numFrames < 100) {
+            numString = "%02d"
+        } else if (numFrames < 1000) {
+            numString = "%03d"
+        } else {
+            Exception new("Too many animation frames!") throw()
+        }
+
+        formatString := "assets/png/%s/%s/%s/%s-%s.png" format(characterName, part, animationName, characterName, numString)
+
+        put(animationName, GlAnim sequence(formatString, 1, numFrames))
+    }
+
 }
 
 

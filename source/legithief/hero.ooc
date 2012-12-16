@@ -172,12 +172,12 @@ Hero: class {
 
     initAnims: func {
         bottom = GlAnimSet new()
-        bottom put("walking", GlAnim sequence("assets/png/hero/bottom/walking/hero-%02d.png", 1, 10))
+        bottom load("hero", "bottom", "walking", 10)
         bottom play("walking")
         gfx add(bottom)
 
         top = GlAnimSet new()
-        top put("walking", GlAnim sequence("assets/png/hero/top/walking/hero-%02d.png", 1, 10))
+        top load("hero", "top", "walking", 10)
         top play("walking")
         gfx add(top)
     }

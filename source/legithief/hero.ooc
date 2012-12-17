@@ -79,6 +79,10 @@ Hero: class {
     jumpSample: Sample
     gruntSamples := ArrayList<Sample> new()
 
+    /* weapon contour */
+    handContour, batContour, lighterContour: WeaponContour
+    weapon: WeaponContour
+
     init: func (=layer) {
         level = layer level
 
@@ -212,10 +216,42 @@ Hero: class {
         initSamples()
 
         initEvents()
+
+        initContours()
     }
 
     setPos: func (pos: Vec2) {
         body setPos(cpv(pos))
+    }
+
+    initContours: func {
+        contourGroup := GlGroup new()
+
+        handContour = WeaponContour new("hand")
+        handContour gfx pos set!(0, 0)
+        contourGroup add(handContour gfx)
+
+        batContour = WeaponContour new("bat")
+        batContour gfx pos set!(100, 0)
+        contourGroup add(batContour gfx)
+
+        lighterContour = WeaponContour new("lighter")
+        lighterContour gfx pos set!(200, 0)
+        contourGroup add(lighterContour gfx)
+
+        contourGroup pos set!(70, 70)
+        level hudGroup add(contourGroup)
+
+        setWeapon(batContour)
+    }
+
+    setWeapon: func (value: WeaponContour) {
+        if (weapon) {
+            weapon setActive(false)
+        }
+
+        weapon = value
+        weapon setActive(true)
     }
 
     initSamples: func {
@@ -229,6 +265,18 @@ Hero: class {
     }
 
     initEvents: func {
+        input onKeyPress(Keys _1, ||
+            setWeapon(handContour)
+        )
+
+        input onKeyPress(Keys _2, ||
+            setWeapon(batContour)
+        )
+
+        input onKeyPress(Keys _3, ||
+            setWeapon(lighterContour)
+        )
+
         // short jump
         input onKeyPress(Keys SPACE, ||
             if (touchesGround? || onLadder) {
@@ -571,4 +619,34 @@ HeroLadderCollision: class extends CpCollisionHandler {
     }
 
 }
+
+WeaponContour: class {
+
+    name: String
+
+    gfx: GlGroup
+
+    outline, activeOutline: GlSprite
+
+    init: func (=name) {
+        gfx = GlGroup new()
+
+        outline = GlSprite new("assets/png/weapon-outline.png")
+        gfx add(outline)
+
+        activeOutline = GlSprite new("assets/png/weapon-outline-active.png")
+        gfx add(activeOutline)
+        activeOutline visible = false
+
+        sprite := GlSprite new("assets/png/%s.png" format(name))
+        gfx add(sprite)
+    }
+
+    setActive: func (active: Bool) {
+        outline visible = !active
+        activeOutline visible = active
+    }
+
+}
+
 

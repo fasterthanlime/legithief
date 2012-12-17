@@ -246,6 +246,8 @@ Hero: class {
         bottom = GlAnimSet new()
         bwalk := bottom load("hero", "bottom", "walking", 12)
         bwalk frameDuration = 4
+        brun := bottom load("hero", "bottom", "running", 11)
+        brun frameDuration = 3
 
         pfoot := bottom load("hero", "bottom", "punching-foot", 8)
         pfoot offset x = 8
@@ -254,29 +256,31 @@ Hero: class {
         gfx add(bottom)
 
         top = GlAnimSet new()
-        hwalk := top load("hero", "top", "walking", 12)
-        hwalk frameDuration = 4
+        twalk := top load("hero", "top", "walking", 12)
+        twalk frameDuration = 4
+        trun := top load("hero", "top", "running", 11)
+        trun frameDuration = 3
 
-        wbat := top load("hero", "top", "walking-bat", 3)
-        wbat offset x = 20
-        wbat frameDuration = 6
+        twbat := top load("hero", "top", "walking-bat", 3)
+        twbat offset x = 20
+        twbat frameDuration = 6
 
-        pbat := top load("hero", "top", "punching-bat", 8)
-        pbat offset x = 38
-        pbat offset y = -24
-        pbat frameDuration = 2
+        tpbat := top load("hero", "top", "punching-bat", 8)
+        tpbat offset x = 38
+        tpbat offset y = -24
+        tpbat frameDuration = 2
 
         top play("walking-bat")
         gfx add(top)
     }
 
     updateAnimations: func {
-        ticks := (direction * lookDir) * (running? ? 2 : 1)
+        ticks := (direction * lookDir) * 1
         if (groundTouchNumber < 1) {
             ticks = 0
         }
 
-        bottomWalking := bottom currentName startsWith?("walking")
+        bottomWalking := bottom currentName startsWith?("walking") || bottom currentName startsWith?("running")
         if (bottomWalking) {
             // if bottom has a walking animation, only update if moving
             if (moving) {
@@ -402,6 +406,10 @@ Hero: class {
         bottom xSwap = (lookDir < 0)
     }
 
+    walkAnim: func (animSet: GlAnimSet) {
+        animSet play(running? ? "running" : "walking")
+    }
+
     /* Leg operations */
 
     throwLeg: func {
@@ -413,7 +421,7 @@ Hero: class {
     }
 
     holdLeg: func {
-        bottom play("walking")
+        walkAnim(bottom)
         base := PI - lookDir * (PI / 4)
         legRotaryLimit setMin(base - 0.1)
         legRotaryLimit setMax(base + 0.1)

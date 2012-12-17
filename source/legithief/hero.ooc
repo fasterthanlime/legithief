@@ -14,7 +14,7 @@ import bleep
 
 Hero: class {
 
-    debug := static true
+    debug := static false
 
     level: Level
     layer: Layer

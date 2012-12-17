@@ -51,7 +51,7 @@ TileDef: class {
 
 Tile: class {
 
-    debug := static true
+    debug := static false
 
     defs := static HashMap<String, TileDef> new()
     logger := static Log getLogger("tile")

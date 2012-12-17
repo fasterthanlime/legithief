@@ -1,6 +1,6 @@
 
 import legithief/[level, utils, item, tile, prop]
-import legithief/[editor-objects]
+import legithief/[editor-objects, level-loader]
 
 import dye/[core, input, sprite, font, math, primitives]
 
@@ -96,7 +96,7 @@ InputDialog: class extends Dialog {
 
 }
 
-UI: class {
+UI: class extends LevelBase {
 
     prevMousePos := vec2(0, 0)
 
@@ -105,6 +105,8 @@ UI: class {
 
     dye: DyeContext
     input: Input
+
+    hero: HeroObject
 
     running := true
 
@@ -174,10 +176,17 @@ UI: class {
         initLayers()
     }
 
+    reset: func {
+        clearLayers()
+        initLayers()
+    }
+
     clearLayers: func {
         while (!layers empty?()) {
             layers get(0) destroy()
         }
+
+        hero = null
     }
 
     initLayers: func {
@@ -203,11 +212,15 @@ UI: class {
         sLayer = ItemLayer new(this, "sprites")
         layers add(sLayer)
 
-        hero := HeroObject new()
+        hero = HeroObject new()
         hero pos set!(0, 0)
         sLayer add(hero)
 
         setActiveLayer(sLayer)
+    }
+
+    setHeroPos: func (pos: Vec2) {
+        hero pos set!(pos)
     }
 
     initHud: func {
@@ -387,5 +400,13 @@ UI: class {
         mouseCoords sub(screenSize() mul(0.5)) add(camPos)
     }
 
+    getLayer: func (key: String) -> LayerBase {
+        match key {
+            case "bg" => bgLayer
+            case "hbg" => hbgLayer
+            case "h" => hLayer
+            case "s" => sLayer
+        }
+    }
 }
 

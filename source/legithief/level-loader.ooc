@@ -11,12 +11,28 @@ import yaml/[Parser, Document]
 use deadlogger
 import deadlogger/[Log, Logger]
 
+LevelBase: abstract class {
+
+    reset: abstract func
+    getLayer: abstract func (key: String) -> LayerBase
+    setHeroPos: abstract func (pos: Vec2)
+
+}
+
+LayerBase: abstract class {
+
+    spawnProp: abstract func (name: String, pos: Vec2)
+    spawnItem: abstract func (name: String, pos: Vec2)
+    spawnTile: abstract func (name: String, pos: Vec2)
+
+}
+
 LevelLoader: class {
 
     logger := static Log getLogger("level-loader")
 
     name: String
-    level: Level
+    level: LevelBase
 
     init: func (=name, =level) {
         level reset()
@@ -47,7 +63,7 @@ LevelLoader: class {
     parseHero: func (d: DocumentNode) {
         map := d toMap()
 
-        level hero setPos(map get("pos") toVec2())
+        level setHeroPos(map get("pos") toVec2())
     }
 
     parseLayers: func (d: DocumentNode) {
@@ -65,14 +81,14 @@ LevelLoader: class {
         }
 
         list := d toList()
-        layer := getLayer(key)
+        layer := level getLayer(key)
         
         list each(|o|
             parseObject(layer, o) 
         )
     }
 
-    parseObject: func (l: Layer, d: DocumentNode) {
+    parseObject: func (l: LayerBase, d: DocumentNode) {
         map := d toMap()
 
         type := map get("type") toScalar()
@@ -83,15 +99,6 @@ LevelLoader: class {
             case "prop" => l spawnProp(name, pos)
             case "item" => l spawnItem(name, pos)
             case "tile" => l spawnTile(name, pos)
-        }
-    }
-
-    getLayer: func (key: String) -> Layer {
-        match key {
-            case "bg" => level bgLayer
-            case "hbg" => level hbgLayer
-            case "h" => level hLayer
-            case "s" => level sLayer
         }
     }
 

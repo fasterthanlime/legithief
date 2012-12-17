@@ -1,5 +1,6 @@
 
 import legithief/[level, utils, item, tile, prop]
+import legithief/[level-loader]
 
 import dye/[core, input, sprite, font, math, primitives]
 
@@ -20,7 +21,7 @@ InvalidInputException: class extends Exception {
 
 }
 
-EditorLayer: class {
+EditorLayer: class extends LayerBase {
 
     moving := false
 
@@ -197,6 +198,42 @@ EditorLayer: class {
         ui layers remove(this)
     }
 
+    spawnItem: func (name: String, pos: Vec2) {
+        def := Item getDefinition(name)
+        if (def) {
+            logger debug("Spawning item %s" format(name))
+            obj := ItemObject new(def)
+            obj pos set!(pos)
+            add(obj)
+        } else {
+            logger warn("Unknown item type %s" format(name))
+        }
+    }
+
+    spawnTile: func (name: String, pos: Vec2) {
+        def := Tile getDefinition(name)
+        if (def) {
+            logger debug("Spawning tile %s" format(name))
+            obj := TileObject new(def)
+            obj pos set!(pos)
+            add(obj)
+        } else {
+            logger warn("Unknown tile type %s" format(name))
+        }
+    }
+
+    spawnProp: func (name: String, pos: Vec2) {
+        def := Prop getDefinition(name)
+        if (def) {
+            logger debug("Spawning prop %s" format(name))
+            obj := PropObject new(def)
+            obj pos set!(pos)
+            add(obj)
+        } else {
+            logger warn("Unknown prop type %s" format(name))
+        }
+    }
+
 }
 
 ItemLayer: class extends EditorLayer {
@@ -204,16 +241,8 @@ ItemLayer: class extends EditorLayer {
     init: super func
 
     insert: func {
-        ui push(InputDialog new(ui, "Enter item name", |itemName|
-            def := Item getDefinition(itemName)
-            if (def) {
-                logger debug("Spawning item %s" format(itemName))
-                obj := ItemObject new(def)
-                obj pos set!(ui handPos())
-                add(obj)
-            } else {
-                logger warn("Unknown item type %s" format(itemName))
-            }
+        ui push(InputDialog new(ui, "Enter item name", |name|
+            spawnItem(name, ui handPos())
         ))
     }
     
@@ -224,16 +253,8 @@ PropLayer: class extends EditorLayer {
     init: super func
 
     insert: func {
-        ui push(InputDialog new(ui, "Enter item name", |imageName|
-            def := Prop getDefinition(imageName)
-            if (def) {
-                logger debug("Spawning prop %s" format(imageName))
-                obj := PropObject new(def)
-                obj pos set!(ui handPos())
-                add(obj)
-            } else {
-                logger warn("Unknown prop item %s" format(imageName))
-            }
+        ui push(InputDialog new(ui, "Enter prop name", |name|
+            spawnProp(name, ui handPos())
         ))
     }
 
@@ -244,16 +265,8 @@ TileLayer: class extends EditorLayer {
     init: super func
 
     insert: func {
-        ui push(InputDialog new(ui, "Enter tile name", |itemName|
-            def := Tile getDefinition(itemName)
-            if (def) {
-                logger debug("Spawning tile %s" format(itemName))
-                obj := TileObject new(def)
-                obj pos set!(ui handPos())
-                add(obj)
-            } else {
-                logger warn("Unknown tile type %s" format(itemName))
-            }
+        ui push(InputDialog new(ui, "Enter tile name", |name|
+            spawnTile(name, ui handPos())
         ))
     }
 

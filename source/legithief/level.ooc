@@ -18,7 +18,7 @@ ShapeGroup: class {
     HOUSE := static 4
 }
 
-Level: class {
+Level: class extends LevelBase {
 
     fontPath := static "assets/ttf/font.ttf"
     logger := static Log getLogger("Level")
@@ -135,9 +135,24 @@ Level: class {
         }
     }
 
+    setHeroPos: func (v: Vec2) {
+        hero setPos(v)
+    }
+
+    getLayer: func (key: String) -> LayerBase {
+        match key {
+            case "bg" => bgLayer
+            case "hbg" => hbgLayer
+            case "h" => hLayer
+            case "s" => sLayer
+        }
+    }
+
 }
 
-Layer: class {
+/* game layer */
+
+Layer: class extends LayerBase {
 
     logger: Logger
 
@@ -165,7 +180,7 @@ Layer: class {
         }
     }
 
-    spawnItem: func (name: String, pos: Vec2) -> Item {
+    spawnItem: func (name: String, pos: Vec2) {
         def := Item getDefinition(name)
 
         if (def) {
@@ -178,7 +193,7 @@ Layer: class {
         }
     }
 
-    spawnTile: func (name: String, pos: Vec2) -> Tile {
+    spawnTile: func (name: String, pos: Vec2) {
         def := Tile getDefinition(name)
 
         if (def) {
@@ -191,7 +206,7 @@ Layer: class {
         }
     }
 
-    spawnProp: func (name: String, pos: Vec2) -> Prop {
+    spawnProp: func (name: String, pos: Vec2) {
         def := Prop getDefinition(name)
 
         if (def) {

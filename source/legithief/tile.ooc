@@ -115,10 +115,12 @@ Tile: class {
             } else {
                 shape setLayers(PhysicLayers FURNITURE | PhysicLayers HERO_TILES)
             }
-            shape setCollisionType(1)
             level space addShape(shape)
             if (ladder) {
                 shape setSensor(true)
+                shape setCollisionType(2)
+            } else {
+                shape setCollisionType(1)
             }
         }
     }

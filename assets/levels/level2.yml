@@ -36,7 +36,922 @@ layers:
     pos:
     - 2016.00
     - 36.00
-  hbg: []
+  hbg:
+  - type: prop
+    name: tile3
+    pos:
+    - -704.00
+    - 0.00
+  - type: prop
+    name: tile3
+    pos:
+    - -704.00
+    - -64.00
+  - type: prop
+    name: tile3
+    pos:
+    - -704.00
+    - -128.00
+  - type: prop
+    name: tile3
+    pos:
+    - -640.00
+    - -128.00
+  - type: prop
+    name: tile3
+    pos:
+    - -576.00
+    - -128.00
+  - type: prop
+    name: tile3
+    pos:
+    - -640.00
+    - -64.00
+  - type: prop
+    name: tile3
+    pos:
+    - -576.00
+    - -64.00
+  - type: prop
+    name: tile3
+    pos:
+    - -576.00
+    - 0.00
+  - type: prop
+    name: tile3
+    pos:
+    - -640.00
+    - 0.00
+  - type: prop
+    name: tile3
+    pos:
+    - -512.00
+    - 0.00
+  - type: prop
+    name: tile3
+    pos:
+    - -512.00
+    - -64.00
+  - type: prop
+    name: tile3
+    pos:
+    - -512.00
+    - -128.00
+  - type: prop
+    name: tile3
+    pos:
+    - -448.00
+    - 0.00
+  - type: prop
+    name: tile3
+    pos:
+    - -448.00
+    - -64.00
+  - type: prop
+    name: tile3
+    pos:
+    - -448.00
+    - -128.00
+  - type: prop
+    name: tile3
+    pos:
+    - -128.00
+    - 0.00
+  - type: prop
+    name: tile3
+    pos:
+    - -128.00
+    - -64.00
+  - type: prop
+    name: tile3
+    pos:
+    - -128.00
+    - -128.00
+  - type: prop
+    name: tile3
+    pos:
+    - -192.00
+    - -128.00
+  - type: prop
+    name: tile3
+    pos:
+    - -192.00
+    - -64.00
+  - type: prop
+    name: tile3
+    pos:
+    - -192.00
+    - 0.00
+  - type: prop
+    name: tile3
+    pos:
+    - -256.00
+    - 0.00
+  - type: prop
+    name: tile3
+    pos:
+    - -256.00
+    - -64.00
+  - type: prop
+    name: tile3
+    pos:
+    - -256.00
+    - -128.00
+  - type: prop
+    name: tile3
+    pos:
+    - -320.00
+    - -128.00
+  - type: prop
+    name: tile3
+    pos:
+    - -320.00
+    - -64.00
+  - type: prop
+    name: tile3
+    pos:
+    - -320.00
+    - 0.00
+  - type: prop
+    name: tile3
+    pos:
+    - -384.00
+    - 0.00
+  - type: prop
+    name: tile3
+    pos:
+    - -384.00
+    - -64.00
+  - type: prop
+    name: tile3
+    pos:
+    - -384.00
+    - -128.00
+  - type: prop
+    name: tile3
+    pos:
+    - 192.00
+    - 0.00
+  - type: prop
+    name: tile3
+    pos:
+    - 192.00
+    - -64.00
+  - type: prop
+    name: tile3
+    pos:
+    - 192.00
+    - -128.00
+  - type: prop
+    name: tile3
+    pos:
+    - 128.00
+    - -128.00
+  - type: prop
+    name: tile3
+    pos:
+    - 128.00
+    - -64.00
+  - type: prop
+    name: tile3
+    pos:
+    - 128.00
+    - 0.00
+  - type: prop
+    name: tile3
+    pos:
+    - 64.00
+    - 0.00
+  - type: prop
+    name: tile3
+    pos:
+    - 64.00
+    - -64.00
+  - type: prop
+    name: tile3
+    pos:
+    - 64.00
+    - -128.00
+  - type: prop
+    name: tile3
+    pos:
+    - 0.00
+    - -128.00
+  - type: prop
+    name: tile3
+    pos:
+    - 0.00
+    - -64.00
+  - type: prop
+    name: tile3
+    pos:
+    - 0.00
+    - 0.00
+  - type: prop
+    name: tile3
+    pos:
+    - -64.00
+    - 0.00
+  - type: prop
+    name: tile3
+    pos:
+    - -64.00
+    - -64.00
+  - type: prop
+    name: tile3
+    pos:
+    - -64.00
+    - -128.00
+  - type: prop
+    name: tile3
+    pos:
+    - 512.00
+    - 0.00
+  - type: prop
+    name: tile3
+    pos:
+    - 512.00
+    - -64.00
+  - type: prop
+    name: tile3
+    pos:
+    - 512.00
+    - -128.00
+  - type: prop
+    name: tile3
+    pos:
+    - 448.00
+    - -128.00
+  - type: prop
+    name: tile3
+    pos:
+    - 448.00
+    - -64.00
+  - type: prop
+    name: tile3
+    pos:
+    - 448.00
+    - 0.00
+  - type: prop
+    name: tile3
+    pos:
+    - 384.00
+    - 0.00
+  - type: prop
+    name: tile3
+    pos:
+    - 384.00
+    - -64.00
+  - type: prop
+    name: tile3
+    pos:
+    - 384.00
+    - -128.00
+  - type: prop
+    name: tile3
+    pos:
+    - 320.00
+    - -128.00
+  - type: prop
+    name: tile3
+    pos:
+    - 320.00
+    - -64.00
+  - type: prop
+    name: tile3
+    pos:
+    - 320.00
+    - 0.00
+  - type: prop
+    name: tile3
+    pos:
+    - 256.00
+    - 0.00
+  - type: prop
+    name: tile3
+    pos:
+    - 256.00
+    - -64.00
+  - type: prop
+    name: tile3
+    pos:
+    - 256.00
+    - -128.00
+  - type: prop
+    name: tile3
+    pos:
+    - 512.00
+    - 192.00
+  - type: prop
+    name: tile3
+    pos:
+    - 512.00
+    - 128.00
+  - type: prop
+    name: tile3
+    pos:
+    - 512.00
+    - 64.00
+  - type: prop
+    name: tile3
+    pos:
+    - 448.00
+    - 64.00
+  - type: prop
+    name: tile3
+    pos:
+    - 448.00
+    - 128.00
+  - type: prop
+    name: tile3
+    pos:
+    - 448.00
+    - 192.00
+  - type: prop
+    name: tile3
+    pos:
+    - 384.00
+    - 192.00
+  - type: prop
+    name: tile3
+    pos:
+    - 384.00
+    - 128.00
+  - type: prop
+    name: tile3
+    pos:
+    - 384.00
+    - 64.00
+  - type: prop
+    name: tile3
+    pos:
+    - 320.00
+    - 64.00
+  - type: prop
+    name: tile3
+    pos:
+    - 320.00
+    - 128.00
+  - type: prop
+    name: tile3
+    pos:
+    - 320.00
+    - 192.00
+  - type: prop
+    name: tile3
+    pos:
+    - 256.00
+    - 192.00
+  - type: prop
+    name: tile3
+    pos:
+    - 256.00
+    - 128.00
+  - type: prop
+    name: tile3
+    pos:
+    - 256.00
+    - 64.00
+  - type: prop
+    name: tile3
+    pos:
+    - 192.00
+    - 192.00
+  - type: prop
+    name: tile3
+    pos:
+    - 192.00
+    - 128.00
+  - type: prop
+    name: tile3
+    pos:
+    - 192.00
+    - 64.00
+  - type: prop
+    name: tile3
+    pos:
+    - 128.00
+    - 64.00
+  - type: prop
+    name: tile3
+    pos:
+    - 128.00
+    - 128.00
+  - type: prop
+    name: tile3
+    pos:
+    - 128.00
+    - 192.00
+  - type: prop
+    name: tile3
+    pos:
+    - 64.00
+    - 192.00
+  - type: prop
+    name: tile3
+    pos:
+    - 64.00
+    - 128.00
+  - type: prop
+    name: tile3
+    pos:
+    - 64.00
+    - 64.00
+  - type: prop
+    name: tile3
+    pos:
+    - 0.00
+    - 64.00
+  - type: prop
+    name: tile3
+    pos:
+    - 0.00
+    - 128.00
+  - type: prop
+    name: tile3
+    pos:
+    - 0.00
+    - 192.00
+  - type: prop
+    name: tile3
+    pos:
+    - -64.00
+    - 192.00
+  - type: prop
+    name: tile3
+    pos:
+    - -64.00
+    - 128.00
+  - type: prop
+    name: tile3
+    pos:
+    - -64.00
+    - 64.00
+  - type: prop
+    name: tile3
+    pos:
+    - -128.00
+    - 192.00
+  - type: prop
+    name: tile3
+    pos:
+    - -128.00
+    - 128.00
+  - type: prop
+    name: tile3
+    pos:
+    - -128.00
+    - 64.00
+  - type: prop
+    name: tile3
+    pos:
+    - -192.00
+    - 64.00
+  - type: prop
+    name: tile3
+    pos:
+    - -192.00
+    - 128.00
+  - type: prop
+    name: tile3
+    pos:
+    - -192.00
+    - 192.00
+  - type: prop
+    name: tile3
+    pos:
+    - -256.00
+    - 192.00
+  - type: prop
+    name: tile3
+    pos:
+    - -256.00
+    - 128.00
+  - type: prop
+    name: tile3
+    pos:
+    - -256.00
+    - 64.00
+  - type: prop
+    name: tile3
+    pos:
+    - -320.00
+    - 64.00
+  - type: prop
+    name: tile3
+    pos:
+    - -320.00
+    - 128.00
+  - type: prop
+    name: tile3
+    pos:
+    - -320.00
+    - 192.00
+  - type: prop
+    name: tile3
+    pos:
+    - -384.00
+    - 192.00
+  - type: prop
+    name: tile3
+    pos:
+    - -384.00
+    - 128.00
+  - type: prop
+    name: tile3
+    pos:
+    - -384.00
+    - 64.00
+  - type: prop
+    name: tile3
+    pos:
+    - -448.00
+    - 192.00
+  - type: prop
+    name: tile3
+    pos:
+    - -448.00
+    - 128.00
+  - type: prop
+    name: tile3
+    pos:
+    - -448.00
+    - 64.00
+  - type: prop
+    name: tile3
+    pos:
+    - -512.00
+    - 64.00
+  - type: prop
+    name: tile3
+    pos:
+    - -512.00
+    - 128.00
+  - type: prop
+    name: tile3
+    pos:
+    - -512.00
+    - 192.00
+  - type: prop
+    name: tile3
+    pos:
+    - -576.00
+    - 192.00
+  - type: prop
+    name: tile3
+    pos:
+    - -576.00
+    - 128.00
+  - type: prop
+    name: tile3
+    pos:
+    - -576.00
+    - 64.00
+  - type: prop
+    name: tile3
+    pos:
+    - -640.00
+    - 64.00
+  - type: prop
+    name: tile3
+    pos:
+    - -640.00
+    - 128.00
+  - type: prop
+    name: tile3
+    pos:
+    - -640.00
+    - 192.00
+  - type: prop
+    name: tile3
+    pos:
+    - -704.00
+    - 192.00
+  - type: prop
+    name: tile3
+    pos:
+    - -704.00
+    - 128.00
+  - type: prop
+    name: tile3
+    pos:
+    - -704.00
+    - 64.00
+  - type: prop
+    name: tile3
+    pos:
+    - -448.00
+    - 384.00
+  - type: prop
+    name: tile3
+    pos:
+    - -448.00
+    - 320.00
+  - type: prop
+    name: tile3
+    pos:
+    - -448.00
+    - 256.00
+  - type: prop
+    name: tile3
+    pos:
+    - -512.00
+    - 256.00
+  - type: prop
+    name: tile3
+    pos:
+    - -512.00
+    - 320.00
+  - type: prop
+    name: tile3
+    pos:
+    - -512.00
+    - 384.00
+  - type: prop
+    name: tile3
+    pos:
+    - -576.00
+    - 384.00
+  - type: prop
+    name: tile3
+    pos:
+    - -576.00
+    - 320.00
+  - type: prop
+    name: tile3
+    pos:
+    - -576.00
+    - 256.00
+  - type: prop
+    name: tile3
+    pos:
+    - -640.00
+    - 256.00
+  - type: prop
+    name: tile3
+    pos:
+    - -640.00
+    - 320.00
+  - type: prop
+    name: tile3
+    pos:
+    - -640.00
+    - 384.00
+  - type: prop
+    name: tile3
+    pos:
+    - -704.00
+    - 384.00
+  - type: prop
+    name: tile3
+    pos:
+    - -704.00
+    - 320.00
+  - type: prop
+    name: tile3
+    pos:
+    - -704.00
+    - 256.00
+  - type: prop
+    name: tile3
+    pos:
+    - -128.00
+    - 384.00
+  - type: prop
+    name: tile3
+    pos:
+    - -128.00
+    - 320.00
+  - type: prop
+    name: tile3
+    pos:
+    - -128.00
+    - 256.00
+  - type: prop
+    name: tile3
+    pos:
+    - -192.00
+    - 256.00
+  - type: prop
+    name: tile3
+    pos:
+    - -192.00
+    - 320.00
+  - type: prop
+    name: tile3
+    pos:
+    - -192.00
+    - 384.00
+  - type: prop
+    name: tile3
+    pos:
+    - -256.00
+    - 384.00
+  - type: prop
+    name: tile3
+    pos:
+    - -256.00
+    - 320.00
+  - type: prop
+    name: tile3
+    pos:
+    - -256.00
+    - 256.00
+  - type: prop
+    name: tile3
+    pos:
+    - -320.00
+    - 256.00
+  - type: prop
+    name: tile3
+    pos:
+    - -320.00
+    - 320.00
+  - type: prop
+    name: tile3
+    pos:
+    - -320.00
+    - 384.00
+  - type: prop
+    name: tile3
+    pos:
+    - -384.00
+    - 384.00
+  - type: prop
+    name: tile3
+    pos:
+    - -384.00
+    - 320.00
+  - type: prop
+    name: tile3
+    pos:
+    - -384.00
+    - 256.00
+  - type: prop
+    name: tile3
+    pos:
+    - 192.00
+    - 384.00
+  - type: prop
+    name: tile3
+    pos:
+    - 192.00
+    - 320.00
+  - type: prop
+    name: tile3
+    pos:
+    - 192.00
+    - 256.00
+  - type: prop
+    name: tile3
+    pos:
+    - 128.00
+    - 256.00
+  - type: prop
+    name: tile3
+    pos:
+    - 128.00
+    - 320.00
+  - type: prop
+    name: tile3
+    pos:
+    - 128.00
+    - 384.00
+  - type: prop
+    name: tile3
+    pos:
+    - 64.00
+    - 384.00
+  - type: prop
+    name: tile3
+    pos:
+    - 64.00
+    - 320.00
+  - type: prop
+    name: tile3
+    pos:
+    - 64.00
+    - 256.00
+  - type: prop
+    name: tile3
+    pos:
+    - 0.00
+    - 256.00
+  - type: prop
+    name: tile3
+    pos:
+    - 0.00
+    - 320.00
+  - type: prop
+    name: tile3
+    pos:
+    - 0.00
+    - 384.00
+  - type: prop
+    name: tile3
+    pos:
+    - -64.00
+    - 384.00
+  - type: prop
+    name: tile3
+    pos:
+    - -64.00
+    - 320.00
+  - type: prop
+    name: tile3
+    pos:
+    - -64.00
+    - 256.00
+  - type: prop
+    name: tile3
+    pos:
+    - 512.00
+    - 384.00
+  - type: prop
+    name: tile3
+    pos:
+    - 512.00
+    - 320.00
+  - type: prop
+    name: tile3
+    pos:
+    - 512.00
+    - 256.00
+  - type: prop
+    name: tile3
+    pos:
+    - 448.00
+    - 256.00
+  - type: prop
+    name: tile3
+    pos:
+    - 448.00
+    - 320.00
+  - type: prop
+    name: tile3
+    pos:
+    - 448.00
+    - 384.00
+  - type: prop
+    name: tile3
+    pos:
+    - 384.00
+    - 384.00
+  - type: prop
+    name: tile3
+    pos:
+    - 384.00
+    - 320.00
+  - type: prop
+    name: tile3
+    pos:
+    - 384.00
+    - 256.00
+  - type: prop
+    name: tile3
+    pos:
+    - 320.00
+    - 256.00
+  - type: prop
+    name: tile3
+    pos:
+    - 320.00
+    - 320.00
+  - type: prop
+    name: tile3
+    pos:
+    - 320.00
+    - 384.00
+  - type: prop
+    name: tile3
+    pos:
+    - 256.00
+    - 384.00
+  - type: prop
+    name: tile3
+    pos:
+    - 256.00
+    - 320.00
+  - type: prop
+    name: tile3
+    pos:
+    - 256.00
+    - 256.00
+  - type: prop
+    name: tile3
+    pos:
+    - 576.00
+    - 256.00
+  - type: prop
+    name: tile3
+    pos:
+    - 576.00
+    - 320.00
+  - type: prop
+    name: tile3
+    pos:
+    - 576.00
+    - 384.00
   h:
   - type: tile
     name: brick
@@ -171,7 +1086,7 @@ layers:
   - type: tile
     name: stair-45
     pos:
-    - 96.00
+    - -96.00
     - -96.00
   - type: tile
     name: brick
@@ -182,31 +1097,6 @@ layers:
     name: brick
     pos:
     - 64.00
-    - 64.00
-  - type: tile
-    name: brick
-    pos:
-    - 128.00
-    - 64.00
-  - type: tile
-    name: brick
-    pos:
-    - 192.00
-    - 64.00
-  - type: tile
-    name: brick
-    pos:
-    - 256.00
-    - 64.00
-  - type: tile
-    name: brick
-    pos:
-    - 320.00
-    - 64.00
-  - type: tile
-    name: brick
-    pos:
-    - 384.00
     - 64.00
   - type: tile
     name: brick
@@ -269,16 +1159,6 @@ layers:
     - -256.00
     - -192.00
   - type: tile
-    name: brick
-    pos:
-    - -192.00
-    - -192.00
-  - type: tile
-    name: brick
-    pos:
-    - -128.00
-    - -192.00
-  - type: tile
     name: through
     pos:
     - -64.00
@@ -296,12 +1176,12 @@ layers:
   - type: tile
     name: through
     pos:
-    - 128.00
+    - -128.00
     - -192.00
   - type: tile
     name: through
     pos:
-    - 192.00
+    - -192.00
     - -192.00
   - type: tile
     name: brick
@@ -333,16 +1213,6 @@ layers:
     pos:
     - -576.00
     - -192.00
-  - type: tile
-    name: through
-    pos:
-    - -320.00
-    - 64.00
-  - type: tile
-    name: through
-    pos:
-    - -384.00
-    - 64.00
   - type: tile
     name: ladder-6
     pos:
@@ -369,11 +1239,6 @@ layers:
     - -576.00
     - 448.00
   - type: tile
-    name: through
-    pos:
-    - -768.00
-    - 64.00
-  - type: tile
     name: brick
     pos:
     - -704.00
@@ -388,14 +1253,379 @@ layers:
     pos:
     - -640.00
     - 448.00
+  - type: tile
+    name: brick
+    pos:
+    - -384.00
+    - 64.00
+  - type: tile
+    name: brick
+    pos:
+    - -320.00
+    - 64.00
+  - type: tile
+    name: brick
+    pos:
+    - -704.00
+    - 128.00
+  - type: tile
+    name: brick
+    pos:
+    - -704.00
+    - 192.00
+  - type: tile
+    name: brick
+    pos:
+    - -640.00
+    - 128.00
+  - type: tile
+    name: brick
+    pos:
+    - -672.00
+    - 160.00
+  - type: tile
+    name: brick
+    pos:
+    - -608.00
+    - 96.00
+  - type: tile
+    name: brick
+    pos:
+    - 576.00
+    - 128.00
+  - type: tile
+    name: brick
+    pos:
+    - 576.00
+    - 192.00
+  - type: tile
+    name: brick
+    pos:
+    - 512.00
+    - 128.00
+  - type: tile
+    name: brick
+    pos:
+    - 480.00
+    - 96.00
+  - type: tile
+    name: brick
+    pos:
+    - 544.00
+    - 160.00
+  - type: tile
+    name: brick
+    pos:
+    - 192.00
+    - -192.00
+  - type: tile
+    name: brick
+    pos:
+    - 128.00
+    - -192.00
+  - type: tile
+    name: stair-45
+    pos:
+    - 288.00
+    - 160.00
+  - type: tile
+    name: stair-45
+    pos:
+    - 160.00
+    - 288.00
+  - type: tile
+    name: through
+    pos:
+    - 128.00
+    - 64.00
+  - type: tile
+    name: through
+    pos:
+    - 192.00
+    - 64.00
+  - type: tile
+    name: through
+    pos:
+    - 256.00
+    - 64.00
+  - type: tile
+    name: through
+    pos:
+    - 320.00
+    - 64.00
+  - type: tile
+    name: through
+    pos:
+    - 384.00
+    - 64.00
+  - type: tile
+    name: ladder-6
+    pos:
+    - -768.00
+    - -128.00
+  - type: tile
+    name: brick
+    pos:
+    - 640.00
+    - 448.00
+  - type: tile
+    name: brick
+    pos:
+    - 704.00
+    - 448.00
+  - type: tile
+    name: brick
+    pos:
+    - 768.00
+    - 448.00
+  - type: tile
+    name: brick
+    pos:
+    - 832.00
+    - 448.00
+  - type: tile
+    name: brick
+    pos:
+    - 896.00
+    - 448.00
+  - type: tile
+    name: brick
+    pos:
+    - 960.00
+    - 448.00
+  - type: tile
+    name: brick
+    pos:
+    - 1024.00
+    - 448.00
+  - type: tile
+    name: brick
+    pos:
+    - 1024.00
+    - 384.00
+  - type: tile
+    name: brick
+    pos:
+    - 1024.00
+    - 256.00
+  - type: tile
+    name: brick
+    pos:
+    - 1024.00
+    - 320.00
+  - type: tile
+    name: brick
+    pos:
+    - 1024.00
+    - 0.00
+  - type: tile
+    name: brick
+    pos:
+    - 1024.00
+    - 64.00
+  - type: tile
+    name: brick
+    pos:
+    - 1024.00
+    - 128.00
+  - type: tile
+    name: brick
+    pos:
+    - 1024.00
+    - 192.00
+  - type: tile
+    name: brick
+    pos:
+    - 1024.00
+    - -256.00
+  - type: tile
+    name: brick
+    pos:
+    - 1024.00
+    - -192.00
+  - type: tile
+    name: brick
+    pos:
+    - 1024.00
+    - -128.00
+  - type: tile
+    name: brick
+    pos:
+    - 1024.00
+    - -64.00
+  - type: tile
+    name: brick
+    pos:
+    - 1024.00
+    - -512.00
+  - type: tile
+    name: brick
+    pos:
+    - 1024.00
+    - -448.00
+  - type: tile
+    name: brick
+    pos:
+    - 1024.00
+    - -384.00
+  - type: tile
+    name: brick
+    pos:
+    - 1024.00
+    - -320.00
+  - type: tile
+    name: brick
+    pos:
+    - 1024.00
+    - -768.00
+  - type: tile
+    name: brick
+    pos:
+    - 1024.00
+    - -704.00
+  - type: tile
+    name: brick
+    pos:
+    - 1024.00
+    - -640.00
+  - type: tile
+    name: brick
+    pos:
+    - 1024.00
+    - -576.00
+  - type: tile
+    name: brick
+    pos:
+    - -1088.00
+    - 384.00
+  - type: tile
+    name: brick
+    pos:
+    - -1088.00
+    - 320.00
+  - type: tile
+    name: brick
+    pos:
+    - -1088.00
+    - 256.00
+  - type: tile
+    name: brick
+    pos:
+    - -1088.00
+    - 448.00
+  - type: tile
+    name: brick
+    pos:
+    - -1024.00
+    - 448.00
+  - type: tile
+    name: brick
+    pos:
+    - -960.00
+    - 448.00
+  - type: tile
+    name: brick
+    pos:
+    - -896.00
+    - 448.00
+  - type: tile
+    name: brick
+    pos:
+    - -832.00
+    - 448.00
+  - type: tile
+    name: brick
+    pos:
+    - -1088.00
+    - 192.00
+  - type: tile
+    name: brick
+    pos:
+    - -1088.00
+    - 128.00
+  - type: tile
+    name: brick
+    pos:
+    - -1088.00
+    - 64.00
+  - type: tile
+    name: brick
+    pos:
+    - -1088.00
+    - 0.00
+  - type: tile
+    name: brick
+    pos:
+    - -1088.00
+    - -64.00
+  - type: tile
+    name: brick
+    pos:
+    - -1088.00
+    - -128.00
+  - type: tile
+    name: brick
+    pos:
+    - -1088.00
+    - -192.00
+  - type: tile
+    name: brick
+    pos:
+    - -1088.00
+    - -256.00
+  - type: tile
+    name: brick
+    pos:
+    - -1088.00
+    - -320.00
+  - type: tile
+    name: brick
+    pos:
+    - -1088.00
+    - -384.00
+  - type: tile
+    name: brick
+    pos:
+    - -1088.00
+    - -448.00
+  - type: tile
+    name: brick
+    pos:
+    - -1088.00
+    - -512.00
   s:
   - type: item
     name: duck
     pos:
-    - -147.00
+    - 13.00
     - 3.00
   - type: item
     name: muskox
     pos:
     - 409.00
     - -32.00
+  - type: item
+    name: tv-support
+    pos:
+    - -94.00
+    - 388.00
+  - type: item
+    name: tv
+    pos:
+    - -96.50
+    - 324.00
+  - type: item
+    name: sofa
+    pos:
+    - -308.00
+    - 372.00
+  - type: item
+    name: sofa-double
+    pos:
+    - 206.00
+    - 372.00
+  - type: item
+    name: bathtub
+    pos:
+    - -444.00
+    - -2.00

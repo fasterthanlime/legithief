@@ -56,6 +56,11 @@ Hero: class {
     feetConstraint: CpConstraint
     feetRotaryLimit: CpRotaryLimitJoint
 
+    /* ladder movement */
+    ladderGrip: CpBody
+    ladderConstraint: CpPinJoint
+    ladderSpeed := 6
+
     /* animations */
     bottom, top: GlAnimSet
 
@@ -65,6 +70,9 @@ Hero: class {
     groundTouchCounter := 0
     collisionHandlers := ArrayList<CpCollisionHandler> new()
     moving := false
+
+    ladderTouchNumber := 0
+    onLadder := false
 
     /* audio */
     walkSample: Sample
@@ -102,6 +110,7 @@ Hero: class {
 
         shape = level space addShape(CpBoxShape new(body, sprite width * xFactor, sprite height))
         shape setFriction(0.1)
+        shape setCollisionType(8)
 
         level space addConstraint(CpRotaryLimitJoint new(body, level space getStaticBody(), 0, 0))
         shape setLayers(PhysicLayers HERO | PhysicLayers HERO_TILES)
@@ -184,10 +193,21 @@ Hero: class {
         feetRotaryLimit = CpRotaryLimitJoint new(feet, level space getStaticBody(), 0, 0)
         level space addConstraint(feetRotaryLimit)
 
-        // hero <-> ground collision detection for jump
+        // ladder grip
+        ladderGrip = CpBody newStatic()
+        ladderGrip setPos(body getPos())
+        ladderConstraint = CpPinJoint new(body, ladderGrip, cpv(0, 0), cpv(0, 0))
+        ladderConstraint setDist(0)
+
+        // hero's feet <-> ground collision detection for jump
         heroGround := HeroGroundCollision new(this)
         level space addCollisionHandler(1, 7, heroGround)
         collisionHandlers add(heroGround)
+
+        // hero's body <-> ladder collision detecton for.. ladder-ing
+        heroLadder := HeroLadderCollision new(this)
+        level space addCollisionHandler(2, 8, heroLadder)
+        collisionHandlers add(heroLadder)
 
         initSamples()
 
@@ -211,13 +231,17 @@ Hero: class {
     initEvents: func {
         // short jump
         input onKeyPress(Keys SPACE, ||
-            if (touchesGround?) {
+            if (touchesGround? || onLadder) {
                 vel := body getVel()
                 vel y = -jumpVel
                 body setVel(vel)
                 jumpCounter = 14
 
                 jumpSample play(0)
+
+                if (onLadder) {
+                    ladderDisable()
+                }
             }
         )
 
@@ -319,6 +343,18 @@ Hero: class {
         Random choice(gruntSamples) play(0)
     }
 
+    ladderEnable: func {
+        onLadder = true
+
+        ladderGrip setPos(body getPos())
+        level space addConstraint(ladderConstraint)
+    }
+
+    ladderDisable: func {
+        onLadder = false
+        level space removeConstraint(ladderConstraint)
+    }
+
     update: func {
         gfx sync(body)
         batGfx sync(bat)
@@ -329,6 +365,46 @@ Hero: class {
             shape setLayers(PhysicLayers HERO | PhysicLayers HERO_TILES | PhysicLayers HERO_STAIRS)
         } else {
             shape setLayers(PhysicLayers HERO | PhysicLayers HERO_TILES | PhysicLayers HERO_THROUGH)
+        }
+
+        if (onLadder) {
+            if (ladderTouchNumber <= 0) {
+                ladderDisable()
+            } else {
+                if (input isPressed(Keys W)) {
+                    gripPos := ladderGrip getPos()
+                    gripPos y = gripPos y - ladderSpeed
+                    ladderGrip setPos(gripPos)
+                }
+                
+                if (input isPressed(Keys S)) {
+                    gripPos := ladderGrip getPos()
+                    gripPos y = gripPos y + ladderSpeed
+                    ladderGrip setPos(gripPos)
+
+                    if (touchesGround?) {
+                        ladderDisable()
+                    }
+                }
+                
+                if (input isPressed(Keys A)) {
+                    gripPos := ladderGrip getPos()
+                    gripPos x = gripPos x - ladderSpeed
+                    ladderGrip setPos(gripPos)
+                }
+                
+                if (input isPressed(Keys D)) {
+                    gripPos := ladderGrip getPos()
+                    gripPos x = gripPos x + ladderSpeed
+                    ladderGrip setPos(gripPos)
+                }
+            }
+        } else {
+            if (ladderTouchNumber > 0) {
+                if (input isPressed(Keys W) || input isPressed(Keys S)) {
+                    ladderEnable()
+                }
+            }
         }
 
         if (input isPressed(Keys D)) {
@@ -475,6 +551,23 @@ HeroGroundCollision: class extends CpCollisionHandler {
 
     separate: func (arbiter: CpArbiter, space: CpSpace) {
         hero groundTouchNumber -= 1
+    }
+
+}
+
+HeroLadderCollision: class extends CpCollisionHandler {
+
+    hero: Hero
+
+    init: func (=hero) {
+    }
+
+    begin: func (arbiter: CpArbiter, space: CpSpace) {
+        hero ladderTouchNumber += 1
+    }
+
+    separate: func (arbiter: CpArbiter, space: CpSpace) {
+        hero ladderTouchNumber -= 1
     }
 
 }

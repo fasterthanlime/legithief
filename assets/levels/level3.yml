@@ -2,11 +2,221 @@
 ---
 hero:
   pos:
-  - -282.00
-  - -67.50
+  - -634.00
+  - -99.50
 layers:
   bg: []
-  hbg: []
+  hbg:
+  - type: prop
+    name: tile5
+    pos:
+    - -384.00
+    - -32.00
+  - type: prop
+    name: tile5
+    pos:
+    - -320.00
+    - -32.00
+  - type: prop
+    name: tile5
+    pos:
+    - -256.00
+    - -32.00
+  - type: prop
+    name: tile5
+    pos:
+    - -64.00
+    - -32.00
+  - type: prop
+    name: tile5
+    pos:
+    - -128.00
+    - -32.00
+  - type: prop
+    name: tile5
+    pos:
+    - -192.00
+    - -32.00
+  - type: prop
+    name: tile5
+    pos:
+    - -64.00
+    - -96.00
+  - type: prop
+    name: tile5
+    pos:
+    - -128.00
+    - -96.00
+  - type: prop
+    name: tile5
+    pos:
+    - -192.00
+    - -96.00
+  - type: prop
+    name: tile5
+    pos:
+    - -256.00
+    - -96.00
+  - type: prop
+    name: tile5
+    pos:
+    - -320.00
+    - -96.00
+  - type: prop
+    name: tile5
+    pos:
+    - -384.00
+    - -96.00
+  - type: prop
+    name: tile5
+    pos:
+    - -256.00
+    - -160.00
+  - type: prop
+    name: tile5
+    pos:
+    - -320.00
+    - -160.00
+  - type: prop
+    name: tile5
+    pos:
+    - -384.00
+    - -160.00
+  - type: prop
+    name: tile5
+    pos:
+    - -64.00
+    - -160.00
+  - type: prop
+    name: tile5
+    pos:
+    - -128.00
+    - -160.00
+  - type: prop
+    name: tile5
+    pos:
+    - -192.00
+    - -160.00
+  - type: prop
+    name: tile5
+    pos:
+    - -256.00
+    - -224.00
+  - type: prop
+    name: tile5
+    pos:
+    - -320.00
+    - -224.00
+  - type: prop
+    name: tile5
+    pos:
+    - -384.00
+    - -224.00
+  - type: prop
+    name: tile5
+    pos:
+    - -64.00
+    - -224.00
+  - type: prop
+    name: tile5
+    pos:
+    - -128.00
+    - -224.00
+  - type: prop
+    name: tile5
+    pos:
+    - -192.00
+    - -224.00
+  - type: prop
+    name: tile5
+    pos:
+    - -256.00
+    - -288.00
+  - type: prop
+    name: tile5
+    pos:
+    - -320.00
+    - -288.00
+  - type: prop
+    name: tile5
+    pos:
+    - -384.00
+    - -288.00
+  - type: prop
+    name: tile5
+    pos:
+    - -256.00
+    - -352.00
+  - type: prop
+    name: tile5
+    pos:
+    - -320.00
+    - -352.00
+  - type: prop
+    name: tile5
+    pos:
+    - -384.00
+    - -352.00
+  - type: prop
+    name: tile5
+    pos:
+    - -64.00
+    - -352.00
+  - type: prop
+    name: tile5
+    pos:
+    - -128.00
+    - -352.00
+  - type: prop
+    name: tile5
+    pos:
+    - -192.00
+    - -352.00
+  - type: prop
+    name: tile5
+    pos:
+    - -64.00
+    - -288.00
+  - type: prop
+    name: tile5
+    pos:
+    - -128.00
+    - -288.00
+  - type: prop
+    name: tile5
+    pos:
+    - -192.00
+    - -288.00
+  - type: prop
+    name: tile5
+    pos:
+    - 0.00
+    - -352.00
+  - type: prop
+    name: tile5
+    pos:
+    - 0.00
+    - -288.00
+  - type: prop
+    name: tile5
+    pos:
+    - 0.00
+    - -224.00
+  - type: prop
+    name: tile5
+    pos:
+    - 0.00
+    - -160.00
+  - type: prop
+    name: tile5
+    pos:
+    - 0.00
+    - -96.00
+  - type: prop
+    name: tile5
+    pos:
+    - 0.00
+    - -32.00
   h:
   - type: tile
     name: concrete
@@ -88,14 +298,304 @@ layers:
     pos:
     - -48.00
     - 16.00
-  s:
-  - type: item
-    name: duck
+  - type: tile
+    name: brick
     pos:
-    - -63.00
-    - -82.00
+    - -480.00
+    - 0.00
+  - type: tile
+    name: brick
+    pos:
+    - -544.00
+    - 0.00
+  - type: tile
+    name: brick
+    pos:
+    - -608.00
+    - 0.00
+  - type: tile
+    name: brick
+    pos:
+    - -672.00
+    - 0.00
+  - type: tile
+    name: brick
+    pos:
+    - -736.00
+    - 0.00
+  - type: tile
+    name: brick
+    pos:
+    - -800.00
+    - 0.00
+  - type: tile
+    name: brick
+    pos:
+    - -800.00
+    - -64.00
+  - type: tile
+    name: brick
+    pos:
+    - -800.00
+    - -128.00
+  - type: tile
+    name: brick
+    pos:
+    - -800.00
+    - -192.00
+  - type: tile
+    name: brick
+    pos:
+    - -800.00
+    - -256.00
+  - type: tile
+    name: brick
+    pos:
+    - -800.00
+    - -320.00
+  - type: tile
+    name: brick
+    pos:
+    - -800.00
+    - -384.00
+  - type: tile
+    name: brick
+    pos:
+    - -800.00
+    - -448.00
+  - type: tile
+    name: concrete
+    pos:
+    - -432.00
+    - -16.00
+  - type: tile
+    name: concrete
+    pos:
+    - -432.00
+    - -48.00
+  - type: tile
+    name: concrete
+    pos:
+    - -432.00
+    - -80.00
+  - type: tile
+    name: concrete
+    pos:
+    - -432.00
+    - -112.00
+  - type: tile
+    name: concrete
+    pos:
+    - -432.00
+    - -144.00
+  - type: tile
+    name: concrete
+    pos:
+    - -432.00
+    - -176.00
+  - type: tile
+    name: concrete
+    pos:
+    - -432.00
+    - -208.00
+  - type: tile
+    name: concrete
+    pos:
+    - -432.00
+    - -240.00
+  - type: tile
+    name: concrete
+    pos:
+    - -432.00
+    - -272.00
+  - type: tile
+    name: concrete
+    pos:
+    - -432.00
+    - -304.00
+  - type: tile
+    name: concrete
+    pos:
+    - -432.00
+    - -336.00
+  - type: tile
+    name: concrete
+    pos:
+    - -432.00
+    - -368.00
+  - type: tile
+    name: ladder-6
+    pos:
+    - -512.00
+    - -224.00
+  - type: tile
+    name: concrete
+    pos:
+    - 48.00
+    - -16.00
+  - type: tile
+    name: concrete
+    pos:
+    - 48.00
+    - -48.00
+  - type: tile
+    name: concrete
+    pos:
+    - 48.00
+    - -80.00
+  - type: tile
+    name: concrete
+    pos:
+    - 48.00
+    - -112.00
+  - type: tile
+    name: concrete
+    pos:
+    - 48.00
+    - -144.00
+  - type: tile
+    name: concrete
+    pos:
+    - 48.00
+    - -176.00
+  - type: tile
+    name: concrete
+    pos:
+    - 48.00
+    - -208.00
+  - type: tile
+    name: concrete
+    pos:
+    - 48.00
+    - -240.00
+  - type: tile
+    name: concrete
+    pos:
+    - 48.00
+    - -272.00
+  - type: tile
+    name: concrete
+    pos:
+    - 48.00
+    - -304.00
+  - type: tile
+    name: concrete
+    pos:
+    - 48.00
+    - -336.00
+  - type: tile
+    name: concrete
+    pos:
+    - 48.00
+    - -368.00
+  - type: tile
+    name: concrete
+    pos:
+    - -400.00
+    - -400.00
+  - type: tile
+    name: concrete
+    pos:
+    - -368.00
+    - -400.00
+  - type: tile
+    name: concrete
+    pos:
+    - 16.00
+    - -400.00
+  - type: tile
+    name: concrete
+    pos:
+    - -16.00
+    - -400.00
+  - type: tile
+    name: concrete
+    pos:
+    - -48.00
+    - -400.00
+  - type: tile
+    name: concrete
+    pos:
+    - -336.00
+    - -400.00
+  - type: tile
+    name: wood
+    pos:
+    - -304.00
+    - -400.00
+  - type: tile
+    name: wood
+    pos:
+    - -272.00
+    - -400.00
+  - type: tile
+    name: wood
+    pos:
+    - -240.00
+    - -400.00
+  - type: tile
+    name: wood
+    pos:
+    - -208.00
+    - -400.00
+  - type: tile
+    name: wood
+    pos:
+    - -176.00
+    - -400.00
+  - type: tile
+    name: wood
+    pos:
+    - -144.00
+    - -400.00
+  - type: tile
+    name: wood
+    pos:
+    - -112.00
+    - -400.00
+  - type: tile
+    name: wood
+    pos:
+    - -80.00
+    - -400.00
+  - type: tile
+    name: brick
+    pos:
+    - 96.00
+    - 0.00
+  - type: tile
+    name: brick
+    pos:
+    - 160.00
+    - 0.00
+  - type: tile
+    name: brick
+    pos:
+    - 224.00
+    - 0.00
+  - type: tile
+    name: brick
+    pos:
+    - 288.00
+    - 0.00
+  - type: tile
+    name: brick
+    pos:
+    - 352.00
+    - 0.00
+  s:
   - type: item
     name: tv-support
     pos:
     - -62.00
     - -28.00
+  - type: item
+    name: tv
+    pos:
+    - -64.50
+    - -91.00
+  - type: item
+    name: muskox
+    pos:
+    - -295.00
+    - -64.00

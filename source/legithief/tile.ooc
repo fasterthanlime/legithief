@@ -24,13 +24,9 @@ TileDef: class {
     inert := true
 
     init: func (=name) {
-        parser := YAMLParser new()
-        parser setInputFile("assets/tiles/%s.yml" format(name))
+        doc := parseYaml("assets/tiles/%s.yml" format(name))
 
-        doc := Document new()
-        parser parseAll(doc)
-
-        dict := doc getRootNode() toMap()
+        dict := doc toMap()
         dict each(|k, v|
             match k {
                 case "image" =>

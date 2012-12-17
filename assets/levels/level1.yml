@@ -1,8 +1,22 @@
 hero:
     pos: [200, 200]
-background:
-    pos: [0, 0]
-    image: "assets/img/leather.png"
-items:
-    - type: "duck"
-      pos: [100, 100]
+layers:
+    bg:
+        - type: prop
+          name: sky
+          pos: [0, 0]
+    hbg:
+    h:
+        - type: tile
+          name: brick
+          pos: [136, 300]
+        - type: tile
+          name: brick
+          pos: [200, 300]
+        - type: tile
+          name: brick
+          pos: [264, 300]
+    s:
+        - type: item
+          name: duck
+          pos: [100, 100]

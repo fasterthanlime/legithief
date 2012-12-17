@@ -43,16 +43,9 @@ ItemDef: class {
     shape := BoxShape new()
 
     init: func (=name) {
-        parser := YAMLParser new()
-        path := "assets/items/%s.yml" format(name)
-        "Opening file %s" printfln(path)
+        doc := parseYaml("assets/items/%s.yml" format(name))
 
-        parser setInputFile(path)
-
-        doc := Document new()
-        parser parseAll(doc)
-
-        dict := doc getRootNode() toMap()
+        dict := doc toMap()
         dict each(|k, v|
             match k {
                 case "image" =>

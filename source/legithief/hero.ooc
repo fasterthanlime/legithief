@@ -54,7 +54,7 @@ Hero: class {
     moving := false
 
     init: func (=layer) {
-        level =  layer level
+        level = layer level
 
         gfx = GlGroup new()
         sprite = GlSprite new("assets/png/hero/hero-01.png") 
@@ -141,6 +141,10 @@ Hero: class {
         collisionHandlers add(heroGround)
 
         initEvents()
+    }
+
+    setPos: func (pos: Vec2) {
+        body setPos(cpv(pos))
     }
 
     initEvents: func {

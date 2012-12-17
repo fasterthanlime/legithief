@@ -62,6 +62,20 @@ extend GlDrawable {
 
 /* YAML utils */
 
+parseYaml: func (path: String) -> DocumentNode {
+    file := File new(path)
+    if (!file exists?()) {
+        Exception new("File not found: %s" format(path)) throw()
+    }
+
+    parser := YAMLParser new()
+    parser setInputFile(path)
+
+    doc := Document new()
+    parser parseAll(doc)
+    doc getRootNode()
+}
+
 extend DocumentNode {
 
     toMap: func -> HashMap<String, DocumentNode> {

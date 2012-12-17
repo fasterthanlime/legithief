@@ -1,5 +1,6 @@
 
-import legithief/[utils, hero, item, tile]
+import legithief/[utils, hero, item, tile, prop]
+import legithief/[level-loader]
 
 import structs/ArrayList
 
@@ -7,9 +8,6 @@ import dye/[core, input, sprite, font, primitives, math]
 
 use chipmunk
 import chipmunk
-
-use yaml
-import yaml/[Parser, Document]
 
 use deadlogger
 import deadlogger/[Log, Logger]
@@ -53,17 +51,11 @@ Level: class {
         initLayers()
 
         hero = Hero new(sLayer)
-        sLayer spawnItem("sofa-double", vec2(500, 100))
-        sLayer spawnItem("sofa", vec2(600, 100))
-        sLayer spawnItem("nightstand", vec2(650, 100))
-        sLayer spawnItem("kitchen", vec2(400,200))
-        sLayer spawnItem("tv-support", vec2(700,200))
-        sLayer spawnItem("tv", vec2(700,100))
-        sLayer spawnItem("trash", vec2(400, 100))
+        load("level1")
+    }
 
-        for (i in -13..28) {
-            hLayer spawnTile("brick", vec2(i * 32, 200))
-        }
+    load: func (name: String) {
+        LevelLoader new(name, this)
     }
 
     update: func {
@@ -81,6 +73,10 @@ Level: class {
         mouseOffset := dye center sub(input getMousePos()) mul(0.5)
         target := dye center sub(hero gfx pos) add(mouseOffset)
         group pos interpolate!(target, 0.12)
+    }
+
+    reset: func {
+        logger warn("level: should reset more thoroughly")
     }
 
     initGfx: func {
@@ -124,6 +120,21 @@ Level: class {
         layer
     }
 
+    /* Here for testing purposes */
+    spawnJunk: func {
+        sLayer spawnItem("sofa-double", vec2(500, 100))
+        sLayer spawnItem("sofa", vec2(600, 100))
+        sLayer spawnItem("nightstand", vec2(650, 100))
+        sLayer spawnItem("kitchen", vec2(400,200))
+        sLayer spawnItem("tv-support", vec2(700,200))
+        sLayer spawnItem("tv", vec2(700,100))
+        sLayer spawnItem("trash", vec2(400, 100))
+
+        for (i in -13..28) {
+            hLayer spawnTile("brick", vec2(i * 32, 200))
+        }
+    }
+
 }
 
 Layer: class {
@@ -132,6 +143,7 @@ Layer: class {
 
     items := ArrayList<Item> new()
     tiles := ArrayList<Tile> new()
+    props := ArrayList<Prop> new()
 
     level: Level
 
@@ -175,6 +187,19 @@ Layer: class {
             tile
         } else {
             logger warn("Unknown tile type: %s" format(name))
+            null
+        }
+    }
+
+    spawnProp: func (name: String, pos: Vec2) -> Prop {
+        def := Prop getDefinition(name)
+
+        if (def) {
+            prop := Prop new(this, def, pos)
+            props add(prop)
+            prop
+        } else {
+            logger warn("Unknown prop type: %s" format(name))
             null
         }
     }

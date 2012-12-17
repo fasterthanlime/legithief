@@ -110,11 +110,13 @@ Tile: class {
             shape = sShape
 
             shape setFriction(def friction)
+            layers := PhysicLayers FURNITURE | PhysicLayers FIRE
             if (through) {
-                shape setLayers(PhysicLayers FURNITURE | PhysicLayers HERO_THROUGH)
+                layers |= PhysicLayers HERO_THROUGH
             } else {
-                shape setLayers(PhysicLayers FURNITURE | PhysicLayers HERO_TILES)
+                layers |= PhysicLayers HERO_TILES
             }
+            shape setLayers(layers)
             level space addShape(shape)
             if (ladder) {
                 shape setSensor(true)

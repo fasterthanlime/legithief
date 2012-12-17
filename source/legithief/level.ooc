@@ -1,5 +1,5 @@
 
-import legithief/[utils, hero, item, tile, prop]
+import legithief/[utils, hero, item, tile, prop, flame]
 import legithief/[level-loader]
 
 import structs/ArrayList
@@ -22,10 +22,12 @@ PhysicLayers: class {
     HERO_TILES := static 8
     HERO_STAIRS := static 16
     HERO_THROUGH := static 32
+    FIRE := static 64
 }
 
 PhysicGroups: class {
     HERO := static 1
+    FIRE := static 2
 }
 
 Level: class extends LevelBase {
@@ -47,6 +49,7 @@ Level: class extends LevelBase {
     hbgLayer: Layer
     hLayer: Layer
     sLayer: Layer
+    fLayer: Layer // flame layer, not in level spec
 
     layers := ArrayList<Layer> new()
 
@@ -81,7 +84,7 @@ Level: class extends LevelBase {
         for (layer in layers) {
             layer update()
         }
-
+        
         mouseOffset := dye center sub(input getMousePos()) mul(0.8)
         target := dye center sub(hero gfx pos) add(mouseOffset)
         group pos interpolate!(target, 0.12)
@@ -124,6 +127,7 @@ Level: class extends LevelBase {
         hbgLayer = addLayer("house background")
         hLayer = addLayer("house")
         sLayer = addLayer("sprites")
+        fLayer = addLayer("flames")
     }
 
     addLayer: func (name: String) -> Layer {
@@ -131,21 +135,6 @@ Level: class extends LevelBase {
         layers add(layer)
         layerGroup add(layer group)
         layer
-    }
-
-    /* Here for testing purposes */
-    spawnJunk: func {
-        sLayer spawnItem("sofa-double", vec2(500, 100))
-        sLayer spawnItem("sofa", vec2(600, 100))
-        sLayer spawnItem("nightstand", vec2(650, 100))
-        sLayer spawnItem("kitchen", vec2(400,200))
-        sLayer spawnItem("tv-support", vec2(700,200))
-        sLayer spawnItem("tv", vec2(700,100))
-        sLayer spawnItem("trash", vec2(400, 100))
-
-        for (i in -13..28) {
-            hLayer spawnTile("brick", vec2(i * 32, 200))
-        }
     }
 
     setHeroPos: func (v: Vec2) {
@@ -173,6 +162,8 @@ Layer: class extends LayerBase {
     tiles := ArrayList<Tile> new()
     props := ArrayList<Prop> new()
 
+    flames := ArrayList<Flame> new()
+
     level: Level
 
     name: String
@@ -190,6 +181,19 @@ Layer: class extends LayerBase {
 
         for (t in tiles) {
             t update()
+        }
+
+        updateFlames()
+    }
+
+    updateFlames: func {
+        flameIter := flames iterator()
+        while (flameIter hasNext?()) {
+            flame := flameIter next()
+            if (!flame update()) {
+                flame destroy()
+                flameIter remove()
+            }
         }
     }
 
@@ -230,6 +234,12 @@ Layer: class extends LayerBase {
             logger warn("Unknown prop type: %s" format(name))
             null
         }
+    }
+
+    spawnFlame: func (pos: Vec2) -> Flame {
+        flame := Flame new(this, pos)
+        flames add(flame)
+        flame
     }
 
 }

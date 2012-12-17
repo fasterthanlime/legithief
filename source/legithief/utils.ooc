@@ -48,6 +48,10 @@ cpv: func ~fromVec2 (v: Vec2) -> CpVect {
     cpv(v x, v y)
 }
 
+vec2: func ~fromCpv (v: CpVect) -> Vec2 {
+    vec2(v x,v y)
+}
+
 /* Dye <-> Chipmunk physics/graphics sync */
 
 extend GlDrawable {

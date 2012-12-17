@@ -1,5 +1,5 @@
 
-import legithief/[level, utils]
+import legithief/[level, utils, flame]
 
 import dye/[core, input, sprite, font, math, primitives, anim]
 
@@ -286,7 +286,10 @@ Hero: class {
             case handContour =>
                 "Should grab stuff" println()
             case lighterContour =>
-                "Should set shit on fire" println()
+                firePos := vec2(body getPos())
+                firePos x = firePos x + (lookDir * sprite width * 0.5)
+                flame := level fLayer spawnFlame(firePos)
+                flame setVel(vec2(lookDir * 30))
         }
     }
 

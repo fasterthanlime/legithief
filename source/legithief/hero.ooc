@@ -6,7 +6,7 @@ import dye/[core, input, sprite, font, math, primitives, anim]
 use chipmunk
 import chipmunk
 
-import math
+import math, math/Random
 import structs/[ArrayList]
 
 use bleep
@@ -68,6 +68,8 @@ Hero: class {
 
     /* audio */
     walkSample: Sample
+    jumpSample: Sample
+    gruntSamples := ArrayList<Sample> new()
 
     init: func (=layer) {
         level = layer level
@@ -198,6 +200,12 @@ Hero: class {
 
     initSamples: func {
         walkSample = level bleep loadSample("assets/wav/walk.wav")
+        jumpSample = level bleep loadSample("assets/wav/jump.wav")
+
+        for (i in 1..4) {
+            path := "assets/wav/grunt%d.wav" format(i)
+            gruntSamples add(level bleep loadSample(path))
+        }
     }
 
     initEvents: func {
@@ -208,6 +216,8 @@ Hero: class {
                 vel y = -jumpVel
                 body setVel(vel)
                 jumpCounter = 14
+
+                jumpSample play(0)
             }
         )
 
@@ -217,6 +227,7 @@ Hero: class {
             if (batCounter <= 0) {
                 batCounter = 15
                 throwBat()
+                grunt()
             }
         )
 
@@ -226,14 +237,15 @@ Hero: class {
             if (legCounter <= 0) {
                 legCounter = 15
                 throwLeg()
+                grunt()
             }
         )
     }
 
     initAnims: func {
         bottom = GlAnimSet new()
-        bwalk := bottom load("hero", "bottom", "walking", 10)
-        bwalk frameDuration = 3
+        bwalk := bottom load("hero", "bottom", "walking", 12)
+        bwalk frameDuration = 4
 
         pfoot := bottom load("hero", "bottom", "punching-foot", 8)
         pfoot offset x = 8
@@ -242,7 +254,7 @@ Hero: class {
         gfx add(bottom)
 
         top = GlAnimSet new()
-        hwalk := top load("hero", "top", "walking", 10)
+        hwalk := top load("hero", "top", "walking", 12)
         hwalk frameDuration = 4
 
         wbat := top load("hero", "top", "walking-bat", 3)
@@ -297,6 +309,10 @@ Hero: class {
         }
 
         moving = value
+    }
+
+    grunt: func {
+        Random choice(gruntSamples) play(0)
     }
 
     update: func {

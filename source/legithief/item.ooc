@@ -99,7 +99,7 @@ Item: class {
         level space addShape(shape)
         shape setFriction(def friction)
 
-        shape setLayers(ShapeGroup FURNITURE)
+        shape setLayers(PhysicLayers FURNITURE)
     }
 
     update: func {

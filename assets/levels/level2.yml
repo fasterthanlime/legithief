@@ -3,7 +3,7 @@
 hero:
   pos:
   - -314.00
-  - -35.50
+  - -67.50
 layers:
   bg:
   - type: prop
@@ -21,27 +21,12 @@ layers:
   - type: tile
     name: brick
     pos:
-    - -384.00
-    - 64.00
-  - type: tile
-    name: brick
-    pos:
     - -320.00
     - 64.00
   - type: tile
     name: brick
     pos:
-    - -256.00
-    - 64.00
-  - type: tile
-    name: brick
-    pos:
     - -192.00
-    - 64.00
-  - type: tile
-    name: brick
-    pos:
-    - -128.00
     - 64.00
   - type: tile
     name: brick
@@ -118,12 +103,52 @@ layers:
     pos:
     - 608.00
     - 64.00
+  - type: tile
+    name: brick
+    pos:
+    - 672.00
+    - 64.00
+  - type: tile
+    name: brick
+    pos:
+    - 736.00
+    - 64.00
+  - type: tile
+    name: brick
+    pos:
+    - 800.00
+    - 64.00
+  - type: tile
+    name: brick
+    pos:
+    - 864.00
+    - 64.00
+  - type: tile
+    name: brick
+    pos:
+    - 928.00
+    - 0.00
+  - type: tile
+    name: brick
+    pos:
+    - 928.00
+    - 64.00
+  - type: tile
+    name: brick
+    pos:
+    - 928.00
+    - -64.00
+  - type: tile
+    name: brick
+    pos:
+    - 928.00
+    - -128.00
   s:
   - type: item
     name: duck
     pos:
-    - -147.00
-    - 3.00
+    - -83.00
+    - -29.00
   - type: item
     name: muskox
     pos:

@@ -84,7 +84,7 @@ Tile: class {
         shape = sShape
 
         shape setFriction(def friction)
-        shape setLayers(ShapeGroup FURNITURE | ShapeGroup HERO)
+        shape setLayers(PhysicLayers FURNITURE | PhysicLayers HERO_TILES)
         shape setCollisionType(1)
         level space addShape(shape)
     }

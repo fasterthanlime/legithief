@@ -12,10 +12,15 @@ import chipmunk
 use deadlogger
 import deadlogger/[Log, Logger]
 
-ShapeGroup: class {
+PhysicLayers: class {
     HERO := static 1
     FURNITURE := static 2
     HOUSE := static 4
+    HERO_TILES := static 8
+}
+
+PhysicGroups: class {
+    HERO := static 1
 }
 
 Level: class extends LevelBase {

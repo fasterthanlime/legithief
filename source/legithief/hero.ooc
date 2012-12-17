@@ -11,6 +11,8 @@ import structs/[ArrayList]
 
 Hero: class {
 
+    debug := static true
+
     level: Level
     layer: Layer
     input: Input 
@@ -49,7 +51,8 @@ Hero: class {
 
     /* physics */
     jumpCounter := 0
-    touchesGround := false
+    groundTouchNumber := 0
+    groundTouchCounter := 0
     collisionHandlers := ArrayList<CpCollisionHandler> new()
     moving := false
 
@@ -68,17 +71,26 @@ Hero: class {
 
         pos := vec2(100, 50)
 
-        mass := 120.0
+        mass := 200.0
         moment := cpMomentForBox(mass, sprite width, sprite height)
         body = level space addBody(CpBody new(mass, moment))
         body setPos(cpv(pos))
 
-        shape = level space addShape(CpBoxShape new(body, sprite width, sprite height))
-        shape setFriction(0.8)
+        xFactor := 0.7 // huhu
+
+        if (debug) {
+            rect := GlRectangle new()
+            rect size set!(sprite width * xFactor, sprite height)
+            rect filled = false
+            gfx add(rect)
+        }
+
+        shape = level space addShape(CpBoxShape new(body, sprite width * xFactor, sprite height))
+        shape setFriction(0.1)
 
         level space addConstraint(CpRotaryLimitJoint new(body, level space getStaticBody(), 0, 0))
-        shape setLayers(ShapeGroup HERO)
-        shape setGroup(1)
+        shape setLayers(PhysicLayers HERO | PhysicLayers HERO_TILES)
+        shape setGroup(PhysicGroups HERO)
         shape setCollisionType(7)
 
         // initialize bat
@@ -86,7 +98,7 @@ Hero: class {
         batSprite := GlRectangle new()
         batSprite size set!(8, 76)
         batSprite color set!(220, 80, 80)
-        batSprite visible = false
+        if (!debug) batSprite visible = false
 
         batGfx add(batSprite)
         layer group add(batGfx)
@@ -101,7 +113,7 @@ Hero: class {
         bat setPos(cpv(pos add(0, -20)))
 
         batShape = level space addShape(CpBoxShape new(bat, batWidth, batHeight))
-        batShape setGroup(1)
+        batShape setGroup(PhysicGroups HERO)
         batShape setFriction(0.99)
 
         batConstraint = level space addConstraint(CpConstraint newPivot(bat, body, cpv(pos)))
@@ -113,7 +125,7 @@ Hero: class {
         legSprite := GlRectangle new()
         legSprite size set!(8, 80)
         legSprite color set!(80, 220, 80)
-        legSprite visible = false
+        if (!debug) legSprite visible = false
 
         legGfx add(legSprite)
         layer group add(legGfx)
@@ -128,7 +140,7 @@ Hero: class {
         leg setPos(cpv(pos add(0, -20)))
 
         legShape = level space addShape(CpBoxShape new(leg, legWidth, legHeight))
-        legShape setGroup(1)
+        legShape setGroup(PhysicGroups HERO)
         legShape setFriction(0.99)
 
         legConstraint = level space addConstraint(CpConstraint newPivot(leg, body, cpv(pos)))
@@ -150,7 +162,7 @@ Hero: class {
     initEvents: func {
         // short jump
         input onKeyPress(Keys SPACE, ||
-            if (touchesGround) {
+            if (touchesGround?) {
                 vel := body getVel()
                 vel y = -jumpVel
                 body setVel(vel)
@@ -207,11 +219,29 @@ Hero: class {
 
     updateAnimations: func {
         ticks := (direction * lookDir) * (running? ? 2 : 1)
-        if (moving) {
-            bottom update(ticks)
+        if (groundTouchNumber < 1) {
+            ticks = 0
         }
 
-        if (moving || !top currentName startsWith?("walking-")) {
+        bottomWalking := bottom currentName startsWith?("walking")
+        if (bottomWalking) {
+            // if bottom has a walking animation, only update if moving
+            if (moving) {
+                bottom update(ticks)
+            }
+        } else {
+            // if we're not walking, update the animation anyway
+            bottom update()
+        }
+
+        topWalking := top currentName startsWith?("walking")
+        if (topWalking) {
+            // if top has a walking animation, only update if moving
+            if (moving) {
+                top update(ticks)
+            }
+        } else {
+            // if we're not walking, update the animation anyway
             top update()
         }
     }
@@ -241,6 +271,10 @@ Hero: class {
             vel := body getVel()
             vel x = vel x * alpha + (direction * speed * (1 - alpha))
             body setVel(vel)
+        } else {
+            vel := body getVel()
+            vel x = vel x * 0.7
+            body setVel(vel)
         }
 
         updateAnimations()
@@ -258,20 +292,24 @@ Hero: class {
     
         if (batCounter > 0) {
             batCounter -= 1
-            batShape setLayers(ShapeGroup HERO | ShapeGroup FURNITURE)
             throwBat()
         } else {
             holdBat()
-            batShape setLayers(ShapeGroup HERO)
         }
 
         if (legCounter > 0) {
             legCounter -= 1
-            legShape setLayers(ShapeGroup HERO | ShapeGroup FURNITURE)
             throwLeg()
         } else {
             holdLeg()
-            legShape setLayers(ShapeGroup HERO)
+        }
+
+        if (groundTouchNumber > 0) {
+            groundTouchCounter = 20
+        } else {
+            if (groundTouchCounter > 0) {
+                groundTouchCounter -= 1
+            }
         }
 
         updateLookDir()
@@ -300,6 +338,7 @@ Hero: class {
         base := PI + lookDir * (PI / 2)
         legRotaryLimit setMin(base - 0.1)
         legRotaryLimit setMax(base + 0.1)
+        legShape setLayers(PhysicLayers HERO | PhysicLayers FURNITURE)
     }
 
     holdLeg: func {
@@ -307,6 +346,7 @@ Hero: class {
         base := PI - lookDir * (PI / 4)
         legRotaryLimit setMin(base - 0.1)
         legRotaryLimit setMax(base + 0.1)
+        legShape setLayers(PhysicLayers HERO)
     }
 
     /* Bat operations */
@@ -316,6 +356,7 @@ Hero: class {
         base := 0 - lookDir * (3 * PI / 4)
         batRotaryLimit setMin(base - 0.1)
         batRotaryLimit setMax(base + 0.1)
+        batShape setLayers(PhysicLayers HERO | PhysicLayers FURNITURE)
     }
 
     holdBat: func {
@@ -323,10 +364,15 @@ Hero: class {
         base := 0 + lookDir * (PI / 4)
         batRotaryLimit setMin(base - 0.1)
         batRotaryLimit setMax(base + 0.1)
+        batShape setLayers(PhysicLayers HERO)
     }
 
     running?: Bool { get {
         input isPressed(Keys SHIFT)
+    } }
+
+    touchesGround?: Bool { get {
+        groundTouchCounter > 0
     } }
 
 }
@@ -339,11 +385,11 @@ HeroGroundCollision: class extends CpCollisionHandler {
     }
 
     begin: func (arbiter: CpArbiter, space: CpSpace) {
-        hero touchesGround = true
+        hero groundTouchNumber += 1
     }
 
     separate: func (arbiter: CpArbiter, space: CpSpace) {
-        hero touchesGround = false
+        hero groundTouchNumber -= 1
     }
 
 }

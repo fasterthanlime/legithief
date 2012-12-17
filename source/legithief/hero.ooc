@@ -164,7 +164,7 @@ Hero: class {
         // initialize feet
         feetGfx = GlGroup new()
         feetSprite := GlRectangle new()
-        feetSprite size set!(sprite width * xFactor, 16)
+        feetSprite size set!(sprite width * 1.2, 16)
         feetSprite color set!(80, 220, 200)
         if (!debug) feetSprite visible = false
 
@@ -324,6 +324,12 @@ Hero: class {
         batGfx sync(bat)
         legGfx sync(leg)
         feetGfx sync(feet)
+
+        if (input isPressed(Keys W) || input isPressed(Keys S)) {
+            shape setLayers(PhysicLayers HERO | PhysicLayers HERO_TILES | PhysicLayers HERO_STAIRS)
+        } else {
+            shape setLayers(PhysicLayers HERO | PhysicLayers HERO_TILES | PhysicLayers HERO_THROUGH)
+        }
 
         if (input isPressed(Keys D)) {
             direction = 1

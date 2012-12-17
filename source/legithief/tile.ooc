@@ -14,6 +14,8 @@ import chipmunk
 use yaml
 import yaml/[Parser, Document]
 
+import math
+
 TileDef: class {
 
     name: String
@@ -49,6 +51,8 @@ TileDef: class {
 
 Tile: class {
 
+    debug := static true
+
     defs := static HashMap<String, TileDef> new()
     logger := static Log getLogger("tile")
 
@@ -63,7 +67,16 @@ Tile: class {
 
     def: TileDef
 
+    /* properties */
+    stair := false
+    ladder := false
+    through := false
+
+    stairRect: GlSegment
+
     init: func (=layer, =def, pos: Vec2) {
+        initProperties()
+
         level = layer level
 
         gfx = GlGroup new()
@@ -78,15 +91,43 @@ Tile: class {
             logger warn("Non-inert tiles are not supported yet!")
         }
 
-        // workaround. Le sigh.
-        (sBody, sShape) := level space createStaticBox(rect)
-        body = sBody
-        shape = sShape
+        if (stair) {
+            height := rect size norm() * 0.8
+            p1 := pos sub(rect width / 2, 0 - rect height / 2)
+            p2 := pos add(rect width / 2, 0 - rect height / 2)
 
-        shape setFriction(def friction)
-        shape setLayers(PhysicLayers FURNITURE | PhysicLayers HERO_TILES)
-        shape setCollisionType(1)
-        level space addShape(shape)
+            stairRect = GlSegment new(p1, p2)
+            if (debug) layer group add(stairRect)
+
+            body = CpBody newStatic()
+            shape = level space addShape(CpSegmentShape new(body, cpv(p1), cpv(p2), 4))
+            shape setLayers(PhysicLayers HERO_STAIRS)
+            shape setCollisionType(1)
+        } else {
+            // workaround. Le sigh.
+            (sBody, sShape) := level space createStaticBox(rect)
+            body = sBody
+            shape = sShape
+
+            shape setFriction(def friction)
+            if (through) {
+                shape setLayers(PhysicLayers FURNITURE | PhysicLayers HERO_THROUGH)
+            } else {
+                shape setLayers(PhysicLayers FURNITURE | PhysicLayers HERO_TILES)
+            }
+            shape setCollisionType(1)
+            level space addShape(shape)
+        }
+    }
+
+    initProperties: func {
+        if (def name startsWith?("stair")) {
+            stair = true
+        } else if (def name startsWith?("ladder")) {
+            ladder = true
+        } else if (def name startsWith?("through")) {
+            through = true
+        }
     }
 
     update: func {

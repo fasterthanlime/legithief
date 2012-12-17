@@ -20,6 +20,8 @@ PhysicLayers: class {
     FURNITURE := static 2
     HOUSE := static 4
     HERO_TILES := static 8
+    HERO_STAIRS := static 16
+    HERO_THROUGH := static 32
 }
 
 PhysicGroups: class {

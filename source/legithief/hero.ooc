@@ -246,12 +246,48 @@ Hero: class {
     }
 
     setWeapon: func (value: WeaponContour) {
+        if (value == weapon) return
+
         if (weapon) {
             weapon setActive(false)
+        }
+        
+        match weapon {
+            case batContour =>
+                batCounter = -1
+            case handContour =>
+                "Should let go of stuff" println()
+            case lighterContour =>
+                // nothing to do
         }
 
         weapon = value
         weapon setActive(true)
+
+        match weapon {
+            case batContour =>
+                top play("walking-bat")
+            case handContour =>
+                top play("walking")
+            case lighterContour =>
+                // need walking-lighter animation!
+                top play("walking")
+        }
+    }
+
+    useWeapon: func {
+        match weapon {
+            case batContour =>
+                if (batCounter <= 0) {
+                    batCounter = 15
+                    throwBat()
+                    grunt()
+                }
+            case handContour =>
+                "Should grab stuff" println()
+            case lighterContour =>
+                "Should set shit on fire" println()
+        }
     }
 
     initSamples: func {
@@ -296,11 +332,7 @@ Hero: class {
         input onMousePress(Buttons LEFT, ||
             if (legCounter > 0) return
 
-            if (batCounter <= 0) {
-                batCounter = 15
-                throwBat()
-                grunt()
-            }
+            useWeapon()
         )
 
         input onMousePress(Buttons RIGHT, ||
@@ -330,6 +362,7 @@ Hero: class {
         top = GlAnimSet new()
         twalk := top load("hero", "top", "walking", 12)
         twalk frameDuration = 4
+
         trun := top load("hero", "top", "running", 11)
         trun frameDuration = 3
 
@@ -342,7 +375,7 @@ Hero: class {
         tpbat offset y = -24
         tpbat frameDuration = 2
 
-        top play("walking-bat")
+        top play("walking")
         gfx add(top)
     }
 
@@ -569,7 +602,10 @@ Hero: class {
     }
 
     holdBat: func {
-        top play("walking-bat")
+        match weapon {
+            case batContour =>
+                top play("walking-bat")
+        }
         base := 0 + lookDir * (PI / 4)
         batRotaryLimit setMin(base - 0.1)
         batRotaryLimit setMax(base + 0.1)

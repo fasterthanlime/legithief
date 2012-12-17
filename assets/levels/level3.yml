@@ -1,0 +1,101 @@
+%YAML 1.1
+---
+hero:
+  pos:
+  - -282.00
+  - -67.50
+layers:
+  bg: []
+  hbg: []
+  h:
+  - type: tile
+    name: concrete
+    pos:
+    - -432.00
+    - 16.00
+  - type: tile
+    name: concrete
+    pos:
+    - -400.00
+    - 16.00
+  - type: tile
+    name: concrete
+    pos:
+    - -336.00
+    - 16.00
+  - type: tile
+    name: concrete
+    pos:
+    - -368.00
+    - 16.00
+  - type: tile
+    name: concrete
+    pos:
+    - -208.00
+    - 16.00
+  - type: tile
+    name: concrete
+    pos:
+    - -240.00
+    - 16.00
+  - type: tile
+    name: concrete
+    pos:
+    - -272.00
+    - 16.00
+  - type: tile
+    name: concrete
+    pos:
+    - -304.00
+    - 16.00
+  - type: tile
+    name: concrete
+    pos:
+    - -80.00
+    - 16.00
+  - type: tile
+    name: concrete
+    pos:
+    - -112.00
+    - 16.00
+  - type: tile
+    name: concrete
+    pos:
+    - -144.00
+    - 16.00
+  - type: tile
+    name: concrete
+    pos:
+    - -176.00
+    - 16.00
+  - type: tile
+    name: concrete
+    pos:
+    - 48.00
+    - 16.00
+  - type: tile
+    name: concrete
+    pos:
+    - 16.00
+    - 16.00
+  - type: tile
+    name: concrete
+    pos:
+    - -16.00
+    - 16.00
+  - type: tile
+    name: concrete
+    pos:
+    - -48.00
+    - 16.00
+  s:
+  - type: item
+    name: duck
+    pos:
+    - -63.00
+    - -82.00
+  - type: item
+    name: tv-support
+    pos:
+    - -62.00
+    - -28.00

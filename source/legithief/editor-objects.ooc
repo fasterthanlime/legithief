@@ -65,7 +65,7 @@ EditorLayer: class extends LayerBase {
         while (!selectedObjects empty?()) {
             o := selectedObjects get(0)
             deselect(o)
-            o destroy()
+            o remove()
         }
     }
 
@@ -288,6 +288,10 @@ EditorObject: class {
         group add(outlineGroup)
     }
 
+    remove: func {
+        destroy()
+    }
+
     destroy: func {
         layer remove(this)
     }
@@ -350,7 +354,7 @@ HeroObject: class extends EditorObject {
         outlineGroup add(rect)
     }
 
-    destroy: func {
+    remove: func {
         // the hero can't be destroyed!
     }
 

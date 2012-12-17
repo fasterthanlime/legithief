@@ -177,7 +177,6 @@ UI: class extends LevelBase {
     }
 
     reset: func {
-        clearLayers()
         initLayers()
     }
 
@@ -327,12 +326,12 @@ UI: class extends LevelBase {
                 case Keys ESC =>
                     running = false
                 case Keys F1 =>
-                    push(InputDialog new(this, "Enter level path to load", |path|
-                        "Should load level %s" printfln(path)
+                    push(InputDialog new(this, "Enter level path to load", |name|
+                        LevelLoader new(name, this)
                     ))
                 case Keys F2 =>
-                    push(InputDialog new(this, "Enter level path to save", |path|
-                        "Should save level %s" printfln(path)
+                    push(InputDialog new(this, "Enter level path to save", |name|
+                        "Should save level %s" printfln(name)
                     ))
                 case Keys KP0 =>
                     camPos set!(0, 0)

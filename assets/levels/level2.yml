@@ -11,6 +11,31 @@ layers:
     pos:
     - 96.00
     - 36.00
+  - type: prop
+    name: sky
+    pos:
+    - 2016.00
+    - 1092.00
+  - type: prop
+    name: sky
+    pos:
+    - -1824.00
+    - 36.00
+  - type: prop
+    name: sky
+    pos:
+    - -1824.00
+    - 1092.00
+  - type: prop
+    name: sky
+    pos:
+    - 96.00
+    - 1092.00
+  - type: prop
+    name: sky
+    pos:
+    - 2016.00
+    - 36.00
   hbg: []
   h:
   - type: tile
@@ -36,8 +61,8 @@ layers:
   - type: tile
     name: brick
     pos:
-    - -64.00
-    - 128.00
+    - -32.00
+    - 96.00
   - type: tile
     name: brick
     pos:
@@ -51,23 +76,18 @@ layers:
   - type: tile
     name: brick
     pos:
-    - 0.00
-    - 192.00
+    - 32.00
+    - 160.00
   - type: tile
     name: brick
     pos:
-    - 64.00
-    - 256.00
+    - 96.00
+    - 224.00
   - type: tile
     name: brick
     pos:
-    - 288.00
-    - 256.00
-  - type: tile
-    name: brick
-    pos:
-    - 352.00
-    - 256.00
+    - 320.00
+    - 224.00
   - type: tile
     name: brick
     pos:
@@ -76,8 +96,8 @@ layers:
   - type: tile
     name: brick
     pos:
-    - 416.00
-    - 128.00
+    - 448.00
+    - 96.00
   - type: tile
     name: brick
     pos:
@@ -87,12 +107,12 @@ layers:
     name: brick
     pos:
     - 416.00
-    - 192.00
+    - 128.00
   - type: tile
     name: brick
     pos:
-    - 480.00
-    - 128.00
+    - 384.00
+    - 160.00
   - type: tile
     name: brick
     pos:
@@ -143,6 +163,96 @@ layers:
     pos:
     - 928.00
     - -128.00
+  - type: tile
+    name: brick
+    pos:
+    - -384.00
+    - 64.00
+  - type: tile
+    name: brick
+    pos:
+    - -256.00
+    - 64.00
+  - type: tile
+    name: brick
+    pos:
+    - -128.00
+    - 64.00
+  - type: tile
+    name: brick
+    pos:
+    - 192.00
+    - 448.00
+  - type: tile
+    name: brick
+    pos:
+    - 128.00
+    - 448.00
+  - type: tile
+    name: brick
+    pos:
+    - 256.00
+    - 448.00
+  - type: tile
+    name: brick
+    pos:
+    - 320.00
+    - 448.00
+  - type: tile
+    name: brick
+    pos:
+    - 384.00
+    - 448.00
+  - type: tile
+    name: brick
+    pos:
+    - 448.00
+    - 448.00
+  - type: tile
+    name: brick
+    pos:
+    - 64.00
+    - 448.00
+  - type: tile
+    name: brick
+    pos:
+    - 0.00
+    - 448.00
+  - type: tile
+    name: brick
+    pos:
+    - -64.00
+    - 448.00
+  - type: tile
+    name: brick
+    pos:
+    - -128.00
+    - 448.00
+  - type: tile
+    name: brick
+    pos:
+    - -192.00
+    - 448.00
+  - type: tile
+    name: brick
+    pos:
+    - -256.00
+    - 448.00
+  - type: tile
+    name: brick
+    pos:
+    - -320.00
+    - 448.00
+  - type: tile
+    name: brick
+    pos:
+    - 512.00
+    - 448.00
+  - type: tile
+    name: brick
+    pos:
+    - 576.00
+    - 448.00
   s:
   - type: item
     name: duck

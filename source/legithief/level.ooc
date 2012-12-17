@@ -1,5 +1,5 @@
 
-import legithief/[utils, hero, item]
+import legithief/[utils, hero, item, tile]
 
 import structs/ArrayList
 
@@ -22,48 +22,44 @@ ShapeGroup: class {
 
 Level: class {
 
+    fontPath := static "assets/ttf/font.ttf"
     logger := static Log getLogger("Level")
 
     dye: DyeContext
     input: Input
 
     hero: Hero
-    items := ArrayList<Item> new()
 
     group: GlGroup
 
     space: CpSpace
 
     /* layers */
-    bbgLayer: GlGroup
-    bgLayer: GlGroup
-    heroLayer: GlGroup
-    hudLayer: GlGroup
+    bgLayer: Layer
+    hbgLayer: Layer
+    hLayer: Layer
+    sLayer: Layer
+
+    layers := ArrayList<Layer> new()
+
+    layerGroup: GlGroup
+    hudGroup: GlGroup
 
     init: func (=dye, globalInput: Input) {
         input = globalInput sub()
         
         initGfx()
         initPhysx()
+        initLayers()
 
-        hero = Hero new(this)
-
-        spawnItem("sofa-double", vec2(500, 100))
-        spawnItem("sofa", vec2(600, 100))
-        spawnItem("nightstand", vec2(650, 100))
-        spawnItem("kitchen", vec2(400,200))
-        spawnItem("tv-support", vec2(700,200))
-        spawnItem("tv", vec2(700,100))
-        spawnItem("trash", vec2(400, 100))
-    }
-
-    spawnItem: func (itemName: String, pos: Vec2) {
-        def := Item getDefinition(itemName)
-        if (def) {
-            items add(Item new(this, def, pos))
-        } else {
-            logger warn("Unknown item type: %s" format(itemName))
-        }
+        hero = Hero new(sLayer)
+        sLayer spawnItem("sofa-double", vec2(500, 100))
+        sLayer spawnItem("sofa", vec2(600, 100))
+        sLayer spawnItem("nightstand", vec2(650, 100))
+        sLayer spawnItem("kitchen", vec2(400,200))
+        sLayer spawnItem("tv-support", vec2(700,200))
+        sLayer spawnItem("tv", vec2(700,100))
+        sLayer spawnItem("trash", vec2(400, 100))
     }
 
     update: func {
@@ -74,13 +70,32 @@ Level: class {
         space step(timeStep * 0.5)
 
         hero update()
-        for (item in items) {
-            item update()
+        for (layer in layers) {
+            layer update()
         }
 
         mouseOffset := dye center sub(input getMousePos()) mul(0.5)
         target := dye center sub(hero gfx pos) add(mouseOffset)
         group pos interpolate!(target, 0.12)
+    }
+
+    initGfx: func {
+        group = GlGroup new()
+        dye add(group)
+
+            layerGroup = GlGroup new()
+            group add(layerGroup)
+
+        hudGroup = GlGroup new()
+        dye add(hudGroup)
+
+        buildHud()
+    }
+
+    buildHud: func {
+        text := GlText new(fontPath, "Legithief")
+        text color = Color black()
+        hudGroup add(text)
     }
 
     initPhysx: func {
@@ -89,43 +104,76 @@ Level: class {
         gravity := cpv(0, 500)
         space setGravity(gravity)
         space setDamping(0.9)
+    }
 
-        for (i in -2..2) {
-            groundRect := GlSprite new("assets/png/checker.png")
-            groundRect pos set!(i * 640, 200)
-            bgLayer add(groundRect)
+    initLayers: func {
+        bgLayer = addLayer("background")
+        hbgLayer = addLayer("house background")
+        hLayer = addLayer("house")
+        sLayer = addLayer("sprites")
+    }
 
-            (groundBody, ground) := space createStaticBox(groundRect)
-            ground setFriction(1)
-            ground setLayers(ShapeGroup FURNITURE | ShapeGroup HERO)
-            ground setCollisionType(1)
-            space addShape(ground)
+    addLayer: func (name: String) -> Layer {
+        layer := Layer new(this, name)
+        layers add(layer)
+        layerGroup add(layer group)
+        layer
+    }
+
+}
+
+Layer: class {
+
+    logger: Logger
+
+    items := ArrayList<Item> new()
+    tiles := ArrayList<Tile> new()
+
+    level: Level
+
+    name: String
+    group: GlGroup
+
+    init: func (=level, =name) {
+        group = GlGroup new()
+        logger = Log getLogger("layer: %s" format(name))
+    }
+
+    update: func {
+        for (i in items) {
+            i update()
+        }
+
+        for (t in tiles) {
+            t update()
         }
     }
 
-    initGfx: func {
-        bbgLayer = GlGroup new()
-        dye add(bbgLayer)
+    spawnItem: func (name: String, pos: Vec2) -> Item {
+        def := Item getDefinition(name)
 
-        group = GlGroup new()
-        dye add(group)
-
-        bgLayer = GlGroup new()
-        group add(bgLayer)
-
-        heroLayer = GlGroup new()
-        group add(heroLayer)
-
-        hudLayer = GlGroup new()
-        dye add(hudLayer)
-
-        buildHud()
+        if (def) {
+            item := Item new(this, def, pos)
+            items add(item)
+            item
+        } else {
+            logger warn("Unknown item type: %s" format(name))
+            null
+        }
     }
 
-    buildHud: func {
-        text := GlText new("assets/ttf/font.ttf", "Legithief - move = wasd, jump = space, run = shift, left click = attack, right click = kick")
-        text color = Color black()
-        hudLayer add(text)
+    spawnTile: func (name: String, pos: Vec2) -> Tile {
+        def := Tile getDefinition(name)
+
+        if (def) {
+            tile := Tile new(this, def, pos)
+            tiles add(tile)
+            tile
+        } else {
+            logger warn("Unknown tile type: %s" format(name))
+            null
+        }
     }
+
 }
 

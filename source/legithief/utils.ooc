@@ -12,6 +12,8 @@ import yaml/[Parser, Document]
 
 import structs/[HashMap, List, ArrayList]
 
+import io/File
+
 /* radians <-> degrees conversion */
 
 toRadians: func (degrees: Float) -> Float {
@@ -100,6 +102,10 @@ extend DocumentNode {
         toScalar() toFloat()
     }
 
+    toBool: func -> Bool {
+        toScalar() trim() == "true"
+    }
+
     toVec2: func -> Vec2 {
         list := toList()
         vec2(list[0] toFloat(), list[1] toFloat())
@@ -141,4 +147,12 @@ extend GlAnimSet {
 
 }
 
+/* List .yml files in a directory, with the '.yml' extension stripped */
+
+listDefs: func (path: String) -> List<String> {
+        File new(path) \
+            getChildrenNames() \
+            filter(|x| x endsWith?(".yml")) \
+            map(|x| x[0..-5]) \
+}
 

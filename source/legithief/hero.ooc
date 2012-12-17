@@ -12,6 +12,7 @@ import structs/[ArrayList]
 Hero: class {
 
     level: Level
+    layer: Layer
     input: Input 
 
     gfx: GlGroup
@@ -52,15 +53,16 @@ Hero: class {
     collisionHandlers := ArrayList<CpCollisionHandler> new()
     moving := false
 
-    init: func (=level) {
+    init: func (=layer) {
+        level =  layer level
+
         gfx = GlGroup new()
         sprite = GlSprite new("assets/png/hero/hero-01.png") 
         gfx add(sprite)
         sprite visible = false
+        layer group add(gfx)
 
         initAnims()
-
-        level heroLayer add(gfx)
 
         input = level input sub()
 
@@ -87,7 +89,7 @@ Hero: class {
         batSprite visible = false
 
         batGfx add(batSprite)
-        level heroLayer add(batGfx)
+        layer group add(batGfx)
 
         batWidth := batSprite width
         batHeight := batSprite height
@@ -114,7 +116,7 @@ Hero: class {
         legSprite visible = false
 
         legGfx add(legSprite)
-        level heroLayer add(legGfx)
+        layer group add(legGfx)
 
         legWidth := legSprite width
         legHeight := legSprite height

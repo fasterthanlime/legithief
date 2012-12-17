@@ -14,40 +14,18 @@ import chipmunk
 use yaml
 import yaml/[Parser, Document]
 
-CollisionShape: abstract class {
-
-}
-
-BoxShape: class extends CollisionShape {
-
-}
-
-ConvexShape: class extends CollisionShape {
-
-    points := ArrayList<Vec2> new()
-
-}
-
-/*
- * Items are stuff that the hero can kick around, but that
- * doesn't necessary collide with him.
- */
-
-ItemDef: class {
+TileDef: class {
 
     name: String
     image: String
     fire := 0.0
     mass := 10.0
-    friction := 0.5
-    shape := BoxShape new()
+    friction := 1.0
+    inert := true
 
     init: func (=name) {
         parser := YAMLParser new()
-        path := "assets/items/%s.yml" format(name)
-        "Opening file %s" printfln(path)
-
-        parser setInputFile(path)
+        parser setInputFile("assets/tiles/%s.yml" format(name))
 
         doc := Document new()
         parser parseAll(doc)
@@ -63,18 +41,20 @@ ItemDef: class {
                     mass = v toFloat()
                 case "fire" =>
                     fire = v toFloat()
+                case "inert" =>
+                    inert = v toBool()
                 case =>
-                    Item logger warn("Unhandled item key %s" format(k))
+                    Tile logger warn("Unhandled tile key %s" format(k))
             }
         )
     }
 
 }
 
-Item: class {
+Tile: class {
 
-    defs := static HashMap<String, ItemDef> new()
-    logger := static Log getLogger("item")
+    defs := static HashMap<String, TileDef> new()
+    logger := static Log getLogger("tile")
 
     level: Level
     layer: Layer
@@ -85,7 +65,7 @@ Item: class {
     body: CpBody
     shape: CpShape
 
-    def: ItemDef
+    def: TileDef
 
     init: func (=layer, =def, pos: Vec2) {
         level = layer level
@@ -97,16 +77,18 @@ Item: class {
 
         layer group add(gfx)
 
-        mass := def mass
-        moment := cpMomentForBox(mass, rect width, rect height)
-        body = level space addBody(CpBody new(mass, moment))
-        body setPos(cpv(pos))
+        if (!def inert) {
+            logger warn("Non-inert tiles are not supported yet!")
+        }
 
-        shape = CpBoxShape new(body, rect width, rect height)
-        level space addShape(shape)
+        // workaround. Le sigh.
+        (sBody, sShape) := level space createStaticBox(rect)
+        body = sBody
+        shape = sShape
+
         shape setFriction(def friction)
-
-        shape setLayers(ShapeGroup FURNITURE)
+        shape setLayers(ShapeGroup FURNITURE | ShapeGroup HERO)
+        shape setCollisionType(1)
     }
 
     update: func {
@@ -116,18 +98,17 @@ Item: class {
     /* loading */
 
     loadDefinitions: static func {
-        for (name in listDefs("assets/items")) {
-            "Defining item %s" printfln(name)
-            Item define(name)
+        for (name in listDefs("assets/tiles")) {
+            Tile define(name)
         }
     }
 
-    define: static func (itemName: String) {
-        defs put(itemName, ItemDef new(itemName))
+    define: static func (tileName: String) {
+        defs put(tileName, TileDef new(tileName))
     }
 
-    getDefinition: static func (itemName: String) -> ItemDef {
-        defs get(itemName)
+    getDefinition: static func (tileName: String) -> TileDef {
+        defs get(tileName)
     }
 
 }

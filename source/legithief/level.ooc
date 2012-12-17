@@ -3,6 +3,7 @@ import legithief/[utils, hero, item, tile, prop, flame, molotov]
 import legithief/[level-loader]
 
 import structs/ArrayList
+import os/Time
 
 import dye/[core, input, sprite, font, primitives, math]
 
@@ -58,6 +59,10 @@ Level: class extends LevelBase {
 
     bleep: Bleep
 
+    /* clock */
+    clock: Clock
+
+    /* code */
     init: func (=dye, globalInput: Input, =bleep) {
         input = globalInput sub()
         
@@ -66,6 +71,7 @@ Level: class extends LevelBase {
         initLayers()
 
         hero = Hero new(sLayer)
+        clock = Clock new(this)
     }
 
     load: func (name: String) {
@@ -78,6 +84,8 @@ Level: class extends LevelBase {
         space step(timeStep * 0.5)
         space step(timeStep * 0.5)
         space step(timeStep * 0.5)
+
+        clock update()
 
         hero update()
         for (layer in layers) {
@@ -107,10 +115,6 @@ Level: class extends LevelBase {
     }
 
     buildHud: func {
-        text := GlText new(fontPath, "Legithief")
-        text pos x = dye width - 200
-        text color = Color black()
-        hudGroup add(text)
     }
 
     initPhysx: func {
@@ -258,6 +262,48 @@ Layer: class extends LayerBase {
         molotov := Molotov new(this, pos)
         molotovs add(molotov)
         molotov
+    }
+
+}
+
+Clock: class {
+
+    level: Level
+    gfx: GlGroup
+    text: GlText
+
+    time := 30_000
+    prev: UInt
+
+    init: func (=level) {
+        gfx = GlGroup new()
+
+        bg := GlSprite new("assets/png/clock.png")
+        gfx add(bg)
+
+        text = GlText new(Level fontPath, "00:30")
+        text color set!(0, 0, 0)
+        text pos set!(-27, 10)
+        gfx add(text)
+
+        gfx pos set!(level dye width - 100, 80)
+
+        level hudGroup add(gfx)
+
+        prev = Time runTime()
+    }
+
+    update: func {
+        curr := Time runTime()
+        if (time > 0) {
+            time -= (curr - prev)
+        } else {
+            time = 0
+        }
+        prev = curr
+
+        seconds := time / 1_000
+        text value = "00:%02d" format(seconds)
     }
 
 }

@@ -73,6 +73,7 @@ Tile: class {
         gfx = GlGroup new()
 
         rect = GlSprite new(def image)
+        rect pos set!(pos)
         gfx add(rect)
 
         layer group add(gfx)
@@ -89,10 +90,10 @@ Tile: class {
         shape setFriction(def friction)
         shape setLayers(ShapeGroup FURNITURE | ShapeGroup HERO)
         shape setCollisionType(1)
+        level space addShape(shape)
     }
 
     update: func {
-        gfx sync(body)
     }
 
     /* loading */

@@ -5,7 +5,7 @@ import dye/[core, input, sprite, font]
 use deadlogger
 import deadlogger/[Log, Logger, Handler, Formatter]
 
-import legithief/[level, hero, item]
+import legithief/[level, hero, item, tile]
 
 import os/[Time, Env]
 
@@ -43,7 +43,11 @@ App: class {
         bleep = Bleep new()
 
         setupEvents()
+        
+        /* Load the definitions for items, tiles, and all assets */
         Item loadDefinitions()
+        Tile loadDefinitions()
+
         level = Level new(dye, input)
 
         bleep play("assets/ogg/story.ogg")

@@ -60,6 +60,10 @@ Level: class {
         sLayer spawnItem("tv-support", vec2(700,200))
         sLayer spawnItem("tv", vec2(700,100))
         sLayer spawnItem("trash", vec2(400, 100))
+
+        for (i in -13..28) {
+            hLayer spawnTile("brick", vec2(i * 32, 200))
+        }
     }
 
     update: func {

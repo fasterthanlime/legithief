@@ -79,6 +79,10 @@ Hero: class {
     jumpSample: Sample
     gruntSamples := ArrayList<Sample> new()
 
+    /* weapon contour */
+    handContour, batContour, lighterContour: WeaponContour
+    weapon: WeaponContour
+
     init: func (=layer) {
         level = layer level
 
@@ -212,10 +216,78 @@ Hero: class {
         initSamples()
 
         initEvents()
+
+        initContours()
     }
 
     setPos: func (pos: Vec2) {
         body setPos(cpv(pos))
+    }
+
+    initContours: func {
+        contourGroup := GlGroup new()
+
+        handContour = WeaponContour new("hand")
+        handContour gfx pos set!(0, 0)
+        contourGroup add(handContour gfx)
+
+        batContour = WeaponContour new("bat")
+        batContour gfx pos set!(100, 0)
+        contourGroup add(batContour gfx)
+
+        lighterContour = WeaponContour new("lighter")
+        lighterContour gfx pos set!(200, 0)
+        contourGroup add(lighterContour gfx)
+
+        contourGroup pos set!(70, 70)
+        level hudGroup add(contourGroup)
+
+        setWeapon(batContour)
+    }
+
+    setWeapon: func (value: WeaponContour) {
+        if (value == weapon) return
+
+        if (weapon) {
+            weapon setActive(false)
+        }
+        
+        match weapon {
+            case batContour =>
+                batCounter = -1
+            case handContour =>
+                "Should let go of stuff" println()
+            case lighterContour =>
+                // nothing to do
+        }
+
+        weapon = value
+        weapon setActive(true)
+
+        match weapon {
+            case batContour =>
+                top play("walking-bat")
+            case handContour =>
+                top play("walking")
+            case lighterContour =>
+                // need walking-lighter animation!
+                top play("walking")
+        }
+    }
+
+    useWeapon: func {
+        match weapon {
+            case batContour =>
+                if (batCounter <= 0) {
+                    batCounter = 15
+                    throwBat()
+                    grunt()
+                }
+            case handContour =>
+                "Should grab stuff" println()
+            case lighterContour =>
+                "Should set shit on fire" println()
+        }
     }
 
     initSamples: func {
@@ -229,6 +301,18 @@ Hero: class {
     }
 
     initEvents: func {
+        input onKeyPress(Keys _1, ||
+            setWeapon(handContour)
+        )
+
+        input onKeyPress(Keys _2, ||
+            setWeapon(batContour)
+        )
+
+        input onKeyPress(Keys _3, ||
+            setWeapon(lighterContour)
+        )
+
         // short jump
         input onKeyPress(Keys SPACE, ||
             if (touchesGround? || onLadder) {
@@ -248,11 +332,7 @@ Hero: class {
         input onMousePress(Buttons LEFT, ||
             if (legCounter > 0) return
 
-            if (batCounter <= 0) {
-                batCounter = 15
-                throwBat()
-                grunt()
-            }
+            useWeapon()
         )
 
         input onMousePress(Buttons RIGHT, ||
@@ -282,6 +362,7 @@ Hero: class {
         top = GlAnimSet new()
         twalk := top load("hero", "top", "walking", 12)
         twalk frameDuration = 4
+
         trun := top load("hero", "top", "running", 11)
         trun frameDuration = 3
 
@@ -294,7 +375,7 @@ Hero: class {
         tpbat offset y = -24
         tpbat frameDuration = 2
 
-        top play("walking-bat")
+        top play("walking")
         gfx add(top)
     }
 
@@ -521,7 +602,10 @@ Hero: class {
     }
 
     holdBat: func {
-        top play("walking-bat")
+        match weapon {
+            case batContour =>
+                top play("walking-bat")
+        }
         base := 0 + lookDir * (PI / 4)
         batRotaryLimit setMin(base - 0.1)
         batRotaryLimit setMax(base + 0.1)
@@ -571,4 +655,34 @@ HeroLadderCollision: class extends CpCollisionHandler {
     }
 
 }
+
+WeaponContour: class {
+
+    name: String
+
+    gfx: GlGroup
+
+    outline, activeOutline: GlSprite
+
+    init: func (=name) {
+        gfx = GlGroup new()
+
+        outline = GlSprite new("assets/png/weapon-outline.png")
+        gfx add(outline)
+
+        activeOutline = GlSprite new("assets/png/weapon-outline-active.png")
+        gfx add(activeOutline)
+        activeOutline visible = false
+
+        sprite := GlSprite new("assets/png/%s.png" format(name))
+        gfx add(sprite)
+    }
+
+    setActive: func (active: Bool) {
+        outline visible = !active
+        activeOutline visible = active
+    }
+
+}
+
 

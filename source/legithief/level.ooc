@@ -82,7 +82,7 @@ Level: class extends LevelBase {
             layer update()
         }
 
-        mouseOffset := dye center sub(input getMousePos()) mul(0.5)
+        mouseOffset := dye center sub(input getMousePos()) mul(0.8)
         target := dye center sub(hero gfx pos) add(mouseOffset)
         group pos interpolate!(target, 0.12)
     }
@@ -106,6 +106,7 @@ Level: class extends LevelBase {
 
     buildHud: func {
         text := GlText new(fontPath, "Legithief")
+        text pos x = dye width - 200
         text color = Color black()
         hudGroup add(text)
     }

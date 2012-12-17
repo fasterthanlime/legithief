@@ -549,11 +549,6 @@ layers:
     - 352.00
     - 0.00
   - type: tile
-    name: ladder-6
-    pos:
-    - -256.00
-    - -480.00
-  - type: tile
     name: wood
     pos:
     - -368.00
@@ -658,6 +653,11 @@ layers:
     pos:
     - -80.00
     - -400.00
+  - type: tile
+    name: ladder-2
+    pos:
+    - -256.00
+    - -352.00
   s:
   - type: item
     name: tv-support

@@ -228,15 +228,15 @@ Hero: class {
     initContours: func {
         contourGroup := GlGroup new()
 
-        handContour = WeaponContour new("hand")
+        handContour = WeaponContour new("fist-big")
         handContour gfx pos set!(0, 0)
         contourGroup add(handContour gfx)
 
-        batContour = WeaponContour new("bat")
+        batContour = WeaponContour new("bat-big")
         batContour gfx pos set!(100, 0)
         contourGroup add(batContour gfx)
 
-        molotovContour = WeaponContour new("molotov")
+        molotovContour = WeaponContour new("molotov-big")
         molotovContour gfx pos set!(200, 0)
         contourGroup add(molotovContour gfx)
 
@@ -467,10 +467,6 @@ Hero: class {
                     gripPos := ladderGrip getPos()
                     gripPos y = gripPos y + ladderSpeed
                     ladderGrip setPos(gripPos)
-
-                    //if (touchesGround?) {
-                    //    ladderDisable()
-                    //}
                 }
                 
                 if (input isPressed(Keys A)) {
@@ -680,6 +676,7 @@ WeaponContour: class {
         activeOutline visible = false
 
         sprite := GlSprite new("assets/png/%s.png" format(name))
+        sprite size mul!(0.8)
         gfx add(sprite)
     }
 

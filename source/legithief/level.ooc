@@ -59,7 +59,7 @@ Level: class extends LevelBase {
     layers := ArrayList<Layer> new()
 
     layerGroup: GlGroup
-    hudGroup: GlGroup
+    hudGroup, overHudGroup: GlGroup
 
     bleep: Bleep
 
@@ -67,6 +67,7 @@ Level: class extends LevelBase {
     plan: Plan
     def: StageDef
     levelEnd: LevelEnd
+    gameoverScreen, titleScreen: FullScreen
 
     /* clock */
     clock: Clock
@@ -82,14 +83,20 @@ Level: class extends LevelBase {
         hero = Hero new(sLayer)
         clock = Clock new(this)
         levelEnd = LevelEnd new(this)
+        titleScreen = FullScreen new(this, "titlescreen")
+        gameoverScreen = FullScreen new(this, "gameover")
 
         initEvents()
+        
+        titleScreen show()
     }
 
     initEvents: func {
         input onMousePress(Buttons LEFT, ||
             if (levelEnd shown?()) {
                 loadNextLevel()
+            } else if (titleScreen shown?()) {
+                titleScreen hide()
             }
         )
     }
@@ -101,7 +108,11 @@ Level: class extends LevelBase {
 
     loadNextLevel: func {
         nextName := plan nextStage()
-        load(nextName)
+        if (nextName) {
+            load(nextName)
+        } else {
+            gameoverScreen show()
+        }
     }
 
     load: func (=def) {
@@ -114,7 +125,7 @@ Level: class extends LevelBase {
     }
 
     levelRunning?: func -> Bool {
-        !(levelEnd shown?() || gameEnd shown?())
+        !(levelEnd shown?() || gameoverScreen shown?() || titleScreen shown?())
     }
 
     update: func {
@@ -157,6 +168,9 @@ Level: class extends LevelBase {
 
         hudGroup = GlGroup new()
         dye add(hudGroup)
+
+        overHudGroup = GlGroup new()
+        dye add(overHudGroup)
 
         buildHud()
     }
@@ -367,6 +381,42 @@ Clock: class {
 
 }
 
+FullScreen: class {
+
+    name: String
+    level: Level
+
+    gfx: GlGroup
+
+    init: func (=level, =name) {
+        gfx = GlGroup new()
+
+        bg := GlSprite new("assets/png/%s.png" format(name))
+        gfx add(bg)
+
+        gfx center!(level dye)
+        gfx visible = false
+
+        level overHudGroup add(gfx)
+    }
+
+    shown?: func -> Bool {
+        gfx visible
+    }
+
+    show: func {
+        gfx visible = true
+    }
+
+    hide: func {
+        gfx visible = false
+    }
+
+    update: func {
+    }
+
+}
+
 LevelEnd: class {
 
     level: Level
@@ -418,7 +468,7 @@ LevelEnd: class {
         gfx center!(level dye)
         gfx visible = false
 
-        level hudGroup add(gfx)
+        level overHudGroup add(gfx)
     }
    
     initTaunts: func {

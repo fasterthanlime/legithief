@@ -3,7 +3,7 @@ import legithief/[utils, hero, item, tile, level]
 
 import structs/ArrayList
 
-import dye/[core, input, sprite, font, primitives, math]
+import dye/[core, math]
 
 use yaml
 import yaml/[Parser, Document]

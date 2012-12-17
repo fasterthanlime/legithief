@@ -1,6 +1,6 @@
 
 import legithief/[level, utils, item, tile, prop]
-import legithief/[editor-objects, level-loader]
+import legithief/[editor-objects, level-loader, level-saver]
 
 import dye/[core, input, sprite, font, math, primitives]
 
@@ -331,7 +331,7 @@ UI: class extends LevelBase {
                     ))
                 case Keys F2 =>
                     push(InputDialog new(this, "Enter level path to save", |name|
-                        "Should save level %s" printfln(name)
+                        LevelSaver new(name, this)
                     ))
                 case Keys KP0 =>
                     camPos set!(0, 0)

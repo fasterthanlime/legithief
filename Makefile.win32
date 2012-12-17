@@ -9,4 +9,4 @@ editor:
 clean:
 	rm -rf .libs rock_tmp
 
-.PHONY: all clean
+.PHONY: all clean editor

@@ -46,11 +46,6 @@ layers:
   - type: tile
     name: brick
     pos:
-    - -320.00
-    - 64.00
-  - type: tile
-    name: brick
-    pos:
     - -192.00
     - 64.00
   - type: tile
@@ -88,11 +83,6 @@ layers:
     pos:
     - 576.00
     - -128.00
-  - type: tile
-    name: brick
-    pos:
-    - -384.00
-    - 64.00
   - type: tile
     name: brick
     pos:
@@ -332,21 +322,6 @@ layers:
     name: brick
     pos:
     - -704.00
-    - 0.00
-  - type: tile
-    name: brick
-    pos:
-    - -704.00
-    - -64.00
-  - type: tile
-    name: brick
-    pos:
-    - -704.00
-    - -128.00
-  - type: tile
-    name: brick
-    pos:
-    - -704.00
     - -192.00
   - type: tile
     name: brick
@@ -358,6 +333,61 @@ layers:
     pos:
     - -576.00
     - -192.00
+  - type: tile
+    name: through
+    pos:
+    - -320.00
+    - 64.00
+  - type: tile
+    name: through
+    pos:
+    - -384.00
+    - 64.00
+  - type: tile
+    name: ladder-6
+    pos:
+    - -768.00
+    - 224.00
+  - type: tile
+    name: brick
+    pos:
+    - -384.00
+    - 448.00
+  - type: tile
+    name: brick
+    pos:
+    - -448.00
+    - 448.00
+  - type: tile
+    name: brick
+    pos:
+    - -512.00
+    - 448.00
+  - type: tile
+    name: brick
+    pos:
+    - -576.00
+    - 448.00
+  - type: tile
+    name: through
+    pos:
+    - -768.00
+    - 64.00
+  - type: tile
+    name: brick
+    pos:
+    - -704.00
+    - 448.00
+  - type: tile
+    name: brick
+    pos:
+    - -768.00
+    - 448.00
+  - type: tile
+    name: brick
+    pos:
+    - -640.00
+    - 448.00
   s:
   - type: item
     name: duck

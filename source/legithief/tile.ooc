@@ -72,8 +72,6 @@ Tile: class {
     ladder := false
     through := false
 
-    stairRect: GlSegment
-
     init: func (=layer, =def, pos: Vec2) {
         initProperties()
 
@@ -96,8 +94,10 @@ Tile: class {
             p1 := pos sub(rect width / 2, 0 - rect height / 2)
             p2 := pos add(rect width / 2, 0 - rect height / 2)
 
-            stairRect = GlSegment new(p1, p2)
-            if (debug) layer group add(stairRect)
+            if (debug) {
+                debugGfx := GlSegment new(p1, p2)
+                layer group add(debugGfx)
+            }
 
             body = CpBody newStatic()
             shape = level space addShape(CpSegmentShape new(body, cpv(p1), cpv(p2), 4))
@@ -117,15 +117,22 @@ Tile: class {
             }
             shape setCollisionType(1)
             level space addShape(shape)
+            if (ladder) {
+                shape setSensor(true)
+            }
         }
     }
 
     initProperties: func {
         if (def name startsWith?("stair")) {
             stair = true
-        } else if (def name startsWith?("ladder")) {
+        }
+        
+        if (def name startsWith?("ladder")) {
             ladder = true
-        } else if (def name startsWith?("through")) {
+        }
+       
+        if (def name startsWith?("through")) {
             through = true
         }
     }

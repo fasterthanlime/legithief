@@ -97,6 +97,7 @@ Level: class extends LevelBase {
                 loadNextLevel()
             } else if (titleScreen shown?()) {
                 titleScreen hide()
+                loadNextLevel()
             } else if (gameoverScreen shown?()) {
                 gameoverScreen hide()
                 plan current = 0
@@ -107,14 +108,13 @@ Level: class extends LevelBase {
 
     loadPlan: func (name: String) {
         plan = Plan new(name)
-        loadNextLevel()
     }
 
     loadNextLevel: func {
         levelEnd hide()
-        nextName := plan nextStage()
-        if (nextName) {
-            load(nextName)
+        next := plan nextStage()
+        if (next) {
+            load(next)
         } else {
             gameoverScreen show()
         }
@@ -123,6 +123,11 @@ Level: class extends LevelBase {
     load: func (=def) {
         LevelLoader new(def name, this)
         clock setDuration(def duration)
+
+        if (def voice) {
+            path := "assets/ogg/%s.ogg" format(def voice)
+            bleep playMusic(path, 0)
+        }
     }
 
     endLevel: func {

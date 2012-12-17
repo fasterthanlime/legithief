@@ -1,7 +1,10 @@
+- name: intro
+  desc: Welcome
+  voice: story
+  duration: 74
 - name: smallroom
   desc: Getting started
   duration: 30
-  voice: story
 - name: level2
   desc: Bigger
   duration: 120

@@ -1,0 +1,806 @@
+%YAML 1.1
+---
+hero:
+  pos:
+  - 56.00
+  - -837.50
+layers:
+  bg:
+  - type: prop
+    name: darkgreen
+    pos:
+    - -320.00
+    - -224.00
+  - type: prop
+    name: darkgreen
+    pos:
+    - -224.00
+    - -736.00
+  - type: prop
+    name: darkgreen
+    pos:
+    - 288.00
+    - -736.00
+  - type: prop
+    name: darkgreen
+    pos:
+    - 800.00
+    - -736.00
+  - type: prop
+    name: darkgreen
+    pos:
+    - 1312.00
+    - -736.00
+  - type: prop
+    name: darkgreen
+    pos:
+    - 1312.00
+    - -224.00
+  - type: prop
+    name: darkgreen
+    pos:
+    - 736.00
+    - -224.00
+  - type: prop
+    name: darkgreen
+    pos:
+    - -224.00
+    - 288.00
+  - type: prop
+    name: darkgreen
+    pos:
+    - 288.00
+    - 288.00
+  - type: prop
+    name: darkgreen
+    pos:
+    - 800.00
+    - 288.00
+  - type: prop
+    name: darkgreen
+    pos:
+    - 1312.00
+    - 288.00
+  - type: prop
+    name: darkgreen
+    pos:
+    - -736.00
+    - 288.00
+  - type: prop
+    name: darkgreen
+    pos:
+    - -736.00
+    - -224.00
+  - type: prop
+    name: darkgreen
+    pos:
+    - -1248.00
+    - 288.00
+  - type: prop
+    name: darkgreen
+    pos:
+    - -1248.00
+    - -224.00
+  - type: prop
+    name: darkgreen
+    pos:
+    - -736.00
+    - -736.00
+  - type: prop
+    name: darkgreen
+    pos:
+    - -1248.00
+    - -736.00
+  - type: prop
+    name: darkgreen
+    pos:
+    - 288.00
+    - 800.00
+  - type: prop
+    name: darkgreen
+    pos:
+    - -224.00
+    - 800.00
+  - type: prop
+    name: darkgreen
+    pos:
+    - 800.00
+    - 800.00
+  - type: prop
+    name: darkgreen
+    pos:
+    - 1312.00
+    - 800.00
+  - type: prop
+    name: darkgreen
+    pos:
+    - -736.00
+    - 800.00
+  - type: prop
+    name: darkgreen
+    pos:
+    - 288.00
+    - -1248.00
+  - type: prop
+    name: darkgreen
+    pos:
+    - -224.00
+    - -1248.00
+  - type: prop
+    name: darkgreen
+    pos:
+    - -736.00
+    - -1248.00
+  - type: prop
+    name: darkgreen
+    pos:
+    - 800.00
+    - -1248.00
+  - type: prop
+    name: darkgreen
+    pos:
+    - 1312.00
+    - -1248.00
+  - type: prop
+    name: darkgreen
+    pos:
+    - 288.00
+    - -1760.00
+  - type: prop
+    name: darkgreen
+    pos:
+    - -224.00
+    - -1760.00
+  - type: prop
+    name: darkgreen
+    pos:
+    - -736.00
+    - -1760.00
+  - type: prop
+    name: darkgreen
+    pos:
+    - 800.00
+    - -1760.00
+  - type: prop
+    name: darkgreen
+    pos:
+    - 1312.00
+    - -1760.00
+  - type: prop
+    name: instructions
+    pos:
+    - 192.00
+    - -224.00
+  hbg: []
+  h:
+  - type: tile
+    name: concrete
+    pos:
+    - -464.00
+    - 16.00
+  - type: tile
+    name: concrete
+    pos:
+    - -432.00
+    - 16.00
+  - type: tile
+    name: concrete
+    pos:
+    - -400.00
+    - 16.00
+  - type: tile
+    name: concrete
+    pos:
+    - -368.00
+    - 16.00
+  - type: tile
+    name: concrete
+    pos:
+    - -336.00
+    - 16.00
+  - type: tile
+    name: concrete
+    pos:
+    - -304.00
+    - 16.00
+  - type: tile
+    name: concrete
+    pos:
+    - -272.00
+    - 16.00
+  - type: tile
+    name: concrete
+    pos:
+    - -240.00
+    - 16.00
+  - type: tile
+    name: concrete
+    pos:
+    - -208.00
+    - 16.00
+  - type: tile
+    name: concrete
+    pos:
+    - -176.00
+    - 16.00
+  - type: tile
+    name: concrete
+    pos:
+    - -144.00
+    - 16.00
+  - type: tile
+    name: concrete
+    pos:
+    - -112.00
+    - 16.00
+  - type: tile
+    name: concrete
+    pos:
+    - -80.00
+    - 16.00
+  - type: tile
+    name: concrete
+    pos:
+    - -48.00
+    - 16.00
+  - type: tile
+    name: concrete
+    pos:
+    - -16.00
+    - 16.00
+  - type: tile
+    name: concrete
+    pos:
+    - 16.00
+    - 16.00
+  - type: tile
+    name: concrete
+    pos:
+    - 48.00
+    - 16.00
+  - type: tile
+    name: concrete
+    pos:
+    - 80.00
+    - 16.00
+  - type: tile
+    name: concrete
+    pos:
+    - 112.00
+    - 16.00
+  - type: tile
+    name: concrete
+    pos:
+    - 176.00
+    - 16.00
+  - type: tile
+    name: concrete
+    pos:
+    - 144.00
+    - 16.00
+  - type: tile
+    name: concrete
+    pos:
+    - 208.00
+    - 16.00
+  - type: tile
+    name: concrete
+    pos:
+    - 240.00
+    - 16.00
+  - type: tile
+    name: concrete
+    pos:
+    - 272.00
+    - 16.00
+  - type: tile
+    name: concrete
+    pos:
+    - 304.00
+    - 16.00
+  - type: tile
+    name: concrete
+    pos:
+    - 336.00
+    - 16.00
+  - type: tile
+    name: concrete
+    pos:
+    - 368.00
+    - 16.00
+  - type: tile
+    name: concrete
+    pos:
+    - 400.00
+    - 16.00
+  - type: tile
+    name: concrete
+    pos:
+    - 432.00
+    - 16.00
+  - type: tile
+    name: concrete
+    pos:
+    - 464.00
+    - 16.00
+  - type: tile
+    name: concrete
+    pos:
+    - 464.00
+    - -16.00
+  - type: tile
+    name: concrete
+    pos:
+    - 464.00
+    - -48.00
+  - type: tile
+    name: concrete
+    pos:
+    - 464.00
+    - -80.00
+  - type: tile
+    name: concrete
+    pos:
+    - 464.00
+    - -112.00
+  - type: tile
+    name: concrete
+    pos:
+    - 464.00
+    - -144.00
+  - type: tile
+    name: concrete
+    pos:
+    - 464.00
+    - -176.00
+  - type: tile
+    name: concrete
+    pos:
+    - 464.00
+    - -208.00
+  - type: tile
+    name: concrete
+    pos:
+    - 464.00
+    - -240.00
+  - type: tile
+    name: concrete
+    pos:
+    - 464.00
+    - -272.00
+  - type: tile
+    name: concrete
+    pos:
+    - 464.00
+    - -304.00
+  - type: tile
+    name: concrete
+    pos:
+    - 464.00
+    - -336.00
+  - type: tile
+    name: concrete
+    pos:
+    - 464.00
+    - -368.00
+  - type: tile
+    name: concrete
+    pos:
+    - 464.00
+    - -400.00
+  - type: tile
+    name: concrete
+    pos:
+    - 464.00
+    - -432.00
+  - type: tile
+    name: concrete
+    pos:
+    - -464.00
+    - -464.00
+  - type: tile
+    name: concrete
+    pos:
+    - -432.00
+    - -464.00
+  - type: tile
+    name: concrete
+    pos:
+    - -400.00
+    - -464.00
+  - type: tile
+    name: concrete
+    pos:
+    - -368.00
+    - -464.00
+  - type: tile
+    name: concrete
+    pos:
+    - -336.00
+    - -464.00
+  - type: tile
+    name: concrete
+    pos:
+    - -304.00
+    - -464.00
+  - type: tile
+    name: concrete
+    pos:
+    - -112.00
+    - -464.00
+  - type: tile
+    name: concrete
+    pos:
+    - -272.00
+    - -464.00
+  - type: tile
+    name: concrete
+    pos:
+    - -240.00
+    - -464.00
+  - type: tile
+    name: concrete
+    pos:
+    - -208.00
+    - -464.00
+  - type: tile
+    name: concrete
+    pos:
+    - -176.00
+    - -464.00
+  - type: tile
+    name: concrete
+    pos:
+    - -144.00
+    - -464.00
+  - type: tile
+    name: concrete
+    pos:
+    - -48.00
+    - -528.00
+  - type: tile
+    name: concrete
+    pos:
+    - -80.00
+    - -464.00
+  - type: tile
+    name: concrete
+    pos:
+    - -48.00
+    - -464.00
+  - type: tile
+    name: concrete
+    pos:
+    - -48.00
+    - -496.00
+  - type: tile
+    name: concrete
+    pos:
+    - 176.00
+    - -496.00
+  - type: tile
+    name: concrete
+    pos:
+    - 272.00
+    - -464.00
+  - type: tile
+    name: concrete
+    pos:
+    - 176.00
+    - -528.00
+  - type: tile
+    name: concrete
+    pos:
+    - -48.00
+    - -560.00
+  - type: tile
+    name: concrete
+    pos:
+    - 176.00
+    - -464.00
+  - type: tile
+    name: concrete
+    pos:
+    - 208.00
+    - -464.00
+  - type: tile
+    name: concrete
+    pos:
+    - 240.00
+    - -464.00
+  - type: tile
+    name: concrete
+    pos:
+    - 464.00
+    - -464.00
+  - type: tile
+    name: concrete
+    pos:
+    - 304.00
+    - -464.00
+  - type: tile
+    name: concrete
+    pos:
+    - 336.00
+    - -464.00
+  - type: tile
+    name: concrete
+    pos:
+    - 368.00
+    - -464.00
+  - type: tile
+    name: concrete
+    pos:
+    - 400.00
+    - -464.00
+  - type: tile
+    name: concrete
+    pos:
+    - 432.00
+    - -464.00
+  - type: tile
+    name: concrete
+    pos:
+    - -464.00
+    - -432.00
+  - type: tile
+    name: concrete
+    pos:
+    - -464.00
+    - -400.00
+  - type: tile
+    name: concrete
+    pos:
+    - -464.00
+    - -368.00
+  - type: tile
+    name: concrete
+    pos:
+    - -464.00
+    - -336.00
+  - type: tile
+    name: concrete
+    pos:
+    - -464.00
+    - -304.00
+  - type: tile
+    name: concrete
+    pos:
+    - -464.00
+    - -272.00
+  - type: tile
+    name: concrete
+    pos:
+    - -464.00
+    - -240.00
+  - type: tile
+    name: concrete
+    pos:
+    - -464.00
+    - -208.00
+  - type: tile
+    name: concrete
+    pos:
+    - -464.00
+    - -176.00
+  - type: tile
+    name: concrete
+    pos:
+    - -464.00
+    - -144.00
+  - type: tile
+    name: concrete
+    pos:
+    - -464.00
+    - -112.00
+  - type: tile
+    name: concrete
+    pos:
+    - -464.00
+    - -80.00
+  - type: tile
+    name: concrete
+    pos:
+    - -464.00
+    - -16.00
+  - type: tile
+    name: concrete
+    pos:
+    - -464.00
+    - -48.00
+  - type: tile
+    name: wood
+    pos:
+    - -48.00
+    - -16.00
+  - type: tile
+    name: wood
+    pos:
+    - -48.00
+    - -48.00
+  - type: tile
+    name: wood
+    pos:
+    - -48.00
+    - -80.00
+  - type: tile
+    name: wood
+    pos:
+    - -48.00
+    - -240.00
+  - type: tile
+    name: wood
+    pos:
+    - -48.00
+    - -272.00
+  - type: tile
+    name: wood
+    pos:
+    - -48.00
+    - -304.00
+  - type: tile
+    name: wood
+    pos:
+    - -48.00
+    - -336.00
+  - type: tile
+    name: wood
+    pos:
+    - -48.00
+    - -368.00
+  - type: tile
+    name: wood
+    pos:
+    - -48.00
+    - -400.00
+  - type: tile
+    name: wood
+    pos:
+    - -48.00
+    - -432.00
+  - type: tile
+    name: glass
+    pos:
+    - -48.00
+    - -208.00
+  - type: tile
+    name: glass
+    pos:
+    - -48.00
+    - -176.00
+  - type: tile
+    name: glass
+    pos:
+    - -48.00
+    - -144.00
+  - type: tile
+    name: glass
+    pos:
+    - -48.00
+    - -112.00
+  - type: tile
+    name: concrete
+    pos:
+    - 176.00
+    - -560.00
+  - type: tile
+    name: concrete
+    pos:
+    - 176.00
+    - -592.00
+  - type: tile
+    name: concrete
+    pos:
+    - -48.00
+    - -592.00
+  - type: tile
+    name: concrete
+    pos:
+    - 176.00
+    - -624.00
+  - type: tile
+    name: concrete
+    pos:
+    - -48.00
+    - -624.00
+  - type: tile
+    name: concrete
+    pos:
+    - 176.00
+    - -656.00
+  - type: tile
+    name: concrete
+    pos:
+    - -48.00
+    - -656.00
+  - type: tile
+    name: concrete
+    pos:
+    - 176.00
+    - -688.00
+  - type: tile
+    name: concrete
+    pos:
+    - -48.00
+    - -688.00
+  - type: tile
+    name: concrete
+    pos:
+    - 176.00
+    - -720.00
+  - type: tile
+    name: concrete
+    pos:
+    - -48.00
+    - -720.00
+  - type: tile
+    name: concrete
+    pos:
+    - 176.00
+    - -752.00
+  - type: tile
+    name: concrete
+    pos:
+    - -48.00
+    - -752.00
+  - type: tile
+    name: concrete
+    pos:
+    - 176.00
+    - -784.00
+  - type: tile
+    name: concrete
+    pos:
+    - -48.00
+    - -784.00
+  - type: tile
+    name: concrete
+    pos:
+    - 176.00
+    - -816.00
+  - type: tile
+    name: concrete
+    pos:
+    - -48.00
+    - -816.00
+  - type: tile
+    name: concrete
+    pos:
+    - 176.00
+    - -848.00
+  - type: tile
+    name: concrete
+    pos:
+    - -48.00
+    - -848.00
+  - type: tile
+    name: concrete
+    pos:
+    - 176.00
+    - -880.00
+  - type: tile
+    name: concrete
+    pos:
+    - -48.00
+    - -880.00
+  - type: tile
+    name: concrete
+    pos:
+    - 176.00
+    - -912.00
+  - type: tile
+    name: concrete
+    pos:
+    - -48.00
+    - -912.00
+  s:
+  - type: item
+    name: dragon
+    pos:
+    - -238.00
+    - -129.00
+  - type: item
+    name: doll
+    pos:
+    - 63.00
+    - -26.50

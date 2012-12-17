@@ -192,6 +192,7 @@ Hero: class {
         feetShape = level space addShape(CpBoxShape new(feet, feetSprite width, feetSprite height))
         feetShape setSensor(true)
         feetShape setCollisionType(7)
+        feetShape setLayers(PhysicLayers FURNITURE | PhysicLayers HERO_THROUGH)
 
         feetConstraint = level space addConstraint(CpConstraint newPivot(feet, body, feet getPos()))
         feetRotaryLimit = CpRotaryLimitJoint new(feet, level space getStaticBody(), 0, 0)
@@ -446,7 +447,7 @@ Hero: class {
         legGfx sync(leg)
         feetGfx sync(feet)
 
-        if (input isPressed(Keys W) || input isPressed(Keys S)) {
+        if (input isPressed(Keys W) || input isPressed(Keys S) || onLadder) {
             shape setLayers(PhysicLayers HERO | PhysicLayers HERO_TILES | PhysicLayers HERO_STAIRS)
         } else {
             shape setLayers(PhysicLayers HERO | PhysicLayers HERO_TILES | PhysicLayers HERO_THROUGH)
@@ -467,9 +468,9 @@ Hero: class {
                     gripPos y = gripPos y + ladderSpeed
                     ladderGrip setPos(gripPos)
 
-                    if (touchesGround?) {
-                        ladderDisable()
-                    }
+                    //if (touchesGround?) {
+                    //    ladderDisable()
+                    //}
                 }
                 
                 if (input isPressed(Keys A)) {

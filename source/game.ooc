@@ -6,11 +6,16 @@ use deadlogger
 import deadlogger/[Log, Logger, Handler, Formatter]
 
 import legithief/[level, hero, item, tile, prop]
+import legithief/[utils]
 
 import os/[Time, Env]
+import structs/[ArrayList, HashMap]
 
 use bleep
 import bleep
+
+use yaml
+import yaml/[Parser, Document]
 
 main: func (argc: Int, argv: CString*) {
 
@@ -21,21 +26,25 @@ main: func (argc: Int, argv: CString*) {
 
 App: class {
 
-    log: Logger
+    logger: Logger
     dye: DyeContext
     input: Input
     running := true
 
     level: Level
     bleep: Bleep
+
+    config := HashMap<String, String> new()
     
     init: func {
         initLogging()
 
+        loadConfig()
+
         // SDL suxxorz, no function but an env var? Wtf?
         Env set("SDL_VIDEO_CENTERED", "1")
 
-        log info("Creating game engine")
+        logger info("Creating game engine")
 
         dye = DyeContext new(1280, 720, "legithief", false)
         dye setClearColor(Color white())
@@ -50,10 +59,26 @@ App: class {
         Prop loadDefinitions()
 
         level = Level new(dye, input, bleep)
+        level load(config get("level"))
+    }
+
+    loadConfig: func {
+        parser := YAMLParser new()
+        path := "config/config.yml"
+        logger info("Loading config from %s" format(path))
+        parser setInputFile(path)
+
+        doc := Document new()
+        parser parseAll(doc)
+
+        dict := doc getRootNode() toMap()
+        dict each(|k, v|
+            config put(k, v toScalar())
+        )
     }
 
     run: func {
-        log info("Starting engine")
+        logger info("Starting engine")
 
         while (running) {
             timeStep := 1000.0 / 60.0
@@ -61,7 +86,7 @@ App: class {
             update()
         }
 
-        log info("Engine exited")
+        logger info("Engine exited")
 
         bleep destroy()
         dye quit()
@@ -82,7 +107,7 @@ App: class {
         console setFormatter(formatter)
 
         Log root attachHandler(console)
-        log = Log getLogger("legithief")
+        logger = Log getLogger("legithief")
     }
 
     setupEvents: func {

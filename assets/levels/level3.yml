@@ -427,7 +427,7 @@ layers:
     name: ladder-6
     pos:
     - -512.00
-    - -224.00
+    - -320.00
   - type: tile
     name: concrete
     pos:

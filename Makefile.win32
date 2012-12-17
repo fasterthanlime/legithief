@@ -3,6 +3,9 @@ OOCFLAGS?=-v -I/g/Dev/sdl_mixer/include -L/g/Dev/sdl_mixer/lib/x86 -I/usr/local/
 all:
 	rock $(OOCFLAGS)
 
+editor:
+	rock $(OOCFLAGS) --sourcepath=source editor
+
 clean:
 	rm -rf .libs rock_tmp
 

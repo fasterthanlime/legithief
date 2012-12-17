@@ -2,8 +2,8 @@
 ---
 hero:
   pos:
-  - -314.00
-  - -67.50
+  - -346.00
+  - -35.50
 layers:
   bg:
   - type: prop
@@ -61,107 +61,42 @@ layers:
   - type: tile
     name: brick
     pos:
-    - -32.00
-    - 96.00
-  - type: tile
-    name: brick
-    pos:
-    - 0.00
-    - 128.00
-  - type: tile
-    name: brick
-    pos:
-    - 64.00
-    - 192.00
-  - type: tile
-    name: brick
-    pos:
-    - 32.00
-    - 160.00
-  - type: tile
-    name: brick
-    pos:
-    - 96.00
-    - 224.00
-  - type: tile
-    name: brick
-    pos:
-    - 320.00
-    - 224.00
-  - type: tile
-    name: brick
-    pos:
-    - 352.00
-    - 192.00
-  - type: tile
-    name: brick
-    pos:
     - 448.00
-    - 96.00
-  - type: tile
-    name: brick
-    pos:
-    - 480.00
     - 64.00
   - type: tile
     name: brick
     pos:
-    - 416.00
-    - 128.00
-  - type: tile
-    name: brick
-    pos:
-    - 384.00
-    - 160.00
-  - type: tile
-    name: brick
-    pos:
-    - 544.00
+    - 512.00
     - 64.00
   - type: tile
     name: brick
     pos:
-    - 608.00
+    - 576.00
     - 64.00
   - type: tile
     name: brick
     pos:
-    - 672.00
+    - 640.00
     - 64.00
   - type: tile
     name: brick
     pos:
-    - 736.00
-    - 64.00
-  - type: tile
-    name: brick
-    pos:
-    - 800.00
-    - 64.00
-  - type: tile
-    name: brick
-    pos:
-    - 864.00
-    - 64.00
-  - type: tile
-    name: brick
-    pos:
-    - 928.00
+    - 704.00
     - 0.00
   - type: tile
     name: brick
     pos:
-    - 928.00
+    - 704.00
     - 64.00
   - type: tile
     name: brick
     pos:
-    - 928.00
+    - 704.00
     - -64.00
   - type: tile
     name: brick
     pos:
-    - 928.00
+    - 704.00
     - -128.00
   - type: tile
     name: brick
@@ -253,14 +188,154 @@ layers:
     pos:
     - 576.00
     - 448.00
+  - type: tile
+    name: stair-45
+    pos:
+    - 96.00
+    - -96.00
+  - type: tile
+    name: brick
+    pos:
+    - 0.00
+    - 64.00
+  - type: tile
+    name: brick
+    pos:
+    - 64.00
+    - 64.00
+  - type: tile
+    name: brick
+    pos:
+    - 128.00
+    - 64.00
+  - type: tile
+    name: brick
+    pos:
+    - 192.00
+    - 64.00
+  - type: tile
+    name: brick
+    pos:
+    - 256.00
+    - 64.00
+  - type: tile
+    name: brick
+    pos:
+    - 320.00
+    - 64.00
+  - type: tile
+    name: brick
+    pos:
+    - 384.00
+    - 64.00
+  - type: tile
+    name: brick
+    pos:
+    - 256.00
+    - -192.00
+  - type: tile
+    name: brick
+    pos:
+    - 320.00
+    - -192.00
+  - type: tile
+    name: brick
+    pos:
+    - 384.00
+    - -192.00
+  - type: tile
+    name: brick
+    pos:
+    - 448.00
+    - -192.00
+  - type: tile
+    name: brick
+    pos:
+    - 512.00
+    - -192.00
+  - type: tile
+    name: brick
+    pos:
+    - 576.00
+    - -192.00
+  - type: tile
+    name: brick
+    pos:
+    - 640.00
+    - -192.00
+  - type: tile
+    name: brick
+    pos:
+    - -512.00
+    - 64.00
+  - type: tile
+    name: brick
+    pos:
+    - 704.00
+    - -192.00
+  - type: tile
+    name: brick
+    pos:
+    - -512.00
+    - 0.00
+  - type: tile
+    name: brick
+    pos:
+    - -512.00
+    - -64.00
+  - type: tile
+    name: brick
+    pos:
+    - -512.00
+    - -128.00
+  - type: tile
+    name: brick
+    pos:
+    - -512.00
+    - -192.00
+  - type: tile
+    name: brick
+    pos:
+    - -448.00
+    - -192.00
+  - type: tile
+    name: brick
+    pos:
+    - -384.00
+    - -192.00
+  - type: tile
+    name: brick
+    pos:
+    - -320.00
+    - -192.00
+  - type: tile
+    name: brick
+    pos:
+    - -256.00
+    - -192.00
+  - type: tile
+    name: brick
+    pos:
+    - -192.00
+    - -192.00
+  - type: tile
+    name: brick
+    pos:
+    - -128.00
+    - -192.00
+  - type: tile
+    name: brick
+    pos:
+    - -64.00
+    - -192.00
   s:
   - type: item
     name: duck
     pos:
-    - -83.00
-    - -29.00
+    - -147.00
+    - 3.00
   - type: item
     name: muskox
     pos:
-    - 537.00
+    - 409.00
     - -32.00

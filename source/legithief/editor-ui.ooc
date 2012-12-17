@@ -197,7 +197,6 @@ UI: class {
         cross := GlCross new()
         layerGroup add(cross)
 
-
         hLayer = TileLayer new(this, "house")
         layers add(hLayer)
 

@@ -243,6 +243,20 @@ TileLayer: class extends EditorLayer {
 
     init: super func
 
+    insert: func {
+        ui push(InputDialog new(ui, "Enter tile name", |itemName|
+            def := Tile getDefinition(itemName)
+            if (def) {
+                logger debug("Spawning tile %s" format(itemName))
+                obj := TileObject new(def)
+                obj pos set!(ui handPos())
+                add(obj)
+            } else {
+                logger warn("Unknown tile type %s" format(itemName))
+            }
+        ))
+    }
+
 }
 
 EditorObject: class {
@@ -390,6 +404,43 @@ PropObject: class extends EditorObject {
         rect := GlRectangle new()
         rect size set!(sprite size)
         rect color = PROP_COLOR
+        rect filled = false
+        rect lineWidth = 2.0
+        outlineGroup add(rect)
+    }
+
+    contains?: func (hand: Vec2) -> Bool {
+        contains?(sprite size, hand)
+    }
+
+    snap!: func (gridSize: Int) {
+        snap!(sprite size, gridSize)
+    }
+
+    clone: func -> This {
+        c := new(def)
+        c pos set!(pos)
+        c
+    }
+
+}
+
+TileObject: class extends EditorObject {
+
+    TILE_COLOR := static Color new(160, 160, 0)
+
+    sprite: GlSprite
+    def: TileDef
+
+    init: func (=def) {
+        super()
+
+        sprite = GlSprite new(def image)
+        group add(sprite)
+
+        rect := GlRectangle new()
+        rect size set!(sprite size)
+        rect color = TILE_COLOR
         rect filled = false
         rect lineWidth = 2.0
         outlineGroup add(rect)

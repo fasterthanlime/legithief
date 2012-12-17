@@ -9,6 +9,9 @@ import chipmunk
 import math
 import structs/[ArrayList]
 
+use bleep
+import bleep
+
 Hero: class {
 
     debug := static true
@@ -24,7 +27,7 @@ Hero: class {
     shape: CpShape
 
     walkSpeed := 150
-    runSpeed := 300
+    runSpeed := 220
     jumpVel := 240
 
     lookDir := 1
@@ -63,6 +66,9 @@ Hero: class {
     collisionHandlers := ArrayList<CpCollisionHandler> new()
     moving := false
 
+    /* audio */
+    walkSample: Sample
+
     init: func (=layer) {
         level = layer level
 
@@ -98,7 +104,6 @@ Hero: class {
         level space addConstraint(CpRotaryLimitJoint new(body, level space getStaticBody(), 0, 0))
         shape setLayers(PhysicLayers HERO | PhysicLayers HERO_TILES)
         shape setGroup(PhysicGroups HERO)
-        shape setCollisionType(7)
 
         // initialize bat
         batGfx = GlGroup new()
@@ -171,6 +176,7 @@ Hero: class {
 
         feetShape = level space addShape(CpBoxShape new(feet, feetSprite width, feetSprite height))
         feetShape setSensor(true)
+        feetShape setCollisionType(7)
 
         feetConstraint = level space addConstraint(CpConstraint newPivot(feet, body, feet getPos()))
         feetRotaryLimit = CpRotaryLimitJoint new(feet, level space getStaticBody(), 0, 0)
@@ -181,11 +187,17 @@ Hero: class {
         level space addCollisionHandler(1, 7, heroGround)
         collisionHandlers add(heroGround)
 
+        initSamples()
+
         initEvents()
     }
 
     setPos: func (pos: Vec2) {
         body setPos(cpv(pos))
+    }
+
+    initSamples: func {
+        walkSample = level bleep loadSample("assets/wav/walk.wav")
     }
 
     initEvents: func {
@@ -275,19 +287,32 @@ Hero: class {
         }
     }
 
+    setMoving: func (value: Bool) {
+        if (moving != value) {
+            if (value) {
+                walkSample play(-1)
+            } else {
+                walkSample stop()
+            }
+        }
+
+        moving = value
+    }
+
     update: func {
         gfx sync(body)
         batGfx sync(bat)
         legGfx sync(leg)
         feetGfx sync(feet)
 
-        moving = false
         if (input isPressed(Keys D)) {
             direction = 1
-            moving = true
+            setMoving(true)
         } else if (input isPressed(Keys A)) {
             direction = -1
-            moving = true
+            setMoving(true)
+        } else {
+            setMoving(false)
         }
 
         if (moving) {

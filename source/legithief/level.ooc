@@ -12,6 +12,9 @@ import chipmunk
 use deadlogger
 import deadlogger/[Log, Logger]
 
+use bleep
+import bleep
+
 PhysicLayers: class {
     HERO := static 1
     FURNITURE := static 2
@@ -48,7 +51,9 @@ Level: class extends LevelBase {
     layerGroup: GlGroup
     hudGroup: GlGroup
 
-    init: func (=dye, globalInput: Input) {
+    bleep: Bleep
+
+    init: func (=dye, globalInput: Input, =bleep) {
         input = globalInput sub()
         
         initGfx()

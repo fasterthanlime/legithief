@@ -49,9 +49,7 @@ App: class {
         Tile loadDefinitions()
         Prop loadDefinitions()
 
-        level = Level new(dye, input)
-
-        bleep play("assets/ogg/story.ogg")
+        level = Level new(dye, input, bleep)
     }
 
     run: func {
@@ -65,6 +63,7 @@ App: class {
 
         log info("Engine exited")
 
+        bleep destroy()
         dye quit()
     }
 

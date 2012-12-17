@@ -2481,26 +2481,6 @@ layers:
   - type: tile
     name: concrete
     pos:
-    - -720.00
-    - -240.00
-  - type: tile
-    name: concrete
-    pos:
-    - -720.00
-    - -272.00
-  - type: tile
-    name: concrete
-    pos:
-    - -720.00
-    - -304.00
-  - type: tile
-    name: concrete
-    pos:
-    - -720.00
-    - -336.00
-  - type: tile
-    name: concrete
-    pos:
     - 432.00
     - 48.00
   - type: tile
@@ -2548,11 +2528,6 @@ layers:
     pos:
     - 560.00
     - 48.00
-  - type: tile
-    name: concrete
-    pos:
-    - -720.00
-    - -368.00
   - type: tile
     name: concrete
     pos:

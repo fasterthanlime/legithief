@@ -97,6 +97,10 @@ Level: class extends LevelBase {
                 loadNextLevel()
             } else if (titleScreen shown?()) {
                 titleScreen hide()
+            } else if (gameoverScreen shown?()) {
+                gameoverScreen hide()
+                plan current = 0
+                loadNextLevel()
             }
         )
     }
@@ -111,6 +115,7 @@ Level: class extends LevelBase {
         if (nextName) {
             load(nextName)
         } else {
+            levelEnd hide()
             gameoverScreen show()
         }
     }
@@ -133,14 +138,14 @@ Level: class extends LevelBase {
             levelEnd update()
         }
 
+        clock update(levelRunning?())
+
         if (levelRunning?()) {
             timeStep: CpFloat = 1.0 / 60.0 // goal = 60 FPS
             space step(timeStep * 0.5)
             space step(timeStep * 0.5)
             space step(timeStep * 0.5)
             space step(timeStep * 0.5)
-
-            clock update()
 
             hero update()
             for (layer in layers) {
@@ -361,7 +366,12 @@ Clock: class {
         ended = false
     }
 
-    update: func {
+    update: func (running: Bool) {
+        if (!running) {
+            prev = Time runTime()
+            return
+        }
+
         curr := Time runTime()
         if (time > 0) {
             time -= (curr - prev)

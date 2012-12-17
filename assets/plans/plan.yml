@@ -1,0 +1,4 @@
+- name: smallroom
+  desc: Getting started
+  duration: 2
+  voice: story

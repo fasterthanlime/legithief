@@ -4,6 +4,7 @@ import legithief/[level-loader]
 
 import structs/ArrayList
 import os/Time
+import math/Random
 
 import dye/[core, input, sprite, font, primitives, math]
 
@@ -15,6 +16,9 @@ import deadlogger/[Log, Logger]
 
 use bleep
 import bleep
+
+use yaml
+import yaml/[Parser, Document]
 
 PhysicLayers: class {
     HERO := static 1
@@ -59,6 +63,11 @@ Level: class extends LevelBase {
 
     bleep: Bleep
 
+    /* Plan */
+    plan: Plan
+    def: StageDef
+    levelEnd: LevelEnd
+
     /* clock */
     clock: Clock
 
@@ -72,24 +81,39 @@ Level: class extends LevelBase {
 
         hero = Hero new(sLayer)
         clock = Clock new(this)
+        levelEnd = LevelEnd new(this)
     }
 
-    load: func (name: String) {
-        LevelLoader new(name, this)
+    loadPlan: func (name: String) {
+        plan = Plan new(name)
+        load(plan nextStage())
+    }
+
+    load: func (=def) {
+        LevelLoader new(def name, this)
+        clock setDuration(def duration)
+    }
+
+    endLevel: func {
+        levelEnd show()
     }
 
     update: func {
-        timeStep: CpFloat = 1.0 / 60.0 // goal = 60 FPS
-        space step(timeStep * 0.5)
-        space step(timeStep * 0.5)
-        space step(timeStep * 0.5)
-        space step(timeStep * 0.5)
+        if (levelEnd shown?()) {
+            levelEnd update()
+        } else {
+            timeStep: CpFloat = 1.0 / 60.0 // goal = 60 FPS
+            space step(timeStep * 0.5)
+            space step(timeStep * 0.5)
+            space step(timeStep * 0.5)
+            space step(timeStep * 0.5)
 
-        clock update()
+            clock update()
 
-        hero update()
-        for (layer in layers) {
-            layer update()
+            hero update()
+            for (layer in layers) {
+                layer update()
+            }
         }
         
         mouseOffset := dye center sub(input getMousePos()) mul(1.2)
@@ -99,6 +123,8 @@ Level: class extends LevelBase {
 
     reset: func {
         logger warn("level: should reset more thoroughly")
+        clock setDuration(0)
+        levelEnd score = 38_000
     }
 
     initGfx: func {
@@ -269,10 +295,12 @@ Layer: class extends LayerBase {
 Clock: class {
 
     level: Level
+
     gfx: GlGroup
     text: GlText
 
-    time := 30_000
+    time := 0
+    ended := false
     prev: UInt
 
     init: func (=level) {
@@ -293,12 +321,22 @@ Clock: class {
         prev = Time runTime()
     }
 
+    setDuration: func (seconds: Int) {
+        time = seconds * 1_000
+        ended = false
+    }
+
     update: func {
         curr := Time runTime()
         if (time > 0) {
             time -= (curr - prev)
         } else {
             time = 0
+        }
+
+        if (time < 999 && !ended) {
+            ended = true
+            level endLevel()
         }
         prev = curr
 
@@ -307,4 +345,150 @@ Clock: class {
     }
 
 }
+
+LevelEnd: class {
+
+    level: Level
+
+    gfx: GlGroup
+    text: GlText
+    scoreText: GlText
+    tauntText: GlText
+    clickText: GlText
+
+    taunts := ArrayList<String> new()
+
+    score, scoreDisplayed: Int
+
+    scoreIncrement := 287
+
+    init: func (=level) {
+        initTaunts()
+
+        gfx = GlGroup new()
+
+        bg := GlSprite new("assets/png/level-end.png")
+        gfx add(bg)
+
+        textGroup := GlGroup new()
+        textGroup pos set!(-230, 30)
+        gfx add(textGroup)
+
+        text = GlText new(Level fontPath, "Level cleared")
+        text color set!(0, 0, 0)
+        text pos set!(0, -160)
+        textGroup add(text)
+
+        tauntText = GlText new(Level fontPath, "")
+        tauntText color set!(0, 0, 0)
+        tauntText pos set!(0, -110)
+        textGroup add(tauntText)
+
+        scoreText = GlText new(Level fontPath, "Score: 0")
+        scoreText color set!(0, 0, 0)
+        scoreText pos set!(0, 80)
+        textGroup add(scoreText)
+
+        clickText = GlText new(Level fontPath, "Click to continue")
+        clickText color set!(130, 0, 0)
+        clickText pos set!(0, 130)
+        textGroup add(clickText)
+
+        gfx center!(level dye)
+        gfx visible = false
+
+        level hudGroup add(gfx)
+    }
+   
+    initTaunts: func {
+        taunts add("A stunning performance.")
+        taunts add("A-fucking-mazing. Not.")
+        taunts add("Words fail me.")
+        taunts add("I think I just peed a little.")
+        taunts add("Someday you won't be totally worthless.")
+    }
+
+    shown?: func -> Bool {
+        gfx visible
+    }
+
+    show: func {
+        gfx visible = true
+        scoreDisplayed = 0
+        tauntText value = Random choice(taunts)
+    }
+
+    hide: func {
+        gfx visible = false
+    }
+
+    update: func {
+        if (gfx visible) {
+            if (scoreDisplayed < score) {
+                scoreDisplayed += scoreIncrement
+                if (scoreDisplayed > score) {
+                    scoreDisplayed = score
+                }
+            }
+        }
+
+        scoreText value = "Score: %d" format(scoreDisplayed)
+    }
+
+}
+
+Plan: class {
+
+    logger := static Log getLogger("plan")
+
+    stages := ArrayList<StageDef> new()
+    current := 0
+    name: String
+
+    init: func (=name) {
+        path := "assets/plans/%s.yml" format(name)
+        logger info("Loading plan from %s" format(path))
+        root := parseYaml(path)
+        seq := root toList()
+        for (node in seq) {
+            stages add(StageDef new(node))
+        }
+    }
+
+    nextStage: func -> StageDef {
+        if (current >= stages size) return null
+        
+        def := stages get(current)
+        current += 1
+        def
+    }
+
+}
+
+StageDef: class {
+
+    name: String
+    desc: String
+    voice: String
+    duration: Int
+
+    init: func (node: DocumentNode) {
+        map := node toMap()
+
+        map each(|k, v|
+            match k {
+                case "name" =>
+                    name = v toScalar()
+                case "desc" =>
+                    desc = v toScalar()
+                case "voice" =>
+                    voice = v toScalar()
+                case "duration" =>
+                    duration = v toInt()
+            }
+        )
+    }
+
+}
+
 

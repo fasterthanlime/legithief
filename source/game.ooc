@@ -59,19 +59,14 @@ App: class {
         Prop loadDefinitions()
 
         level = Level new(dye, input, bleep)
-        level load(config get("level"))
+        level loadPlan(config get("plan"))
     }
 
     loadConfig: func {
-        parser := YAMLParser new()
         path := "config/config.yml"
         logger info("Loading config from %s" format(path))
-        parser setInputFile(path)
-
-        doc := Document new()
-        parser parseAll(doc)
-
-        dict := doc getRootNode() toMap()
+        root := parseYaml(path) 
+        dict := root toMap()
         dict each(|k, v|
             config put(k, v toScalar())
         )

@@ -46,6 +46,13 @@ Hero: class {
     legRotaryLimit: CpRotaryLimitJoint
     legCounter := 0
 
+    /* feet sensor */
+    feet: CpBody
+    feetShape: CpShape
+    feetGfx: GlGroup
+    feetConstraint: CpConstraint
+    feetRotaryLimit: CpRotaryLimitJoint
+
     /* animations */
     bottom, top: GlAnimSet
 
@@ -146,6 +153,28 @@ Hero: class {
         legConstraint = level space addConstraint(CpConstraint newPivot(leg, body, cpv(pos)))
         legRotaryLimit = CpRotaryLimitJoint new(leg, level space getStaticBody(), PI - 0.1, PI + 0.1)
         level space addConstraint(legRotaryLimit)
+
+        // initialize feet
+        feetGfx = GlGroup new()
+        feetSprite := GlRectangle new()
+        feetSprite size set!(sprite width * xFactor, 16)
+        feetSprite color set!(80, 220, 200)
+        if (!debug) feetSprite visible = false
+
+        feetGfx add(feetSprite)
+        layer group add(feetGfx)
+
+        feetMass := 20.0
+        feetMoment := cpMomentForBox(feetMass, feetSprite width, feetSprite height)
+        feet = level space addBody(CpBody new(feetMass, feetMoment))
+        feet setPos(cpv(pos add(0, sprite height / 2)))
+
+        feetShape = level space addShape(CpBoxShape new(feet, feetSprite width, feetSprite height))
+        feetShape setSensor(true)
+
+        feetConstraint = level space addConstraint(CpConstraint newPivot(feet, body, feet getPos()))
+        feetRotaryLimit = CpRotaryLimitJoint new(feet, level space getStaticBody(), 0, 0)
+        level space addConstraint(feetRotaryLimit)
 
         // hero <-> ground collision detection for jump
         heroGround := HeroGroundCollision new(this)
@@ -250,6 +279,7 @@ Hero: class {
         gfx sync(body)
         batGfx sync(bat)
         legGfx sync(leg)
+        feetGfx sync(feet)
 
         moving = false
         if (input isPressed(Keys D)) {

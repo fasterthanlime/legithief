@@ -110,7 +110,6 @@ Item: class {
 
     loadDefinitions: static func {
         for (name in listDefs("assets/items")) {
-            "Defining item %s" printfln(name)
             Item define(name)
         }
     }

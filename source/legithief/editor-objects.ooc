@@ -1,5 +1,5 @@
 
-import legithief/[level, utils, item]
+import legithief/[level, utils, item, tile, prop]
 
 import dye/[core, input, sprite, font, math, primitives]
 
@@ -219,20 +219,20 @@ ItemLayer: class extends EditorLayer {
     
 }
 
-ImageLayer: class extends EditorLayer {
+PropLayer: class extends EditorLayer {
 
     init: super func
 
     insert: func {
         ui push(InputDialog new(ui, "Enter item name", |imageName|
-            def := ImageDef get(imageName)
+            def := Prop getDefinition(imageName)
             if (def) {
-                logger debug("Spawning image %s" format(imageName))
-                obj := ImageObject new(def)
+                logger debug("Spawning prop %s" format(imageName))
+                obj := PropObject new(def)
                 obj pos set!(ui handPos())
                 add(obj)
             } else {
-                logger warn("Unknown image item %s" format(imageName))
+                logger warn("Unknown prop item %s" format(imageName))
             }
         ))
     }
@@ -374,41 +374,22 @@ ItemObject: class extends EditorObject {
 
 }
 
-ImageDef: class {
+PropObject: class extends EditorObject {
 
-    name: String
-    path: String
-
-    init: func (=name, =path)
-
-    get: static func (name: String) -> This {
-        path := "assets/png/%s.png" format(name)
-        sprite := GlSprite new(path)
-        if (sprite width == 0 || sprite height == 0) {
-            return null
-        }
-
-        new(name, path)
-    }
-
-}
-
-ImageObject: class extends EditorObject {
-
-    ITEM_COLOR := static Color new(0, 0, 160)
+    PROP_COLOR := static Color new(0, 160, 160)
 
     sprite: GlSprite
-    def: ImageDef
+    def: PropDef
 
     init: func (=def) {
         super()
 
-        sprite = GlSprite new(def path)
+        sprite = GlSprite new(def image)
         group add(sprite)
 
         rect := GlRectangle new()
         rect size set!(sprite size)
-        rect color = ITEM_COLOR
+        rect color = PROP_COLOR
         rect filled = false
         rect lineWidth = 2.0
         outlineGroup add(rect)

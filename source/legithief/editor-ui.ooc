@@ -1,5 +1,5 @@
 
-import legithief/[level, utils, item]
+import legithief/[level, utils, item, tile, prop]
 import legithief/[editor-objects]
 
 import dye/[core, input, sprite, font, math, primitives]
@@ -145,6 +145,8 @@ UI: class {
     /* Constructor */
     init: func (=dye, globalInput: Input) {
         Item loadDefinitions()
+        Tile loadDefinitions()
+        Prop loadDefinitions()
 
         group = GlGroup new()
         dye add(group)
@@ -181,10 +183,10 @@ UI: class {
     initLayers: func {
         clearLayers()
 
-        bgLayer = ImageLayer new(this, "background")
+        bgLayer = PropLayer new(this, "background")
         layers add(bgLayer)
 
-        hbgLayer = ImageLayer new(this, "house background")
+        hbgLayer = PropLayer new(this, "house background")
         layers add(hbgLayer)
 
         grid := GlGrid new()

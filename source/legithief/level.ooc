@@ -1,5 +1,5 @@
 
-import legithief/[utils, hero, item, tile, prop, flame]
+import legithief/[utils, hero, item, tile, prop, flame, molotov]
 import legithief/[level-loader]
 
 import structs/ArrayList
@@ -85,7 +85,7 @@ Level: class extends LevelBase {
             layer update()
         }
         
-        mouseOffset := dye center sub(input getMousePos()) mul(0.8)
+        mouseOffset := dye center sub(input getMousePos()) mul(1.2)
         target := dye center sub(hero gfx pos) add(mouseOffset)
         group pos interpolate!(target, 0.12)
     }
@@ -163,6 +163,7 @@ Layer: class extends LayerBase {
     props := ArrayList<Prop> new()
 
     flames := ArrayList<Flame> new()
+    molotovs := ArrayList<Molotov> new()
 
     level: Level
 
@@ -184,6 +185,7 @@ Layer: class extends LayerBase {
         }
 
         updateFlames()
+        updateMolotovs()
     }
 
     updateFlames: func {
@@ -193,6 +195,17 @@ Layer: class extends LayerBase {
             if (!flame update()) {
                 flame destroy()
                 flameIter remove()
+            }
+        }
+    }
+
+    updateMolotovs: func {
+        molotovIter := molotovs iterator()
+        while (molotovIter hasNext?()) {
+            molotov := molotovIter next()
+            if (!molotov update()) {
+                molotov destroy()
+                molotovIter remove()
             }
         }
     }
@@ -240,6 +253,12 @@ Layer: class extends LayerBase {
         flame := Flame new(this, pos)
         flames add(flame)
         flame
+    }
+
+    spawnMolotov: func (pos: Vec2) -> Molotov {
+        molotov := Molotov new(this, pos)
+        molotovs add(molotov)
+        molotov
     }
 
 }

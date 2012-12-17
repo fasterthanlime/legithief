@@ -55,7 +55,7 @@ Flame: class {
 
         shape = level space addShape(CpBoxShape new(body, 32, 64))
         shape setGroup(PhysicGroups FIRE)
-        shape setFriction(0.0)
+        shape setFriction(0.8)
         shape setCollisionType(12)
         shape setLayers(PhysicLayers FIRE)
 
@@ -86,7 +86,7 @@ Flame: class {
 
         gfx sync(body)
 
-        true // TODO: extinguish at some point
+        true
     }
 
     destroy: func {

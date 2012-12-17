@@ -521,43 +521,8 @@ layers:
   - type: tile
     name: wood
     pos:
-    - -304.00
     - -400.00
-  - type: tile
-    name: wood
-    pos:
-    - -272.00
-    - -400.00
-  - type: tile
-    name: wood
-    pos:
-    - -240.00
-    - -400.00
-  - type: tile
-    name: wood
-    pos:
-    - -208.00
-    - -400.00
-  - type: tile
-    name: wood
-    pos:
-    - -176.00
-    - -400.00
-  - type: tile
-    name: wood
-    pos:
-    - -144.00
-    - -400.00
-  - type: tile
-    name: wood
-    pos:
-    - -112.00
-    - -400.00
-  - type: tile
-    name: wood
-    pos:
-    - -80.00
-    - -400.00
+    - -16.00
   - type: tile
     name: brick
     pos:
@@ -583,19 +548,129 @@ layers:
     pos:
     - 352.00
     - 0.00
+  - type: tile
+    name: ladder-6
+    pos:
+    - -256.00
+    - -480.00
+  - type: tile
+    name: wood
+    pos:
+    - -368.00
+    - -16.00
+  - type: tile
+    name: wood
+    pos:
+    - -336.00
+    - -16.00
+  - type: tile
+    name: wood
+    pos:
+    - -304.00
+    - -16.00
+  - type: tile
+    name: wood
+    pos:
+    - -272.00
+    - -16.00
+  - type: tile
+    name: wood
+    pos:
+    - -240.00
+    - -16.00
+  - type: tile
+    name: wood
+    pos:
+    - -208.00
+    - -16.00
+  - type: tile
+    name: wood
+    pos:
+    - -176.00
+    - -16.00
+  - type: tile
+    name: wood
+    pos:
+    - -144.00
+    - -16.00
+  - type: tile
+    name: wood
+    pos:
+    - -112.00
+    - -16.00
+  - type: tile
+    name: wood
+    pos:
+    - -80.00
+    - -16.00
+  - type: tile
+    name: wood
+    pos:
+    - -48.00
+    - -16.00
+  - type: tile
+    name: wood
+    pos:
+    - -16.00
+    - -16.00
+  - type: tile
+    name: wood
+    pos:
+    - 16.00
+    - -16.00
+  - type: tile
+    name: through
+    pos:
+    - -304.00
+    - -400.00
+  - type: tile
+    name: through
+    pos:
+    - -272.00
+    - -400.00
+  - type: tile
+    name: through
+    pos:
+    - -240.00
+    - -400.00
+  - type: tile
+    name: through
+    pos:
+    - -208.00
+    - -400.00
+  - type: tile
+    name: through
+    pos:
+    - -176.00
+    - -400.00
+  - type: tile
+    name: through
+    pos:
+    - -144.00
+    - -400.00
+  - type: tile
+    name: through
+    pos:
+    - -112.00
+    - -400.00
+  - type: tile
+    name: through
+    pos:
+    - -80.00
+    - -400.00
   s:
   - type: item
     name: tv-support
     pos:
     - -62.00
-    - -28.00
+    - -60.00
   - type: item
     name: tv
     pos:
-    - -64.50
-    - -91.00
+    - -62.50
+    - -126.00
   - type: item
     name: muskox
     pos:
     - -295.00
-    - -64.00
+    - -96.00

@@ -80,7 +80,7 @@ Hero: class {
     gruntSamples := ArrayList<Sample> new()
 
     /* weapon contour */
-    handContour, batContour, lighterContour: WeaponContour
+    handContour, batContour, molotovContour: WeaponContour
     weapon: WeaponContour
 
     init: func (=layer) {
@@ -235,9 +235,9 @@ Hero: class {
         batContour gfx pos set!(100, 0)
         contourGroup add(batContour gfx)
 
-        lighterContour = WeaponContour new("lighter")
-        lighterContour gfx pos set!(200, 0)
-        contourGroup add(lighterContour gfx)
+        molotovContour = WeaponContour new("molotov")
+        molotovContour gfx pos set!(200, 0)
+        contourGroup add(molotovContour gfx)
 
         contourGroup pos set!(70, 70)
         level hudGroup add(contourGroup)
@@ -257,7 +257,7 @@ Hero: class {
                 batCounter = -1
             case handContour =>
                 "Should let go of stuff" println()
-            case lighterContour =>
+            case molotovContour =>
                 // nothing to do
         }
 
@@ -269,8 +269,8 @@ Hero: class {
                 top play("walking-bat")
             case handContour =>
                 top play("walking")
-            case lighterContour =>
-                // need walking-lighter animation!
+            case molotovContour =>
+                // need walking-molotov animation!
                 top play("walking")
         }
     }
@@ -285,11 +285,12 @@ Hero: class {
                 }
             case handContour =>
                 "Should grab stuff" println()
-            case lighterContour =>
+            case molotovContour =>
                 firePos := vec2(body getPos())
-                firePos x = firePos x + (lookDir * sprite width * 0.5)
-                flame := level fLayer spawnFlame(firePos)
-                flame setVel(vec2(lookDir * 30))
+                mouseOffset := level dye center sub(level input getMousePos()) normalized() mul(-600.0)
+                molotov := level fLayer spawnMolotov(firePos)
+                molotov setVel(mouseOffset)
+                molotov setAngVel(lookDir * 12)
         }
     }
 
@@ -313,7 +314,7 @@ Hero: class {
         )
 
         input onKeyPress(Keys _3, ||
-            setWeapon(lighterContour)
+            setWeapon(molotovContour)
         )
 
         // short jump

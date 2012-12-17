@@ -100,6 +100,7 @@ Item: class {
         shape setFriction(def friction)
 
         shape setLayers(PhysicLayers FURNITURE)
+        shape setCollisionType(4)
     }
 
     update: func {

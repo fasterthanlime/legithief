@@ -82,11 +82,26 @@ Level: class extends LevelBase {
         hero = Hero new(sLayer)
         clock = Clock new(this)
         levelEnd = LevelEnd new(this)
+
+        initEvents()
+    }
+
+    initEvents: func {
+        input onMousePress(Buttons LEFT, ||
+            if (levelEnd shown?()) {
+                loadNextLevel()
+            }
+        )
     }
 
     loadPlan: func (name: String) {
         plan = Plan new(name)
-        load(plan nextStage())
+        loadNextLevel()
+    }
+
+    loadNextLevel: func {
+        nextName := plan nextStage()
+        load(nextName)
     }
 
     load: func (=def) {
@@ -98,10 +113,16 @@ Level: class extends LevelBase {
         levelEnd show()
     }
 
+    levelRunning?: func -> Bool {
+        !(levelEnd shown?() || gameEnd shown?())
+    }
+
     update: func {
         if (levelEnd shown?()) {
             levelEnd update()
-        } else {
+        }
+
+        if (levelRunning?()) {
             timeStep: CpFloat = 1.0 / 60.0 // goal = 60 FPS
             space step(timeStep * 0.5)
             space step(timeStep * 0.5)
@@ -360,7 +381,7 @@ LevelEnd: class {
 
     score, scoreDisplayed: Int
 
-    scoreIncrement := 287
+    scoreIncrement := 579
 
     init: func (=level) {
         initTaunts()

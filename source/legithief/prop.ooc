@@ -49,6 +49,10 @@ Prop: class {
         layer group add(rect)
     }
 
+    destroy: func {
+        layer group remove(rect)
+    }
+
     /* loading */
 
     loadDefinitions: static func {

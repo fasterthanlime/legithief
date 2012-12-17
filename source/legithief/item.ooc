@@ -103,6 +103,12 @@ Item: class {
         shape setCollisionType(4)
     }
 
+    destroy: func {
+        layer group remove(gfx)
+        level space removeBody(body)
+        level space removeShape(shape)
+    }
+
     update: func {
         gfx sync(body)
     }

@@ -127,6 +127,11 @@ Tile: class {
         }
     }
 
+    destroy: func {
+        layer group remove(gfx)
+        level space removeShape(shape)
+    }
+
     initProperties: func {
         if (def name startsWith?("stair")) {
             stair = true

@@ -1,4 +1,7 @@
 - name: smallroom
   desc: Getting started
-  duration: 5
+  duration: 30
   voice: story
+- name: level2
+  desc: Bigger
+  duration: 120

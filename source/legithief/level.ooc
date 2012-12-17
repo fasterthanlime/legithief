@@ -111,11 +111,11 @@ Level: class extends LevelBase {
     }
 
     loadNextLevel: func {
+        levelEnd hide()
         nextName := plan nextStage()
         if (nextName) {
             load(nextName)
         } else {
-            levelEnd hide()
             gameoverScreen show()
         }
     }
@@ -160,6 +160,11 @@ Level: class extends LevelBase {
 
     reset: func {
         logger warn("level: should reset more thoroughly")
+
+        for (layer in layers) {
+            layer reset()
+        }
+
         clock setDuration(0)
         levelEnd score = 38_000
     }
@@ -242,6 +247,23 @@ Layer: class extends LayerBase {
     init: func (=level, =name) {
         group = GlGroup new()
         logger = Log getLogger("layer: %s" format(name))
+    }
+
+    reset: func {
+        for (i in items) {
+            i destroy()
+        }
+        items clear()
+
+        for (t in tiles) {
+            t destroy()
+        }
+        tiles clear()
+
+        for (p in props) {
+            p destroy()
+        }
+        props clear()
     }
 
     update: func {

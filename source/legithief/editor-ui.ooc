@@ -132,7 +132,7 @@ UI: class {
     dialogStack := Stack<Dialog> new()
 
     /* Layers */
-    heroLayer: EditorLayer
+    bgLayer, hbgLayer, hLayer, sLayer: EditorLayer
 
     layers := ArrayList<EditorLayer> new()
     activeLayer: EditorLayer
@@ -140,6 +140,7 @@ UI: class {
     /* HUD */
     camPosText: GlText
     mousePosText: GlText
+    activeLayerText: GlText
 
     /* Constructor */
     init: func (=dye, globalInput: Input) {
@@ -152,14 +153,6 @@ UI: class {
         group add(worldGroup)
 
         {
-            grid := GlGrid new()
-            grid width = gridSize
-            grid color set!(200, 200, 200)
-            worldGroup add(grid)
-
-            cross := GlCross new()
-            worldGroup add(cross)
-
             layerGroup = GlGroup new()
             worldGroup add(layerGroup)
         }
@@ -175,8 +168,8 @@ UI: class {
         initEvents()
         prevMousePos set!(input getMousePos())
 
-        initLayers()
         initHud()
+        initLayers()
     }
 
     clearLayers: func {
@@ -188,14 +181,32 @@ UI: class {
     initLayers: func {
         clearLayers()
 
-        heroLayer = EditorLayer new(this)
-        layers add(heroLayer)
+        bgLayer = ImageLayer new(this, "background")
+        layers add(bgLayer)
 
-        activeLayer = heroLayer
+        hbgLayer = ImageLayer new(this, "house background")
+        layers add(hbgLayer)
+
+        grid := GlGrid new()
+        grid width = gridSize
+        grid color set!(200, 200, 200)
+        layerGroup add(grid)
+
+        cross := GlCross new()
+        layerGroup add(cross)
+
+
+        hLayer = TileLayer new(this, "house")
+        layers add(hLayer)
+
+        sLayer = ItemLayer new(this, "sprites")
+        layers add(sLayer)
 
         hero := HeroObject new()
         hero pos set!(0, 0)
-        heroLayer add(hero)
+        sLayer add(hero)
+
+        setActiveLayer(sLayer)
     }
 
     initHud: func {
@@ -205,8 +216,13 @@ UI: class {
 
         mousePosText = GlText new(fontPath, "camera pos")
         mousePosText color set!(Color black())
-        mousePosText pos add!(250, 0)
+        mousePosText pos add!(300, 0)
         hudGroup add(mousePosText)
+
+        activeLayerText = GlText new(fontPath, "active layer: sprites")
+        activeLayerText color set!(Color black())
+        activeLayerText pos set!(100, dye height - 100)
+        hudGroup add(activeLayerText)
     }
 
     updateHud: func {
@@ -281,6 +297,14 @@ UI: class {
         prevMousePos set!(mousePos)
     }
 
+    setActiveLayer: func (layer: EditorLayer) {
+        if (activeLayer) {
+            activeLayer clearSelection()
+        }
+        activeLayer = layer
+        activeLayerText value = "active layer: %s" format(activeLayer name)
+    }
+
     initEvents: func {
         input onKeyPress(|kev|
             if (!root?) return
@@ -307,19 +331,19 @@ UI: class {
                 case Keys KP8 => 
                     camPos sub!(0, camNudge)
                 case Keys I =>
-                    push(InputDialog new(this, "Enter item name", |itemName|
-                        def := Item getDefinition(itemName)
-                        if (def) {
-                            logger debug("Spawning item %s" format(itemName))
-                            obj := ItemObject new(def)
-                            obj pos set!(handPos())
-                            activeLayer add(obj)
-                        } else {
-                            logger warn("Unknown item type %s" format(itemName))
-                        }
-                    ))
+                    if (activeLayer) {
+                        activeLayer insert()
+                    }
                 case Keys BACKSPACE || Keys DEL =>
                     if (activeLayer) activeLayer deleteSelected()
+                case Keys _1 =>
+                    setActiveLayer(bgLayer)
+                case Keys _2 =>
+                    setActiveLayer(hbgLayer)
+                case Keys _3 =>
+                    setActiveLayer(hLayer)
+                case Keys _4 =>
+                    setActiveLayer(sLayer)
             }
         )
 

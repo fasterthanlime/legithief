@@ -51,7 +51,7 @@ Level: class extends LevelBase {
         initLayers()
 
         hero = Hero new(sLayer)
-        load("level1")
+        load("level2")
     }
 
     load: func (name: String) {

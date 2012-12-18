@@ -26,6 +26,16 @@ layers:
     pos:
     - 896.00
     - -508.00
+  - type: prop
+    name: sky
+    pos:
+    - 2528.00
+    - -508.00
+  - type: prop
+    name: sky
+    pos:
+    - 2240.00
+    - -1532.00
   hbg:
   - type: prop
     name: tile2
@@ -877,12 +887,7 @@ layers:
     name: wall1
     pos:
     - 400.00
-    - -256.00
-  - type: tile
-    name: wall1
-    pos:
-    - 400.00
-    - -448.00
+    - -512.00
   - type: tile
     name: wall1
     pos:
@@ -1041,18 +1046,13 @@ layers:
   - type: tile
     name: concrete
     pos:
-    - -432.00
+    - -464.00
     - -656.00
   - type: tile
     name: concrete
     pos:
     - -400.00
     - -656.00
-  - type: tile
-    name: wall1
-    pos:
-    - -464.00
-    - -576.00
   - type: tile
     name: wall1
     pos:
@@ -1218,6 +1218,316 @@ layers:
     pos:
     - 224.00
     - -768.00
+  - type: tile
+    name: ground
+    pos:
+    - 544.00
+    - -96.00
+  - type: tile
+    name: ground
+    pos:
+    - 800.00
+    - -96.00
+  - type: tile
+    name: ground
+    pos:
+    - 1056.00
+    - -96.00
+  - type: tile
+    name: wall1
+    pos:
+    - 1168.00
+    - -320.00
+  - type: tile
+    name: wall1
+    pos:
+    - 1168.00
+    - -512.00
+  - type: tile
+    name: ground
+    pos:
+    - 1312.00
+    - -96.00
+  - type: tile
+    name: ground
+    pos:
+    - 1568.00
+    - -96.00
+  - type: tile
+    name: ground
+    pos:
+    - 1824.00
+    - -96.00
+  - type: tile
+    name: underground
+    pos:
+    - 1824.00
+    - 160.00
+  - type: tile
+    name: underground
+    pos:
+    - 1824.00
+    - 416.00
+  - type: tile
+    name: underground
+    pos:
+    - 1568.00
+    - 416.00
+  - type: tile
+    name: underground
+    pos:
+    - 1568.00
+    - 160.00
+  - type: tile
+    name: underground
+    pos:
+    - 1312.00
+    - 160.00
+  - type: tile
+    name: underground
+    pos:
+    - 1056.00
+    - 160.00
+  - type: tile
+    name: underground
+    pos:
+    - 1056.00
+    - 416.00
+  - type: tile
+    name: underground
+    pos:
+    - 1312.00
+    - 416.00
+  - type: tile
+    name: underground
+    pos:
+    - 800.00
+    - 160.00
+  - type: tile
+    name: underground
+    pos:
+    - 544.00
+    - 160.00
+  - type: tile
+    name: underground
+    pos:
+    - 544.00
+    - 416.00
+  - type: tile
+    name: underground
+    pos:
+    - 800.00
+    - 416.00
+  - type: tile
+    name: underground
+    pos:
+    - 288.00
+    - 160.00
+  - type: tile
+    name: underground
+    pos:
+    - 32.00
+    - 160.00
+  - type: tile
+    name: underground
+    pos:
+    - 32.00
+    - 416.00
+  - type: tile
+    name: underground
+    pos:
+    - 288.00
+    - 416.00
+  - type: tile
+    name: underground
+    pos:
+    - -224.00
+    - 160.00
+  - type: tile
+    name: underground
+    pos:
+    - -480.00
+    - 160.00
+  - type: tile
+    name: underground
+    pos:
+    - -480.00
+    - 416.00
+  - type: tile
+    name: underground
+    pos:
+    - -224.00
+    - 416.00
+  - type: tile
+    name: underground
+    pos:
+    - -736.00
+    - 160.00
+  - type: tile
+    name: underground
+    pos:
+    - -992.00
+    - 160.00
+  - type: tile
+    name: underground
+    pos:
+    - -992.00
+    - 416.00
+  - type: tile
+    name: underground
+    pos:
+    - -736.00
+    - 416.00
+  - type: tile
+    name: underground
+    pos:
+    - -1248.00
+    - 288.00
+  - type: tile
+    name: underground
+    pos:
+    - -1504.00
+    - 288.00
+  - type: tile
+    name: underground
+    pos:
+    - -1504.00
+    - 544.00
+  - type: tile
+    name: underground
+    pos:
+    - -1248.00
+    - 544.00
+  - type: tile
+    name: ground
+    pos:
+    - -1248.00
+    - 32.00
+  - type: tile
+    name: ground
+    pos:
+    - -992.00
+    - 32.00
+  - type: tile
+    name: ground
+    pos:
+    - -736.00
+    - 32.00
+  - type: tile
+    name: ground
+    pos:
+    - -608.00
+    - 32.00
+  - type: tile
+    name: ground
+    pos:
+    - -1504.00
+    - 32.00
+  - type: tile
+    name: wall1
+    pos:
+    - -1104.00
+    - -192.00
+  - type: tile
+    name: wall1
+    pos:
+    - -1104.00
+    - -384.00
+  - type: tile
+    name: ground
+    pos:
+    - -1760.00
+    - 32.00
+  - type: tile
+    name: underground
+    pos:
+    - -1760.00
+    - 288.00
+  - type: tile
+    name: underground
+    pos:
+    - -1760.00
+    - 544.00
+  - type: tile
+    name: ground
+    pos:
+    - -2016.00
+    - 32.00
+  - type: tile
+    name: underground
+    pos:
+    - -2016.00
+    - 288.00
+  - type: tile
+    name: underground
+    pos:
+    - -2016.00
+    - 544.00
+  - type: tile
+    name: wall1
+    pos:
+    - 400.00
+    - -128.00
+  - type: tile
+    name: glass
+    pos:
+    - 400.00
+    - -400.00
+  - type: tile
+    name: glass
+    pos:
+    - 400.00
+    - -368.00
+  - type: tile
+    name: glass
+    pos:
+    - 400.00
+    - -336.00
+  - type: tile
+    name: glass
+    pos:
+    - 400.00
+    - -304.00
+  - type: tile
+    name: glass
+    pos:
+    - 400.00
+    - -272.00
+  - type: tile
+    name: glass
+    pos:
+    - 400.00
+    - -240.00
+  - type: tile
+    name: concrete
+    pos:
+    - -432.00
+    - -656.00
+  - type: tile
+    name: concrete
+    pos:
+    - -464.00
+    - -624.00
+  - type: tile
+    name: glass
+    pos:
+    - -464.00
+    - -592.00
+  - type: tile
+    name: glass
+    pos:
+    - -464.00
+    - -560.00
+  - type: tile
+    name: glass
+    pos:
+    - -464.00
+    - -528.00
+  - type: tile
+    name: glass
+    pos:
+    - -464.00
+    - -496.00
   s:
   - type: item
     name: tv

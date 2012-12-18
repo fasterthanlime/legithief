@@ -40,6 +40,7 @@ Tile: class {
 
     /* */
     handler: static CpCollisionHandler
+    handler2: static CpCollisionHandler
     reverse := static HashMap<CpShape, Tile> new()
 
     /* properties */
@@ -49,6 +50,8 @@ Tile: class {
 
     broken := false
     smashSamples := static ArrayList<Sample> new()
+    lit := false
+    litEnergy := 100
 
     init: func (=layer, =def, pos: Vec2) {
         initProperties()
@@ -95,6 +98,9 @@ Tile: class {
                 layers |= PhysicLayers HERO_TILES
             }
 
+            if (!def fireproof) {
+                layers |= PhysicLayers FIRE
+            }
             if (def breakable) {
                 layers |= PhysicLayers BREAKING
             }
@@ -114,6 +120,14 @@ Tile: class {
                 if (!handler) {
                     handler = SmashCollision new(level)
                     level space addCollisionHandler(1, 21, handler)
+                }
+            }
+
+            if (!def fireproof) {
+                reverse put(shape, this)
+                if (!handler2) {
+                    handler2 = FireCollision new(level)
+                    level space addCollisionHandler(1, 12, handler2)
                 }
             }
         }
@@ -156,6 +170,24 @@ Tile: class {
             return false
         }
 
+        if (!def fireproof && lit) {
+            if (litEnergy > 0) {
+                litEnergy -= 1
+
+                if (litEnergy == 70) {
+                    flamePos := vec2(body getPos())
+                    flamePos y += Random randInt(-32, 32)
+
+                    for (i in -3..3) {
+                        realPos := flamePos add(i * 16, 0)
+                        layer spawnFlame(realPos)
+                    }
+                }
+            } else {
+                return false
+            }
+        }
+
         true
     }
 
@@ -176,6 +208,41 @@ Tile: class {
     }
 
 }
+
+FireCollision: class extends CpCollisionHandler {
+
+    level: Level
+    samples := ArrayList<Sample> new()
+
+    lastNoiseCounter := Time runTime()
+
+    init: func (=level) {
+        for (i in 1..1) {
+            samples add(level bleep loadSample("assets/wav/thud%d.wav" format(i)))
+        }
+    }
+
+    begin: func (arbiter: CpArbiter, space: CpSpace) {
+        shape1, shape2: CpShape
+        arbiter getShapes(shape1&, shape2&)
+
+        tile: Tile = null
+        tile = Tile reverse get(shape1)
+        if (tile) {
+            tile lit = true
+
+            // Something we can't break? make a sound anyway
+            current := Time runTime()
+
+            if (current - lastNoiseCounter > 600) {
+                //Random choice(samples) play(0)
+            }
+            lastNoiseCounter = current
+        }
+    }
+
+}
+
 
 SmashCollision: class extends CpCollisionHandler {
 
@@ -221,6 +288,7 @@ TileDef: class {
     friction := 1.0
     inert := true
     breakable := false
+    fireproof := true
 
     init: func (=name) {
         doc := parseYaml("assets/tiles/%s.yml" format(name))
@@ -240,6 +308,8 @@ TileDef: class {
                     inert = v toBool()
                 case "breakable" =>
                     breakable = v toBool()
+                case "fireproof" =>
+                    fireproof = v toBool()
                 case =>
                     Tile logger warn("Unhandled tile key %s" format(k))
             }

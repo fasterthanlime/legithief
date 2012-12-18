@@ -391,6 +391,14 @@ Layer: class extends LayerBase {
     }
 
     spawnFlame: func (pos: Vec2) -> Flame {
+        // too many flames!
+        if (flames size > 120) {
+            f := flames removeAt(0)
+            f setPos(pos)
+            flames add(f)
+            return f
+        }
+
         flame := Flame new(this, pos)
         flames add(flame)
         flame

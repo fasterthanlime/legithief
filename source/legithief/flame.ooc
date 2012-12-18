@@ -63,6 +63,10 @@ Flame: class {
         level space addConstraint(rotaryLimit)
     }
 
+    setPos: func (pos: Vec2) {
+        body setPos(cpv(pos))
+    }
+
     setVel: func (vel: Vec2) {
         body setVel(cpv(vel))
     }

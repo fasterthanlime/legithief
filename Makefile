@@ -1,4 +1,4 @@
-OOCFLAGS?=-v
+OOCFLAGS?=-v -g
 
 all:
 	rock $(OOCFLAGS)

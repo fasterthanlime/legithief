@@ -1,16 +1,14 @@
-- name: smallroom
-  desc: Getting started
-  duration: 30
+- name: intro
+  desc: Welcome
+  voice: story
+  duration: 74
 - name: house1
   desc: First house
   duration: 30
 - name: house2
   desc: Second house
-  duration: 30
-- name: level2
-  desc: Bigger
-  duration: 120
-- name: intro
-  desc: Welcome
-  voice: story
-  duration: 74
+  duration: 45
+- name: building1
+  desc: Into the building
+  duration: 200
+

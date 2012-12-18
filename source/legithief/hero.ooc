@@ -675,6 +675,11 @@ Hero: class {
         groundTouchCounter > 0
     } }
 
+    reset: func {
+        body setVel(cpv(0, 0))
+        setWeapon(handContour)
+    }
+
 }
 
 HeroGroundCollision: class extends CpCollisionHandler {

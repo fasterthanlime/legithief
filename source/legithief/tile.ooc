@@ -98,9 +98,6 @@ Tile: class {
                 layers |= PhysicLayers HERO_TILES
             }
 
-            if (!def fireproof) {
-                layers |= PhysicLayers FIRE
-            }
             if (def breakable) {
                 layers |= PhysicLayers BREAKING
             }
@@ -222,7 +219,7 @@ FireCollision: class extends CpCollisionHandler {
         }
     }
 
-    begin: func (arbiter: CpArbiter, space: CpSpace) {
+    begin: func (arbiter: CpArbiter, space: CpSpace) -> Bool {
         shape1, shape2: CpShape
         arbiter getShapes(shape1&, shape2&)
 
@@ -239,6 +236,8 @@ FireCollision: class extends CpCollisionHandler {
             }
             lastNoiseCounter = current
         }
+
+        true
     }
 
 }
@@ -257,7 +256,7 @@ SmashCollision: class extends CpCollisionHandler {
         }
     }
 
-    begin: func (arbiter: CpArbiter, space: CpSpace) {
+    begin: func (arbiter: CpArbiter, space: CpSpace) -> Bool {
         shape1, shape2: CpShape
         arbiter getShapes(shape1&, shape2&)
 
@@ -274,6 +273,8 @@ SmashCollision: class extends CpCollisionHandler {
             }
             lastNoiseCounter = current
         }
+
+        true
     }
 
 }

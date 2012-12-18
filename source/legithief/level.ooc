@@ -180,8 +180,6 @@ Level: class extends LevelBase {
     }
 
     reset: func {
-        logger warn("level: should reset more thoroughly")
-
         for (layer in layers) {
             layer reset()
         }
@@ -191,6 +189,7 @@ Level: class extends LevelBase {
         bleep stopMusic()
         score = 0
         scoreDisplay setScore(0)
+        hero reset()
     }
 
     initGfx: func {

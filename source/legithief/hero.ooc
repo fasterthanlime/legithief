@@ -27,7 +27,7 @@ Hero: class {
     shape: CpShape
 
     walkSpeed := 150
-    runSpeed := 220
+    runSpeed := 260
     jumpVel := 240
 
     lookDir := 1
@@ -192,7 +192,7 @@ Hero: class {
         feetShape = level space addShape(CpBoxShape new(feet, feetSprite width, feetSprite height))
         feetShape setSensor(true)
         feetShape setCollisionType(7)
-        feetShape setLayers(PhysicLayers FURNITURE | PhysicLayers HERO_THROUGH)
+        feetShape setLayers(PhysicLayers FURNITURE | PhysicLayers HERO_THROUGH | PhysicLayers HERO_STAIRS)
 
         feetConstraint = level space addConstraint(CpConstraint newPivot(feet, body, feet getPos()))
         feetRotaryLimit = CpRotaryLimitJoint new(feet, level space getStaticBody(), 0, 0)
@@ -271,8 +271,7 @@ Hero: class {
             case handContour =>
                 top play("walking")
             case molotovContour =>
-                // need walking-molotov animation!
-                top play("walking")
+                top play("walking-molotov")
         }
     }
 
@@ -306,6 +305,14 @@ Hero: class {
     }
 
     initEvents: func {
+        input onKeyPress(Keys SHIFT, ||
+            walkAnim()
+        )
+
+        input onKeyRelease(Keys SHIFT, ||
+            walkAnim()
+        )
+
         input onKeyPress(Keys _1, ||
             setWeapon(handContour)
         )
@@ -355,8 +362,12 @@ Hero: class {
         bottom = GlAnimSet new()
         bwalk := bottom load("hero", "bottom", "walking", 12)
         bwalk frameDuration = 4
+        bwalk offset y = 4
+
         brun := bottom load("hero", "bottom", "running", 11)
         brun frameDuration = 3
+        bclimb := bottom load("hero", "bottom", "climbing", 6)
+        bclimb frameDuration = 5
 
         pfoot := bottom load("hero", "bottom", "punching-foot", 8)
         pfoot offset x = 8
@@ -371,9 +382,16 @@ Hero: class {
         trun := top load("hero", "top", "running", 11)
         trun frameDuration = 3
 
+        tclimb := top load("hero", "top", "climbing", 6)
+        tclimb frameDuration = 5
+
         twbat := top load("hero", "top", "walking-bat", 3)
         twbat offset x = 20
         twbat frameDuration = 6
+
+        twmol := top load("hero", "top", "walking-molotov", 3)
+        twmol offset x = 0
+        twmol frameDuration = 6
 
         tpbat := top load("hero", "top", "punching-bat", 8)
         tpbat offset x = 38
@@ -397,8 +415,16 @@ Hero: class {
                 bottom update(ticks)
             }
         } else {
-            // if we're not walking, update the animation anyway
-            bottom update()
+            if (onLadder) {
+                if (input isPressed(Keys W)) {
+                    bottom update(1)
+                } else if (input isPressed(Keys S)) {
+                    bottom update(-1)
+                }
+            } else {
+                // if we're not walking, update the animation anyway
+                bottom update()
+            }
         }
 
         topWalking := top currentName startsWith?("walking")
@@ -408,8 +434,16 @@ Hero: class {
                 top update(ticks)
             }
         } else {
-            // if we're not walking, update the animation anyway
-            top update()
+            if (onLadder) {
+                if (input isPressed(Keys W)) {
+                    top update(1)
+                } else if (input isPressed(Keys S)) {
+                    top update(-1)
+                }
+            } else {
+                // if we're not walking, update the animation anyway
+                top update()
+            }
         }
     }
 
@@ -439,6 +473,7 @@ Hero: class {
     ladderDisable: func {
         onLadder = false
         level space removeConstraint(ladderConstraint)
+        walkAnim()
     }
 
     update: func {
@@ -449,6 +484,7 @@ Hero: class {
 
         if (input isPressed(Keys W) || input isPressed(Keys S) || onLadder) {
             shape setLayers(PhysicLayers HERO | PhysicLayers HERO_TILES | PhysicLayers HERO_STAIRS)
+            walkAnim()
         } else {
             shape setLayers(PhysicLayers HERO | PhysicLayers HERO_TILES | PhysicLayers HERO_THROUGH)
         }
@@ -532,6 +568,10 @@ Hero: class {
         if (batCounter > 0) {
             batCounter -= 1
             throwBat()
+
+            if (batCounter == 0) {
+                walkAnim()
+            }
         } else {
             holdBat()
         }
@@ -539,6 +579,10 @@ Hero: class {
         if (legCounter > 0) {
             legCounter -= 1
             throwLeg()
+
+            if (legCounter == 0) {
+                walkAnim()
+            }
         } else {
             holdLeg()
         }
@@ -570,8 +614,22 @@ Hero: class {
         bottom xSwap = (lookDir < 0)
     }
 
-    walkAnim: func (animSet: GlAnimSet) {
-        animSet play(running? ? "running" : "walking")
+    walkAnim: func {
+        if (onLadder) {
+            top play("climbing")
+            bottom play("climbing")
+        } else {
+            topAnim := match weapon {
+                case handContour =>
+                    "walking"
+                case batContour =>
+                    "walking-bat"
+                case molotovContour =>
+                    "walking-molotov"
+            }
+            top play(topAnim)
+            bottom play(running? ? "running" : "walking")
+        }
     }
 
     /* Leg operations */
@@ -585,7 +643,6 @@ Hero: class {
     }
 
     holdLeg: func {
-        walkAnim(bottom)
         base := PI - lookDir * (PI / 4)
         legRotaryLimit setMin(base - 0.1)
         legRotaryLimit setMax(base + 0.1)
@@ -603,10 +660,6 @@ Hero: class {
     }
 
     holdBat: func {
-        match weapon {
-            case batContour =>
-                top play("walking-bat")
-        }
         base := 0 + lookDir * (PI / 4)
         batRotaryLimit setMin(base - 0.1)
         batRotaryLimit setMax(base + 0.1)

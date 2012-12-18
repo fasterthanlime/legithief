@@ -104,6 +104,12 @@ Level: class extends LevelBase {
                 loadNextLevel()
             }
         )
+
+        input onKeyPress(Keys F1, ||
+            if (levelRunning?()) {
+                loadNextLevel()
+            }
+        )
     }
 
     loadPlan: func (name: String) {
@@ -172,6 +178,7 @@ Level: class extends LevelBase {
 
         clock setDuration(0)
         levelEnd score = 38_000
+        bleep stopMusic()
     }
 
     initGfx: func {

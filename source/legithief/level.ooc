@@ -28,6 +28,7 @@ PhysicLayers: class {
     HERO_STAIRS := static 16
     HERO_THROUGH := static 32
     FIRE := static 64
+    BREAKING := static 128
 }
 
 PhysicGroups: class {
@@ -287,19 +288,45 @@ Layer: class extends LayerBase {
             p destroy()
         }
         props clear()
+
+        for (f in flames) {
+            f destroy()
+        }
+        flames clear()
+
+        for (m in molotovs) {
+            m destroy()
+        }
+        molotovs clear()
     }
 
     update: func {
-        for (i in items) {
-            i update()
-        }
-
-        for (t in tiles) {
-            t update()
-        }
-
+        updateItems()
+        updateTiles()
         updateFlames()
         updateMolotovs()
+    }
+
+    updateTiles: func {
+        tileIter := tiles iterator()
+        while (tileIter hasNext?()) {
+            tile := tileIter next()
+            if (!tile update()) {
+                tile destroy()
+                tileIter remove()
+            }
+        }
+    }
+
+    updateItems: func {
+        itemIter := items iterator()
+        while (itemIter hasNext?()) {
+            item := itemIter next()
+            if (!item update()) {
+                item destroy()
+                itemIter remove()
+            }
+        }
     }
 
     updateFlames: func {

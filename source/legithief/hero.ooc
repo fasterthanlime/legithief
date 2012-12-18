@@ -142,6 +142,7 @@ Hero: class {
         batShape = level space addShape(CpBoxShape new(bat, batWidth, batHeight))
         batShape setGroup(PhysicGroups HERO)
         batShape setFriction(0.99)
+        batShape setCollisionType(21)
 
         batConstraint = level space addConstraint(CpConstraint newPivot(bat, body, cpv(pos)))
         batRotaryLimit = CpRotaryLimitJoint new(bat, level space getStaticBody(), -0.1, 0.1)
@@ -656,7 +657,7 @@ Hero: class {
         base := 0 - lookDir * (3 * PI / 4)
         batRotaryLimit setMin(base - 0.1)
         batRotaryLimit setMax(base + 0.1)
-        batShape setLayers(PhysicLayers HERO | PhysicLayers FURNITURE)
+        batShape setLayers(PhysicLayers HERO | PhysicLayers FURNITURE | PhysicLayers BREAKING)
     }
 
     holdBat: func {

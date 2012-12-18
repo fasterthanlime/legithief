@@ -40,7 +40,6 @@ ItemDef: class {
     fire := 0.0
     mass := 10.0
     friction := 0.5
-    breakable := false
     shape := BoxShape new()
 
     init: func (=name) {
@@ -110,8 +109,10 @@ Item: class {
         level space removeShape(shape)
     }
 
-    update: func {
+    update: func -> Bool {
         gfx sync(body)
+
+        true
     }
 
     /* loading */

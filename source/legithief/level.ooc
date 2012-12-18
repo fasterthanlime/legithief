@@ -60,7 +60,7 @@ Level: class extends LevelBase {
     layers := ArrayList<Layer> new()
 
     layerGroup: GlGroup
-    hudGroup, overHudGroup: GlGroup
+    hudGroup, overHudGroup, bottomHudGroup: GlGroup
 
     bleep: Bleep
 
@@ -209,6 +209,18 @@ Level: class extends LevelBase {
     }
 
     buildHud: func {
+        bottomHudGroup = GlGroup new()
+        bottomHudGroup pos set!(dye width / 2, dye height - 24)
+
+        bottomHud := GlSprite new("assets/png/bottom-ui.png")
+        bottomHudGroup add(bottomHud)
+
+        hudGroup add(bottomHudGroup)
+
+        skipText := GlText new(Level fontPath, "Bored? You can skip the level with F1")
+        skipText color set!(20, 20, 20)
+        skipText pos set!(20 - dye width / 2, 10)
+        bottomHudGroup add(skipText)
     }
 
     initPhysx: func {
@@ -421,17 +433,12 @@ Score: class {
     init: func (=level) {
         gfx = GlGroup new()
 
-        bg := GlSprite new("assets/png/score.png")
-        gfx add(bg)
-
         text = GlText new(Level fontPath, "0")
         text color set!(0, 0, 0)
-        text pos set!(-70, 10)
+        text pos set!(0, 10)
         gfx add(text)
 
-        gfx pos set!(level dye width - 300, 80)
-
-        level hudGroup add(gfx)
+        level bottomHudGroup add(gfx)
     }
 
     setScore: func (score: Int) {
@@ -455,17 +462,12 @@ Clock: class {
     init: func (=level) {
         gfx = GlGroup new()
 
-        bg := GlSprite new("assets/png/clock.png")
-        gfx add(bg)
-
-        text = GlText new(Level fontPath, "00:30")
+        text = GlText new(Level fontPath, "Time left: 00:00")
         text color set!(0, 0, 0)
-        text pos set!(-27, 10)
+        text pos set!(level dye width / 2 - 180, 10)
         gfx add(text)
 
-        gfx pos set!(level dye width - 100, 80)
-
-        level hudGroup add(gfx)
+        level bottomHudGroup add(gfx)
 
         prev = Time runTime()
     }
@@ -495,7 +497,10 @@ Clock: class {
         prev = curr
 
         seconds := time / 1_000
-        text value = "00:%02d" format(seconds)
+
+        minutes := (seconds - seconds % 60) / 60
+        seconds = seconds - minutes * 60
+        text value = "Time left: %02d:%02d" format(minutes, seconds)
     }
 
 }
@@ -580,7 +585,7 @@ LevelEnd: class {
         textGroup add(scoreText)
 
         clickText = GlText new(Level fontPath, "Click to continue")
-        clickText color set!(130, 0, 0)
+        clickText color set!(20, 20, 20)
         clickText pos set!(0, 130)
         textGroup add(clickText)
 

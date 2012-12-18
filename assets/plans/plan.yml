@@ -11,7 +11,4 @@
 - name: building1
   desc: Into the building
   duration: 200
-- name: level2
-  desc: Bigger
-  duration: 120
 

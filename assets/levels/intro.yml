@@ -34,7 +34,7 @@ layers:
   - type: prop
     name: darkgreen
     pos:
-    - 1312.00
+    - 1248.00
     - -224.00
   - type: prop
     name: darkgreen
@@ -793,6 +793,366 @@ layers:
     pos:
     - -48.00
     - -912.00
+  - type: tile
+    name: ground
+    pos:
+    - 320.00
+    - -800.00
+  - type: tile
+    name: underground
+    pos:
+    - -352.00
+    - 160.00
+  - type: tile
+    name: underground
+    pos:
+    - -96.00
+    - 160.00
+  - type: tile
+    name: underground
+    pos:
+    - 160.00
+    - 160.00
+  - type: tile
+    name: underground
+    pos:
+    - 416.00
+    - 160.00
+  - type: tile
+    name: ground
+    pos:
+    - 576.00
+    - -800.00
+  - type: tile
+    name: ground
+    pos:
+    - 832.00
+    - -800.00
+  - type: tile
+    name: ground
+    pos:
+    - -192.00
+    - -800.00
+  - type: tile
+    name: ground
+    pos:
+    - -448.00
+    - -800.00
+  - type: tile
+    name: ground
+    pos:
+    - -704.00
+    - -800.00
+  - type: tile
+    name: ground
+    pos:
+    - -960.00
+    - -800.00
+  - type: tile
+    name: ground
+    pos:
+    - 1088.00
+    - -800.00
+  - type: tile
+    name: underground
+    pos:
+    - -352.00
+    - 416.00
+  - type: tile
+    name: underground
+    pos:
+    - -96.00
+    - 416.00
+  - type: tile
+    name: underground
+    pos:
+    - 160.00
+    - 416.00
+  - type: tile
+    name: underground
+    pos:
+    - 416.00
+    - 416.00
+  - type: tile
+    name: underground
+    pos:
+    - -352.00
+    - 672.00
+  - type: tile
+    name: underground
+    pos:
+    - -96.00
+    - 672.00
+  - type: tile
+    name: underground
+    pos:
+    - 160.00
+    - 672.00
+  - type: tile
+    name: underground
+    pos:
+    - 416.00
+    - 672.00
+  - type: tile
+    name: underground
+    pos:
+    - 608.00
+    - -96.00
+  - type: tile
+    name: underground
+    pos:
+    - 864.00
+    - -96.00
+  - type: tile
+    name: underground
+    pos:
+    - 1120.00
+    - -96.00
+  - type: tile
+    name: underground
+    pos:
+    - 1376.00
+    - -96.00
+  - type: tile
+    name: underground
+    pos:
+    - 1376.00
+    - -352.00
+  - type: tile
+    name: underground
+    pos:
+    - 1120.00
+    - -352.00
+  - type: tile
+    name: underground
+    pos:
+    - 864.00
+    - -352.00
+  - type: tile
+    name: underground
+    pos:
+    - 608.00
+    - -352.00
+  - type: tile
+    name: underground
+    pos:
+    - 608.00
+    - -608.00
+  - type: tile
+    name: underground
+    pos:
+    - 864.00
+    - -608.00
+  - type: tile
+    name: underground
+    pos:
+    - 1120.00
+    - -608.00
+  - type: tile
+    name: underground
+    pos:
+    - 1376.00
+    - -608.00
+  - type: tile
+    name: underground
+    pos:
+    - 672.00
+    - 672.00
+  - type: tile
+    name: underground
+    pos:
+    - 928.00
+    - 672.00
+  - type: tile
+    name: underground
+    pos:
+    - 1184.00
+    - 672.00
+  - type: tile
+    name: underground
+    pos:
+    - 1440.00
+    - 672.00
+  - type: tile
+    name: underground
+    pos:
+    - 1440.00
+    - 416.00
+  - type: tile
+    name: underground
+    pos:
+    - 1184.00
+    - 416.00
+  - type: tile
+    name: underground
+    pos:
+    - 928.00
+    - 416.00
+  - type: tile
+    name: underground
+    pos:
+    - 672.00
+    - 416.00
+  - type: tile
+    name: underground
+    pos:
+    - 672.00
+    - 160.00
+  - type: tile
+    name: underground
+    pos:
+    - 928.00
+    - 160.00
+  - type: tile
+    name: underground
+    pos:
+    - 1184.00
+    - 160.00
+  - type: tile
+    name: underground
+    pos:
+    - 1440.00
+    - 160.00
+  - type: tile
+    name: underground
+    pos:
+    - 320.00
+    - -608.00
+  - type: tile
+    name: underground
+    pos:
+    - 448.00
+    - -608.00
+  - type: tile
+    name: underground
+    pos:
+    - -192.00
+    - -608.00
+  - type: tile
+    name: underground
+    pos:
+    - -448.00
+    - -608.00
+  - type: tile
+    name: underground
+    pos:
+    - -704.00
+    - -608.00
+  - type: tile
+    name: underground
+    pos:
+    - -960.00
+    - -608.00
+  - type: tile
+    name: underground
+    pos:
+    - -1376.00
+    - -352.00
+  - type: tile
+    name: underground
+    pos:
+    - -1120.00
+    - -352.00
+  - type: tile
+    name: underground
+    pos:
+    - -864.00
+    - -352.00
+  - type: tile
+    name: underground
+    pos:
+    - -608.00
+    - -352.00
+  - type: tile
+    name: underground
+    pos:
+    - -1376.00
+    - -96.00
+  - type: tile
+    name: underground
+    pos:
+    - -1120.00
+    - -96.00
+  - type: tile
+    name: underground
+    pos:
+    - -864.00
+    - -96.00
+  - type: tile
+    name: underground
+    pos:
+    - -608.00
+    - -96.00
+  - type: tile
+    name: underground
+    pos:
+    - -1376.00
+    - 160.00
+  - type: tile
+    name: underground
+    pos:
+    - -1120.00
+    - 160.00
+  - type: tile
+    name: underground
+    pos:
+    - -864.00
+    - 160.00
+  - type: tile
+    name: underground
+    pos:
+    - -608.00
+    - 160.00
+  - type: tile
+    name: underground
+    pos:
+    - -1376.00
+    - 416.00
+  - type: tile
+    name: underground
+    pos:
+    - -1120.00
+    - 416.00
+  - type: tile
+    name: underground
+    pos:
+    - -864.00
+    - 416.00
+  - type: tile
+    name: underground
+    pos:
+    - -608.00
+    - 416.00
+  - type: tile
+    name: underground
+    pos:
+    - -1376.00
+    - 672.00
+  - type: tile
+    name: underground
+    pos:
+    - -1120.00
+    - 672.00
+  - type: tile
+    name: underground
+    pos:
+    - -864.00
+    - 672.00
+  - type: tile
+    name: underground
+    pos:
+    - -608.00
+    - 672.00
+  - type: tile
+    name: ground
+    pos:
+    - -1216.00
+    - -800.00
+  - type: tile
+    name: underground
+    pos:
+    - -1216.00
+    - -608.00
   s:
   - type: item
     name: dragon

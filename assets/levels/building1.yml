@@ -2,8 +2,8 @@
 ---
 hero:
   pos:
-  - -282.00
-  - -451.50
+  - 102.00
+  - -291.50
 layers:
   bg:
   - type: prop
@@ -1367,6 +1367,16 @@ layers:
     pos:
     - -128.00
     - -832.00
+  - type: prop
+    name: lustre
+    pos:
+    - 200.00
+    - -1023.50
+  - type: prop
+    name: chandelier
+    pos:
+    - -3.00
+    - -169.50
   h:
   - type: tile
     name: ground
@@ -2789,3 +2799,93 @@ layers:
     pos:
     - 366.00
     - -492.00
+  - type: item
+    name: trash
+    pos:
+    - 472.00
+    - -930.00
+  - type: item
+    name: trash
+    pos:
+    - 312.00
+    - -34.00
+  - type: item
+    name: trash
+    pos:
+    - 536.00
+    - 478.00
+  - type: item
+    name: vending
+    pos:
+    - 608.00
+    - 448.00
+  - type: item
+    name: dishwasher
+    pos:
+    - -26.00
+    - 464.00
+  - type: item
+    name: chair-left
+    pos:
+    - -104.00
+    - 470.00
+  - type: item
+    name: bathtub
+    pos:
+    - -60.00
+    - -706.00
+  - type: item
+    name: toilet
+    pos:
+    - 68.00
+    - -712.00
+  - type: item
+    name: duck
+    pos:
+    - 461.00
+    - -701.00
+  - type: item
+    name: muskox
+    pos:
+    - 1049.00
+    - -64.00
+  - type: item
+    name: muskox
+    pos:
+    - 1273.00
+    - -64.00
+  - type: item
+    name: flowers
+    pos:
+    - 766.00
+    - -261.50
+  - type: item
+    name: flowers
+    pos:
+    - 702.00
+    - -261.50
+  - type: item
+    name: flowers
+    pos:
+    - 638.00
+    - -261.50
+  - type: item
+    name: muskox
+    pos:
+    - -807.00
+    - -64.00
+  - type: item
+    name: basketball
+    pos:
+    - -427.00
+    - -20.50
+  - type: item
+    name: container
+    pos:
+    - -351.00
+    - -37.50
+  - type: item
+    name: container
+    pos:
+    - 193.00
+    - 474.50

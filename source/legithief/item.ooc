@@ -156,13 +156,12 @@ BreakCollision: class extends CpCollisionHandler {
 
     level: Level
     samples := ArrayList<Sample> new()
-
     lastNoiseCounter := Time runTime()
 
     init: func (=level) {
-        //for (i in 1..3) {
-        //    samples add(level bleep loadSample("assets/wav/thud%d.wav" format(i)))
-        //}
+        for (i in 1..3) {
+            samples add(level bleep loadSample("assets/wav/thud%d.wav" format(i)))
+        }
     }
 
     begin: func (arbiter: CpArbiter, space: CpSpace) -> Bool {
@@ -176,24 +175,23 @@ BreakCollision: class extends CpCollisionHandler {
         item = item reverse get(shape1)
         if (item) {
             vel := vec2(body1 getVel()) norm()
-            if (vel > 500) {
+            if (vel > 600) {
                 if (!item broken) {
                     item broken = true
                     score := (item def mass * vel) * 0.1
                     "score = %.2f, mass = %.2f, vel = %.2f" printfln(score, item def mass, vel)
                     level addScore(score)
+
+                    current := Time runTime()
+
+                    if (current - lastNoiseCounter > 300) {
+                        Random choice(samples) play(0)
+                    }
+                    lastNoiseCounter = current
                 }
             }
 
-        } // else {
-            // Something we can't break? make a sound anyway
-            //current := Time runTime()
-
-            //if (current - lastNoiseCounter > 600) {
-            //    Random choice(samples) play(0)
-            //}
-            //lastNoiseCounter = current
-        //}
+        }
 
         true
     }

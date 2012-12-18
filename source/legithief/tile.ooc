@@ -213,12 +213,7 @@ FireCollision: class extends CpCollisionHandler {
     level: Level
     samples := ArrayList<Sample> new()
 
-    lastNoiseCounter := Time runTime()
-
     init: func (=level) {
-        for (i in 1..1) {
-            samples add(level bleep loadSample("assets/wav/thud%d.wav" format(i)))
-        }
     }
 
     begin: func (arbiter: CpArbiter, space: CpSpace) -> Bool {
@@ -229,14 +224,6 @@ FireCollision: class extends CpCollisionHandler {
         tile = Tile reverse get(shape1)
         if (tile) {
             tile lit = true
-
-            // Something we can't break? make a sound anyway
-            current := Time runTime()
-
-            if (current - lastNoiseCounter > 600) {
-                //Random choice(samples) play(0)
-            }
-            lastNoiseCounter = current
         }
 
         true

@@ -76,10 +76,14 @@ Level: class extends LevelBase {
     score := 0
     scoreDisplay: Score
 
+    cashSamples := ArrayList<Sample> new()
+    lastNoiseCounter := Time runTime()
+
     /* code */
     init: func (=dye, globalInput: Input, =bleep) {
         input = globalInput sub()
         
+        initSamples()
         initGfx()
         initPhysx()
         initLayers()
@@ -94,6 +98,12 @@ Level: class extends LevelBase {
         initEvents()
         
         titleScreen show()
+    }
+
+    initSamples: func {
+        for (i in 1..3) {
+            cashSamples add(bleep loadSample("assets/wav/cash%d.wav" format(i)))
+        }
     }
 
     initEvents: func {
@@ -153,6 +163,12 @@ Level: class extends LevelBase {
     addScore: func (amount: Int) {
         score += amount
         scoreDisplay setScore(score)
+
+        current := Time runTime()
+        if (current - lastNoiseCounter > 600) {
+            Random choice(cashSamples) play(0)
+        }
+        lastNoiseCounter = current
     }
 
     update: func {

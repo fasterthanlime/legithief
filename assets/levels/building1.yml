@@ -36,6 +36,16 @@ layers:
     pos:
     - 704.00
     - -2652.00
+  - type: prop
+    name: sky
+    pos:
+    - 2624.00
+    - -476.00
+  - type: prop
+    name: sky
+    pos:
+    - 2624.00
+    - -1532.00
   hbg:
   - type: prop
     name: tile1
@@ -1377,6 +1387,21 @@ layers:
     pos:
     - -3.00
     - -169.50
+  - type: prop
+    name: tile4
+    pos:
+    - 800.00
+    - -160.00
+  - type: prop
+    name: tile4
+    pos:
+    - 800.00
+    - -96.00
+  - type: prop
+    name: tile4
+    pos:
+    - 800.00
+    - -32.00
   h:
   - type: tile
     name: ground
@@ -1849,11 +1874,6 @@ layers:
     - 736.00
     - 320.00
   - type: tile
-    name: ladder-2
-    pos:
-    - -576.00
-    - -64.00
-  - type: tile
     name: underground
     pos:
     - -384.00
@@ -2051,12 +2071,12 @@ layers:
   - type: tile
     name: wall1
     pos:
-    - 784.00
+    - 816.00
     - -96.00
   - type: tile
     name: wall1
     pos:
-    - 784.00
+    - 816.00
     - -128.00
   - type: tile
     name: floor1
@@ -2722,6 +2742,11 @@ layers:
     name: concrete
     pos:
     - -144.00
+    - -208.00
+  - type: tile
+    name: floor1
+    pos:
+    - 768.00
     - -208.00
   s:
   - type: item

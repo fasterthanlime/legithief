@@ -26,6 +26,36 @@ layers:
     pos:
     - -960.00
     - 516.00
+  - type: prop
+    name: sky
+    pos:
+    - -2880.00
+    - 548.00
+  - type: prop
+    name: sky
+    pos:
+    - -2880.00
+    - -508.00
+  - type: prop
+    name: sky
+    pos:
+    - 2880.00
+    - -540.00
+  - type: prop
+    name: sky
+    pos:
+    - 2880.00
+    - 516.00
+  - type: prop
+    name: sky
+    pos:
+    - -960.00
+    - -1564.00
+  - type: prop
+    name: sky
+    pos:
+    - 960.00
+    - -1564.00
   hbg:
   - type: prop
     name: door2-1
@@ -1148,6 +1178,56 @@ layers:
     pos:
     - -528.00
     - 144.00
+  - type: tile
+    name: ground
+    pos:
+    - -2112.00
+    - 288.00
+  - type: tile
+    name: underground
+    pos:
+    - -1920.00
+    - 640.00
+  - type: tile
+    name: underground
+    pos:
+    - -2176.00
+    - 640.00
+  - type: tile
+    name: underground
+    pos:
+    - -2112.00
+    - 384.00
+  - type: tile
+    name: underground
+    pos:
+    - -2336.00
+    - 384.00
+  - type: tile
+    name: underground
+    pos:
+    - -1952.00
+    - 896.00
+  - type: tile
+    name: ground
+    pos:
+    - 2048.00
+    - 288.00
+  - type: tile
+    name: underground
+    pos:
+    - 2336.00
+    - 544.00
+  - type: tile
+    name: ground
+    pos:
+    - 2240.00
+    - 288.00
+  - type: tile
+    name: underground
+    pos:
+    - 2304.00
+    - 800.00
   s:
   - type: item
     name: piano

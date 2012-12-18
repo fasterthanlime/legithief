@@ -72,6 +72,9 @@ Level: class extends LevelBase {
     /* clock */
     clock: Clock
 
+    score := 0
+    scoreDisplay: Score
+
     /* code */
     init: func (=dye, globalInput: Input, =bleep) {
         input = globalInput sub()
@@ -82,6 +85,7 @@ Level: class extends LevelBase {
 
         hero = Hero new(sLayer)
         clock = Clock new(this)
+        scoreDisplay = Score new(this)
         levelEnd = LevelEnd new(this)
         titleScreen = FullScreen new(this, "titlescreen")
         gameoverScreen = FullScreen new(this, "gameover")
@@ -144,6 +148,11 @@ Level: class extends LevelBase {
         !(levelEnd shown?() || gameoverScreen shown?() || titleScreen shown?())
     }
 
+    addScore: func (amount: Int) {
+        score += amount
+        scoreDisplay setScore(score)
+    }
+
     update: func {
         if (levelEnd shown?()) {
             levelEnd update()
@@ -179,6 +188,8 @@ Level: class extends LevelBase {
         clock setDuration(0)
         levelEnd score = 38_000
         bleep stopMusic()
+        score = 0
+        scoreDisplay setScore(0)
     }
 
     initGfx: func {
@@ -363,6 +374,36 @@ Layer: class extends LayerBase {
         molotovs add(molotov)
         molotov
     }
+
+}
+
+Score: class {
+
+    level: Level
+
+    gfx: GlGroup
+    text: GlText
+
+    init: func (=level) {
+        gfx = GlGroup new()
+
+        bg := GlSprite new("assets/png/score.png")
+        gfx add(bg)
+
+        text = GlText new(Level fontPath, "0")
+        text color set!(0, 0, 0)
+        text pos set!(-70, 10)
+        gfx add(text)
+
+        gfx pos set!(level dye width - 300, 80)
+
+        level hudGroup add(gfx)
+    }
+
+    setScore: func (score: Int) {
+        text value = "Score: %06d" format(score)
+    }
+
 
 }
 

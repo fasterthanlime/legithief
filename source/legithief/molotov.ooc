@@ -27,6 +27,8 @@ Molotov: class {
 
     explodes := false
 
+    explodeSamples := static ArrayList<Sample> new()
+
     init: func (=layer, pos: Vec2) {
         level = layer level
 
@@ -51,6 +53,17 @@ Molotov: class {
         handler = MolotovCollision new(this)
         level space addCollisionHandler(1, 13, handler)
         level space addCollisionHandler(4, 13, handler)
+
+        initSamples()
+    }
+
+    initSamples: func {
+        if (!explodeSamples empty?()) return
+
+        for (i in 1..3) {
+            path := "assets/wav/bottle%d.wav" format(i)
+            explodeSamples add(level bleep loadSample(path))
+        }
     }
 
     setVel: func (vel: Vec2) {
@@ -72,6 +85,7 @@ Molotov: class {
                 flame := level fLayer spawnFlame(pos)
                 flame setVel(vel add(i * 30, -30))
             }
+            Random choice(explodeSamples) play(0)
             return false
         }
 

@@ -175,11 +175,13 @@ BreakCollision: class extends CpCollisionHandler {
         item = item reverse get(shape1)
         if (item) {
             vel := vec2(body1 getVel()) norm()
-            if (vel > 600) {
+            if (vel > 500) {
                 if (!item broken) {
                     item broken = true
+                    item rect brightness = 0.1
+
                     score := (item def mass * vel) * 0.1
-                    "score = %.2f, mass = %.2f, vel = %.2f" printfln(score, item def mass, vel)
+                    //"score = %.2f, mass = %.2f, vel = %.2f" printfln(score, item def mass, vel)
                     level addScore(score)
 
                     current := Time runTime()

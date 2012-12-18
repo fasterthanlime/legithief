@@ -27,7 +27,7 @@ Hero: class {
     shape: CpShape
 
     walkSpeed := 150
-    runSpeed := 260
+    runSpeed := 330
     jumpVel := 240
 
     lookDir := 1

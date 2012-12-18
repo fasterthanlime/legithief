@@ -2,8 +2,8 @@
 ---
 hero:
   pos:
-  - 56.00
-  - -837.50
+  - 70.00
+  - -835.50
 layers:
   bg:
   - type: prop
@@ -1162,5 +1162,5 @@ layers:
   - type: item
     name: doll
     pos:
-    - 63.00
-    - -26.50
+    - 351.00
+    - -122.50

@@ -112,7 +112,7 @@ Level: class extends LevelBase {
 
         input onKeyPress(Keys F1, ||
             if (levelRunning?()) {
-                loadNextLevel()
+                endLevel()
             }
         )
     }
@@ -142,6 +142,7 @@ Level: class extends LevelBase {
     }
 
     endLevel: func {
+        levelEnd setScore(score)
         levelEnd show()
     }
 
@@ -185,7 +186,7 @@ Level: class extends LevelBase {
         }
 
         clock setDuration(0)
-        levelEnd score = 38_000
+        levelEnd score = 0
         bleep stopMusic()
         score = 0
         scoreDisplay setScore(0)
@@ -433,7 +434,7 @@ Score: class {
     init: func (=level) {
         gfx = GlGroup new()
 
-        text = GlText new(Level fontPath, "0")
+        text = GlText new(Level fontPath, "Score: 0")
         text color set!(0, 0, 0)
         text pos set!(0, 10)
         gfx add(text)
@@ -442,7 +443,7 @@ Score: class {
     }
 
     setScore: func (score: Int) {
-        text value = "Score: %06d" format(score)
+        text value = "Score: %d" format(score)
     }
 
 
@@ -616,6 +617,8 @@ LevelEnd: class {
     hide: func {
         gfx visible = false
     }
+
+    setScore: func (=score) {}
 
     update: func {
         if (gfx visible) {

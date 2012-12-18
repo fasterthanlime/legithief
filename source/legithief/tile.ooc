@@ -164,6 +164,7 @@ Tile: class {
     update: func -> Bool {
         if (def breakable && broken) {
             Random choice(smashSamples) play(0)
+            level addScore(500)
             return false
         }
 
@@ -181,6 +182,7 @@ Tile: class {
                     }
                 }
             } else {
+                level addScore(100)
                 return false
             }
         }

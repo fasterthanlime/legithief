@@ -46,7 +46,8 @@ App: class {
 
         logger info("Creating game engine")
 
-        dye = DyeContext new(1280, 720, "legithief", false)
+        fullScreen := (config get("fullScreen") == "true")
+        dye = DyeContext new(1280, 720, "legithief", fullScreen)
         dye setClearColor(Color white())
 
         bleep = Bleep new()

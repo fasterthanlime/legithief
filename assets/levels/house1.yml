@@ -354,11 +354,6 @@ layers:
     - 352.00
     - 16.00
   - type: tile
-    name: floor1
-    pos:
-    - -384.00
-    - 16.00
-  - type: tile
     name: wall1
     pos:
     - -464.00
@@ -581,7 +576,7 @@ layers:
   - type: tile
     name: through
     pos:
-    - -304.00
+    - -337.00
     - 16.00
   - type: tile
     name: through
@@ -748,6 +743,26 @@ layers:
     pos:
     - -464.00
     - 160.00
+  - type: tile
+    name: through
+    pos:
+    - -304.00
+    - 16.00
+  - type: tile
+    name: through
+    pos:
+    - -368.00
+    - 16.00
+  - type: tile
+    name: through
+    pos:
+    - -400.00
+    - 16.00
+  - type: tile
+    name: through
+    pos:
+    - -432.00
+    - 16.00
   s:
   - type: item
     name: piano

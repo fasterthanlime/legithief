@@ -1,0 +1,1296 @@
+%YAML 1.1
+---
+hero:
+  pos:
+  - -26.00
+  - -67.50
+layers:
+  bg:
+  - type: prop
+    name: sky
+    pos:
+    - -1152.00
+    - -1564.00
+  - type: prop
+    name: sky
+    pos:
+    - 352.00
+    - -1116.00
+  - type: prop
+    name: sky
+    pos:
+    - -1344.00
+    - -508.00
+  - type: prop
+    name: sky
+    pos:
+    - 896.00
+    - -508.00
+  hbg:
+  - type: prop
+    name: tile2
+    pos:
+    - -416.00
+    - -608.00
+  - type: prop
+    name: tile2
+    pos:
+    - -352.00
+    - -608.00
+  - type: prop
+    name: tile2
+    pos:
+    - -288.00
+    - -608.00
+  - type: prop
+    name: tile2
+    pos:
+    - -224.00
+    - -608.00
+  - type: prop
+    name: tile2
+    pos:
+    - -160.00
+    - -608.00
+  - type: prop
+    name: tile2
+    pos:
+    - -96.00
+    - -608.00
+  - type: prop
+    name: tile2
+    pos:
+    - -32.00
+    - -608.00
+  - type: prop
+    name: tile2
+    pos:
+    - 32.00
+    - -608.00
+  - type: prop
+    name: tile2
+    pos:
+    - 96.00
+    - -608.00
+  - type: prop
+    name: tile2
+    pos:
+    - 160.00
+    - -608.00
+  - type: prop
+    name: tile2
+    pos:
+    - 224.00
+    - -608.00
+  - type: prop
+    name: tile2
+    pos:
+    - 288.00
+    - -608.00
+  - type: prop
+    name: tile2
+    pos:
+    - 352.00
+    - -608.00
+  - type: prop
+    name: tile2
+    pos:
+    - 352.00
+    - -544.00
+  - type: prop
+    name: tile2
+    pos:
+    - 288.00
+    - -544.00
+  - type: prop
+    name: tile2
+    pos:
+    - 224.00
+    - -544.00
+  - type: prop
+    name: tile2
+    pos:
+    - 160.00
+    - -544.00
+  - type: prop
+    name: tile2
+    pos:
+    - 96.00
+    - -544.00
+  - type: prop
+    name: tile2
+    pos:
+    - 32.00
+    - -544.00
+  - type: prop
+    name: tile2
+    pos:
+    - -96.00
+    - -544.00
+  - type: prop
+    name: tile2
+    pos:
+    - -32.00
+    - -544.00
+  - type: prop
+    name: tile2
+    pos:
+    - -160.00
+    - -544.00
+  - type: prop
+    name: tile2
+    pos:
+    - -224.00
+    - -544.00
+  - type: prop
+    name: tile2
+    pos:
+    - -288.00
+    - -544.00
+  - type: prop
+    name: tile2
+    pos:
+    - -352.00
+    - -544.00
+  - type: prop
+    name: tile2
+    pos:
+    - -416.00
+    - -544.00
+  - type: prop
+    name: tile2
+    pos:
+    - 352.00
+    - -480.00
+  - type: prop
+    name: tile2
+    pos:
+    - 288.00
+    - -480.00
+  - type: prop
+    name: tile2
+    pos:
+    - 224.00
+    - -480.00
+  - type: prop
+    name: tile2
+    pos:
+    - 160.00
+    - -480.00
+  - type: prop
+    name: tile2
+    pos:
+    - 96.00
+    - -480.00
+  - type: prop
+    name: tile2
+    pos:
+    - 32.00
+    - -480.00
+  - type: prop
+    name: tile2
+    pos:
+    - -96.00
+    - -480.00
+  - type: prop
+    name: tile2
+    pos:
+    - -32.00
+    - -480.00
+  - type: prop
+    name: tile2
+    pos:
+    - -160.00
+    - -480.00
+  - type: prop
+    name: tile2
+    pos:
+    - -224.00
+    - -480.00
+  - type: prop
+    name: tile2
+    pos:
+    - -288.00
+    - -480.00
+  - type: prop
+    name: tile2
+    pos:
+    - -352.00
+    - -480.00
+  - type: prop
+    name: tile2
+    pos:
+    - -416.00
+    - -480.00
+  - type: prop
+    name: tile2
+    pos:
+    - 352.00
+    - -416.00
+  - type: prop
+    name: tile2
+    pos:
+    - 288.00
+    - -416.00
+  - type: prop
+    name: tile2
+    pos:
+    - 224.00
+    - -416.00
+  - type: prop
+    name: tile2
+    pos:
+    - 160.00
+    - -416.00
+  - type: prop
+    name: tile2
+    pos:
+    - 96.00
+    - -416.00
+  - type: prop
+    name: tile2
+    pos:
+    - 32.00
+    - -416.00
+  - type: prop
+    name: tile2
+    pos:
+    - -96.00
+    - -416.00
+  - type: prop
+    name: tile2
+    pos:
+    - -32.00
+    - -416.00
+  - type: prop
+    name: tile2
+    pos:
+    - -160.00
+    - -416.00
+  - type: prop
+    name: tile2
+    pos:
+    - -224.00
+    - -416.00
+  - type: prop
+    name: tile2
+    pos:
+    - -288.00
+    - -416.00
+  - type: prop
+    name: tile2
+    pos:
+    - -352.00
+    - -416.00
+  - type: prop
+    name: tile2
+    pos:
+    - -416.00
+    - -416.00
+  - type: prop
+    name: tile2
+    pos:
+    - 352.00
+    - -352.00
+  - type: prop
+    name: tile2
+    pos:
+    - 288.00
+    - -352.00
+  - type: prop
+    name: tile2
+    pos:
+    - 224.00
+    - -352.00
+  - type: prop
+    name: tile2
+    pos:
+    - 160.00
+    - -352.00
+  - type: prop
+    name: tile2
+    pos:
+    - 96.00
+    - -352.00
+  - type: prop
+    name: tile2
+    pos:
+    - 32.00
+    - -352.00
+  - type: prop
+    name: tile2
+    pos:
+    - -96.00
+    - -352.00
+  - type: prop
+    name: tile2
+    pos:
+    - -32.00
+    - -352.00
+  - type: prop
+    name: tile2
+    pos:
+    - -160.00
+    - -352.00
+  - type: prop
+    name: tile2
+    pos:
+    - -224.00
+    - -352.00
+  - type: prop
+    name: tile2
+    pos:
+    - -288.00
+    - -352.00
+  - type: prop
+    name: tile2
+    pos:
+    - -352.00
+    - -352.00
+  - type: prop
+    name: tile2
+    pos:
+    - -416.00
+    - -352.00
+  - type: prop
+    name: tile2
+    pos:
+    - 352.00
+    - -288.00
+  - type: prop
+    name: tile2
+    pos:
+    - 288.00
+    - -288.00
+  - type: prop
+    name: tile2
+    pos:
+    - 224.00
+    - -288.00
+  - type: prop
+    name: tile2
+    pos:
+    - 160.00
+    - -288.00
+  - type: prop
+    name: tile2
+    pos:
+    - 96.00
+    - -288.00
+  - type: prop
+    name: tile2
+    pos:
+    - 32.00
+    - -288.00
+  - type: prop
+    name: tile2
+    pos:
+    - -96.00
+    - -288.00
+  - type: prop
+    name: tile2
+    pos:
+    - -32.00
+    - -288.00
+  - type: prop
+    name: tile2
+    pos:
+    - -160.00
+    - -288.00
+  - type: prop
+    name: tile2
+    pos:
+    - -224.00
+    - -288.00
+  - type: prop
+    name: tile2
+    pos:
+    - -288.00
+    - -288.00
+  - type: prop
+    name: tile2
+    pos:
+    - -352.00
+    - -288.00
+  - type: prop
+    name: tile2
+    pos:
+    - -416.00
+    - -288.00
+  - type: prop
+    name: tile2
+    pos:
+    - 352.00
+    - -224.00
+  - type: prop
+    name: tile2
+    pos:
+    - 288.00
+    - -224.00
+  - type: prop
+    name: tile2
+    pos:
+    - 224.00
+    - -224.00
+  - type: prop
+    name: tile2
+    pos:
+    - 160.00
+    - -224.00
+  - type: prop
+    name: tile2
+    pos:
+    - 96.00
+    - -224.00
+  - type: prop
+    name: tile2
+    pos:
+    - 32.00
+    - -224.00
+  - type: prop
+    name: tile2
+    pos:
+    - -96.00
+    - -224.00
+  - type: prop
+    name: tile2
+    pos:
+    - -32.00
+    - -224.00
+  - type: prop
+    name: tile2
+    pos:
+    - -160.00
+    - -224.00
+  - type: prop
+    name: tile2
+    pos:
+    - -224.00
+    - -224.00
+  - type: prop
+    name: tile2
+    pos:
+    - -288.00
+    - -224.00
+  - type: prop
+    name: tile2
+    pos:
+    - -352.00
+    - -224.00
+  - type: prop
+    name: tile2
+    pos:
+    - -416.00
+    - -224.00
+  - type: prop
+    name: tile2
+    pos:
+    - 352.00
+    - -160.00
+  - type: prop
+    name: tile2
+    pos:
+    - 288.00
+    - -160.00
+  - type: prop
+    name: tile2
+    pos:
+    - 224.00
+    - -160.00
+  - type: prop
+    name: tile2
+    pos:
+    - 160.00
+    - -160.00
+  - type: prop
+    name: tile2
+    pos:
+    - 96.00
+    - -160.00
+  - type: prop
+    name: tile2
+    pos:
+    - 32.00
+    - -160.00
+  - type: prop
+    name: tile2
+    pos:
+    - -96.00
+    - -160.00
+  - type: prop
+    name: tile2
+    pos:
+    - -32.00
+    - -160.00
+  - type: prop
+    name: tile2
+    pos:
+    - -160.00
+    - -160.00
+  - type: prop
+    name: tile2
+    pos:
+    - -224.00
+    - -160.00
+  - type: prop
+    name: tile2
+    pos:
+    - -288.00
+    - -160.00
+  - type: prop
+    name: tile2
+    pos:
+    - -352.00
+    - -160.00
+  - type: prop
+    name: tile2
+    pos:
+    - -416.00
+    - -160.00
+  - type: prop
+    name: tile2
+    pos:
+    - 352.00
+    - -96.00
+  - type: prop
+    name: tile2
+    pos:
+    - 288.00
+    - -96.00
+  - type: prop
+    name: tile2
+    pos:
+    - 224.00
+    - -96.00
+  - type: prop
+    name: tile2
+    pos:
+    - 160.00
+    - -96.00
+  - type: prop
+    name: tile2
+    pos:
+    - 96.00
+    - -96.00
+  - type: prop
+    name: tile2
+    pos:
+    - 32.00
+    - -96.00
+  - type: prop
+    name: tile2
+    pos:
+    - -96.00
+    - -96.00
+  - type: prop
+    name: tile2
+    pos:
+    - -32.00
+    - -96.00
+  - type: prop
+    name: tile2
+    pos:
+    - -160.00
+    - -96.00
+  - type: prop
+    name: tile2
+    pos:
+    - -224.00
+    - -96.00
+  - type: prop
+    name: tile2
+    pos:
+    - -288.00
+    - -96.00
+  - type: prop
+    name: tile2
+    pos:
+    - -352.00
+    - -96.00
+  - type: prop
+    name: tile2
+    pos:
+    - -416.00
+    - -96.00
+  - type: prop
+    name: tile2
+    pos:
+    - 352.00
+    - -32.00
+  - type: prop
+    name: tile2
+    pos:
+    - 288.00
+    - -32.00
+  - type: prop
+    name: tile2
+    pos:
+    - 224.00
+    - -32.00
+  - type: prop
+    name: tile2
+    pos:
+    - 160.00
+    - -32.00
+  - type: prop
+    name: tile2
+    pos:
+    - 96.00
+    - -32.00
+  - type: prop
+    name: tile2
+    pos:
+    - 32.00
+    - -32.00
+  - type: prop
+    name: tile2
+    pos:
+    - -96.00
+    - -32.00
+  - type: prop
+    name: tile2
+    pos:
+    - -32.00
+    - -32.00
+  - type: prop
+    name: tile2
+    pos:
+    - -128.00
+    - -192.00
+  - type: prop
+    name: tile2
+    pos:
+    - -224.00
+    - -32.00
+  - type: prop
+    name: tile2
+    pos:
+    - -288.00
+    - -32.00
+  - type: prop
+    name: tile2
+    pos:
+    - -352.00
+    - -32.00
+  - type: prop
+    name: tile2
+    pos:
+    - -416.00
+    - -32.00
+  - type: prop
+    name: door3-3
+    pos:
+    - -192.00
+    - -96.00
+  - type: prop
+    name: windows1-3
+    pos:
+    - -192.00
+    - -320.00
+  - type: prop
+    name: windows2-3
+    pos:
+    - -192.00
+    - -544.00
+  - type: prop
+    name: windows2-3
+    pos:
+    - 128.00
+    - -544.00
+  - type: prop
+    name: windows1-3
+    pos:
+    - 128.00
+    - -320.00
+  h:
+  - type: tile
+    name: wall1
+    pos:
+    - 400.00
+    - -64.00
+  - type: tile
+    name: roofmid
+    pos:
+    - -416.00
+    - -704.00
+  - type: tile
+    name: roofleft
+    pos:
+    - 416.00
+    - -704.00
+  - type: tile
+    name: roofright
+    pos:
+    - -480.00
+    - -704.00
+  - type: tile
+    name: concrete
+    pos:
+    - 368.00
+    - -656.00
+  - type: tile
+    name: floor2
+    pos:
+    - -64.00
+    - 16.00
+  - type: tile
+    name: floor1
+    pos:
+    - 320.00
+    - 16.00
+  - type: tile
+    name: ladder-2
+    pos:
+    - -416.00
+    - -448.00
+  - type: tile
+    name: ladder-6
+    pos:
+    - -416.00
+    - -192.00
+  - type: tile
+    name: glass
+    pos:
+    - -368.00
+    - -240.00
+  - type: tile
+    name: through
+    pos:
+    - 240.00
+    - -208.00
+  - type: tile
+    name: floor1
+    pos:
+    - 192.00
+    - 16.00
+  - type: tile
+    name: through
+    pos:
+    - 208.00
+    - -208.00
+  - type: tile
+    name: through
+    pos:
+    - 176.00
+    - -208.00
+  - type: tile
+    name: through
+    pos:
+    - 144.00
+    - -208.00
+  - type: tile
+    name: through
+    pos:
+    - 112.00
+    - -208.00
+  - type: tile
+    name: through
+    pos:
+    - 80.00
+    - -208.00
+  - type: tile
+    name: stair-45
+    pos:
+    - 128.00
+    - -96.00
+  - type: tile
+    name: floor1
+    pos:
+    - 64.00
+    - 16.00
+  - type: tile
+    name: floor1
+    pos:
+    - -64.00
+    - -208.00
+  - type: tile
+    name: floor1
+    pos:
+    - 320.00
+    - -208.00
+  - type: tile
+    name: floor1
+    pos:
+    - 320.00
+    - -432.00
+  - type: tile
+    name: through
+    pos:
+    - 208.00
+    - -432.00
+  - type: tile
+    name: through
+    pos:
+    - 176.00
+    - -432.00
+  - type: tile
+    name: through
+    pos:
+    - 144.00
+    - -432.00
+  - type: tile
+    name: through
+    pos:
+    - 112.00
+    - -432.00
+  - type: tile
+    name: through
+    pos:
+    - 80.00
+    - -432.00
+  - type: tile
+    name: through
+    pos:
+    - 48.00
+    - -432.00
+  - type: tile
+    name: through
+    pos:
+    - 16.00
+    - -432.00
+  - type: tile
+    name: through
+    pos:
+    - 240.00
+    - -432.00
+  - type: tile
+    name: stair-45
+    pos:
+    - 128.00
+    - -320.00
+  - type: tile
+    name: through
+    pos:
+    - 48.00
+    - -208.00
+  - type: tile
+    name: through
+    pos:
+    - 16.00
+    - -208.00
+  - type: tile
+    name: floor1
+    pos:
+    - -64.00
+    - -432.00
+  - type: tile
+    name: wall1
+    pos:
+    - 400.00
+    - -256.00
+  - type: tile
+    name: wall1
+    pos:
+    - 400.00
+    - -448.00
+  - type: tile
+    name: wall1
+    pos:
+    - 400.00
+    - -576.00
+  - type: tile
+    name: concrete
+    pos:
+    - 336.00
+    - -656.00
+  - type: tile
+    name: concrete
+    pos:
+    - 304.00
+    - -656.00
+  - type: tile
+    name: concrete
+    pos:
+    - 272.00
+    - -656.00
+  - type: tile
+    name: concrete
+    pos:
+    - 240.00
+    - -656.00
+  - type: tile
+    name: concrete
+    pos:
+    - 208.00
+    - -656.00
+  - type: tile
+    name: concrete
+    pos:
+    - 144.00
+    - -656.00
+  - type: tile
+    name: concrete
+    pos:
+    - -48.00
+    - -656.00
+  - type: tile
+    name: concrete
+    pos:
+    - 176.00
+    - -656.00
+  - type: tile
+    name: concrete
+    pos:
+    - 112.00
+    - -656.00
+  - type: tile
+    name: concrete
+    pos:
+    - 80.00
+    - -656.00
+  - type: tile
+    name: concrete
+    pos:
+    - 48.00
+    - -656.00
+  - type: tile
+    name: concrete
+    pos:
+    - 16.00
+    - -656.00
+  - type: tile
+    name: concrete
+    pos:
+    - -16.00
+    - -656.00
+  - type: tile
+    name: concrete
+    pos:
+    - -176.00
+    - -656.00
+  - type: tile
+    name: concrete
+    pos:
+    - -144.00
+    - -656.00
+  - type: tile
+    name: concrete
+    pos:
+    - -112.00
+    - -656.00
+  - type: tile
+    name: concrete
+    pos:
+    - -80.00
+    - -656.00
+  - type: tile
+    name: concrete
+    pos:
+    - -304.00
+    - -656.00
+  - type: tile
+    name: concrete
+    pos:
+    - -272.00
+    - -656.00
+  - type: tile
+    name: concrete
+    pos:
+    - -240.00
+    - -656.00
+  - type: tile
+    name: concrete
+    pos:
+    - -208.00
+    - -656.00
+  - type: tile
+    name: floor2
+    pos:
+    - -192.00
+    - -208.00
+  - type: tile
+    name: floor1
+    pos:
+    - -192.00
+    - -432.00
+  - type: tile
+    name: floor1
+    pos:
+    - -320.00
+    - -432.00
+  - type: tile
+    name: floor1
+    pos:
+    - -192.00
+    - 16.00
+  - type: tile
+    name: floor1
+    pos:
+    - -320.00
+    - 16.00
+  - type: tile
+    name: floor1
+    pos:
+    - -320.00
+    - -208.00
+  - type: tile
+    name: floor1
+    pos:
+    - -384.00
+    - 16.00
+  - type: tile
+    name: concrete
+    pos:
+    - -368.00
+    - -656.00
+  - type: tile
+    name: concrete
+    pos:
+    - -336.00
+    - -656.00
+  - type: tile
+    name: concrete
+    pos:
+    - -432.00
+    - -656.00
+  - type: tile
+    name: concrete
+    pos:
+    - -400.00
+    - -656.00
+  - type: tile
+    name: wall1
+    pos:
+    - -464.00
+    - -576.00
+  - type: tile
+    name: wall1
+    pos:
+    - -464.00
+    - -384.00
+  - type: tile
+    name: wall1
+    pos:
+    - -464.00
+    - -192.00
+  - type: tile
+    name: wall1
+    pos:
+    - -464.00
+    - -64.00
+  - type: tile
+    name: glass
+    pos:
+    - -368.00
+    - -272.00
+  - type: tile
+    name: glass
+    pos:
+    - -368.00
+    - -336.00
+  - type: tile
+    name: glass
+    pos:
+    - -368.00
+    - -368.00
+  - type: tile
+    name: glass
+    pos:
+    - -368.00
+    - -400.00
+  - type: tile
+    name: glass
+    pos:
+    - -368.00
+    - -304.00
+  - type: tile
+    name: roofmid
+    pos:
+    - -352.00
+    - -704.00
+  - type: tile
+    name: roofmid
+    pos:
+    - -224.00
+    - -704.00
+  - type: tile
+    name: roofmid
+    pos:
+    - -288.00
+    - -704.00
+  - type: tile
+    name: roofmid
+    pos:
+    - 32.00
+    - -704.00
+  - type: tile
+    name: roofmid
+    pos:
+    - -32.00
+    - -704.00
+  - type: tile
+    name: roofmid
+    pos:
+    - -96.00
+    - -704.00
+  - type: tile
+    name: roofmid
+    pos:
+    - -160.00
+    - -704.00
+  - type: tile
+    name: roofmid
+    pos:
+    - 288.00
+    - -704.00
+  - type: tile
+    name: roofmid
+    pos:
+    - 224.00
+    - -704.00
+  - type: tile
+    name: roofmid
+    pos:
+    - 160.00
+    - -704.00
+  - type: tile
+    name: roofmid
+    pos:
+    - 96.00
+    - -704.00
+  - type: tile
+    name: roofmid
+    pos:
+    - 352.00
+    - -704.00
+  - type: tile
+    name: roofleft
+    pos:
+    - 352.00
+    - -768.00
+  - type: tile
+    name: roofright
+    pos:
+    - -416.00
+    - -768.00
+  - type: tile
+    name: roofmid
+    pos:
+    - -352.00
+    - -768.00
+  - type: tile
+    name: roofmid
+    pos:
+    - -288.00
+    - -768.00
+  - type: tile
+    name: roofmid
+    pos:
+    - -224.00
+    - -768.00
+  - type: tile
+    name: roofmid
+    pos:
+    - -160.00
+    - -768.00
+  - type: tile
+    name: roofmid
+    pos:
+    - -96.00
+    - -768.00
+  - type: tile
+    name: roofmid
+    pos:
+    - 160.00
+    - -768.00
+  - type: tile
+    name: roofmid
+    pos:
+    - 96.00
+    - -768.00
+  - type: tile
+    name: roofmid
+    pos:
+    - 32.00
+    - -768.00
+  - type: tile
+    name: roofmid
+    pos:
+    - -32.00
+    - -768.00
+  - type: tile
+    name: roofmid
+    pos:
+    - 288.00
+    - -768.00
+  - type: tile
+    name: roofmid
+    pos:
+    - 224.00
+    - -768.00
+  s:
+  - type: item
+    name: tv
+    pos:
+    - 286.50
+    - -93.00
+  - type: item
+    name: tv-support
+    pos:
+    - 290.00
+    - -28.00
+  - type: item
+    name: trash
+    pos:
+    - 184.00
+    - -34.00
+  - type: item
+    name: bed
+    pos:
+    - -191.00
+    - -480.00
+  - type: item
+    name: nightstand
+    pos:
+    - -320.00
+    - -480.00
+  - type: item
+    name: sofa
+    pos:
+    - 300.00
+    - -268.00
+  - type: item
+    name: doll
+    pos:
+    - -186.00
+    - -496.50
+  - type: item
+    name: sofa-double
+    pos:
+    - -274.00
+    - -44.00
+  - type: item
+    name: flowers
+    pos:
+    - -322.00
+    - -549.50
+  - type: item
+    name: table
+    pos:
+    - -198.00
+    - -262.00
+  - type: item
+    name: chair-left
+    pos:
+    - -104.00
+    - -266.00
+  - type: item
+    name: chair-right
+    pos:
+    - -296.00
+    - -266.00
+  - type: item
+    name: chair-right
+    pos:
+    - 24.00
+    - -490.00
+  - type: item
+    name: football
+    pos:
+    - 368.50
+    - -240.50
+  - type: item
+    name: mirror
+    pos:
+    - 272.00
+    - -522.00

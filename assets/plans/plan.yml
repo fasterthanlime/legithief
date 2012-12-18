@@ -1,3 +1,6 @@
+- name: test
+  desc: Level test
+  duration: 300
 - name: intro
   desc: Welcome
   voice: story
